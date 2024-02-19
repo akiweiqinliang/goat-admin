@@ -1,0 +1,22 @@
+.example-step-extra-class{
+  border: 0;
+}
+.shepherd-button{
+  background: #535bf2;
+  color: white;
+}
+.shepherd-button:not(:disabled):hover{
+  background: #747bff;
+  color: white;
+}
+.shepherd-arrow:before{
+  display: none;
+}
+
+body{
+  //background: #000;
+  //overscroll-behavior-y: none;
+}
+.arco-layout-content{
+  //background: black !important;
+}
