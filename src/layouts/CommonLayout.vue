@@ -1,4 +1,5 @@
 <template>
+  <a-config-provider :locale="locale">
   <a-layout class="layout-demo">
     <a-layout-sider
         hide-trigger
@@ -12,8 +13,8 @@
     </a-layout-sider>
     <a-layout>
       <a-layout-header style="padding:0 20px;">
-        <a-row justify="space-between">
-          <a-col :span="22">
+        <a-row justify="space-around">
+          <a-col :span="19">
             <div ref="tourControlBtn" class="tourBox" style="display: inline-flex">
               <a-button shape="round" @click="onCollapse">
                 <IconCaretRight v-if="collapsed" />
@@ -21,6 +22,17 @@
               </a-button>
             </div>
             <a-button shape="round" style="margin-left: 20px;" @click="replayGuide">➡️ click me to replay shepherd 💥</a-button>
+          </a-col>
+          <a-col :span="4">
+            <a-select
+                v-model="language"
+                @change="handleLanguageChange(language.value)"
+                :style="{width:'160px',borderRadius: '20px'}"
+                placeholder="Select language"
+                :trigger-props="{ autoFitPopupMinWidth: true }"
+            >
+              <a-option v-for="item of langData" :value="item" :label="item.label" />
+            </a-select>
           </a-col>
           <a-col :span="1">
             <a-switch checked-color="#000000" v-model="colorValue" @change="handleColorChange">
@@ -46,10 +58,15 @@
       </a-layout>
     </a-layout>
   </a-layout>
+  </a-config-provider>
 </template>
 <script>
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, computed } from 'vue';
 import { Message} from '@arco-design/web-vue';
+
+import zhCN from '@arco-design/web-vue/es/locale/lang/zh-cn';
+import enUS from '@arco-design/web-vue/es/locale/lang/en-us';
+
 import {
   IconCaretRight,
   IconCaretLeft,
@@ -66,13 +83,44 @@ export default defineComponent({
   setup() {
     const colorValue = ref(JSON.parse(localStorage.getItem('theme-appearance')) || false);
     const collapsed = ref(false);
+    const langData = ref([
+      {
+        label: '中文',
+        value: 'zh',
+      },
+      {
+        label: 'English',
+        value: 'en',
+      },
+      {
+        label: '跟随系统',
+        value: navigator.language || navigator.userLanguage,
+      }
+    ])
+    const language = ref({
+      label: '中文',
+      value: 'zh',
+    });
     const onCollapse = () => {
       collapsed.value = !collapsed.value;
     };
+    const locales = {
+      'zh': zhCN,
+      'en': enUS,
+    };
+
+    const localeType = ref('zh');
+    const locale = computed(() => {
+      return locales[localeType.value] || zhCN;
+    });
     return {
+      langData,
+      language,
       colorValue,
       collapsed,
       onCollapse,
+      localeType,
+      locale
     };
   },
   mounted(){
@@ -84,7 +132,6 @@ export default defineComponent({
       this.handleColorChange()
     }
   },
-
   methods: {
     handleColorChange() {
       if (this.colorValue) {
@@ -95,6 +142,10 @@ export default defineComponent({
         document.body.style.background = 'transparent';
       }
       localStorage.setItem('theme-appearance', JSON.stringify(this.colorValue))
+    },
+    handleLanguageChange(locale) {
+      this.$i18n.locale = locale;
+      this.localeType = locale;
     },
     replayGuide() {
       this.createTour();

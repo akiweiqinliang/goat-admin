@@ -1,4 +1,4 @@
-import request from '@/utils/axios';
+import request from '../axios';
 import CryptoJS from 'crypto-js'
 /**
  * 登录
