@@ -6,7 +6,7 @@
     </router-link>
   </template>
   <template v-else>
-        <a-sub-menu :key="menu?.name">
+        <a-sub-menu :key="menu.layoutName">
           <template #title>
             <span><IconCalendar />{{ $t(menu.layoutName) }}</span>
           </template>

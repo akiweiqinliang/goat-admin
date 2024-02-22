@@ -1,4 +1,19 @@
 <template>
+  <a-row class="tagList">
+    <a-space>
+      <a-tag checkable
+             :default-checked="checkTagId === 0"
+             v-for="tag in tagList"
+             :key="`cookbook-tag-${tag.id}`"
+             :checked="checkTagId === tag.tadId"
+             @check="checkTagId = tag.tadId"
+             :bordered="false"
+             class="cookbookTag"
+      >
+        {{tag.value}}
+      </a-tag>
+    </a-space>
+  </a-row>
   <a-row justify="flex-start">
     <a-col :span="6"
            class="box" v-for="item in imgList"
@@ -10,15 +25,14 @@
           :description='item.updateTime'
           width="100%"
           style="vertical-align: top;"
-          :preview-visible="visible1"
-          @preview-visible-change="() => { visible1= false }"
       >
         <template #extra>
           <div class="actions">
-            <span class="action" @click="() => { visible1 = true }"><icon-eye /></span>
-            <span class="action" @click="onDownLoad"><icon-download /></span>
-            <a-tooltip content="A user’s avatar">
-              <span class="action"><icon-info-circle /></span>
+            <a-tooltip content="查看菜谱">
+              <span class="action"><icon-eye /></span>
+            </a-tooltip>
+            <a-tooltip :content="item.tag">
+              <span class="action"><icon-tag /></span>
             </a-tooltip>
           </div>
         </template>
@@ -29,12 +43,12 @@
 
 <script>
 import { ref } from 'vue';
-import { IconEye, IconDownload, IconInfoCircle } from '@arco-design/web-vue/es/icon';
+import { IconEye, IconDownload, IconInfoCircle, IconTag } from '@arco-design/web-vue/es/icon';
 
 export default {
   name: "ImgList",
   components: {
-    IconEye, IconDownload, IconInfoCircle
+    IconEye, IconDownload, IconInfoCircle, IconTag
   },
   props: {
     imgList: {
@@ -44,28 +58,53 @@ export default {
     }
   },
   setup() {
-    const visible1 = ref(false);
-    const visible2 = ref(false);
-
-    return {
-      visible1,
-      visible2,
-      onDownLoad() {
-        console.log('download');
+    let checkTagId = ref(0)
+    let tagList = ref([
+      {
+        id: 0,
+        tadId: 0,
+        value: '全部'
       },
+      {
+        id: 1,
+        tadId: 1,
+        value: '懒人快手'
+      },
+      {
+        id: 2,
+        tadId: 2,
+        value: '清淡饮食'
+      },
+      {
+        id: 3,
+        tadId: 3,
+        value: '无辣不欢'
+      },
+    ])
+    return {
+      tagList,
+      checkTagId,
     }
-  }
+  },
 }
 </script>
 <style>
 .arco-image-footer{
   backdrop-filter: blur(1px);
   background-color: #0000004d !important;
+  cursor: initial;
 }
 </style>
 <style scoped lang="scss">
+.tagList{
+  padding: 20px 20px 0;
+}
+.cookbookTag{
+  border-radius: 14px;
+}
 .box{
   padding: 20px;
+  cursor: zoom-in;
 }
 .actions {
   display: flex;
