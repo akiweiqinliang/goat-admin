@@ -15,7 +15,7 @@ import 'shepherd.js/dist/css/shepherd.css';
 import './assets/custom.scss'
 import api from "@/api/index.ts";
 import {messages} from "@/lang/index.js";
-
+import CKEditor from '@ckeditor/ckeditor5-vue';
 
 const app = createApp(App);
 const i18n = createI18n({
@@ -28,6 +28,7 @@ app.use(router)
     .use(ArcoVue)
     .use(VueShepherd)
     .use(i18n)
+    .use( CKEditor )
     .mount('#app')
 
 app.config.globalProperties.$api = api;

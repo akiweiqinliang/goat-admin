@@ -1,26 +1,38 @@
 <template>
-  {{ $t('westernFood') }}
-  {{ westernList }}
+  <ImgList :imgList="westernList"/>
 </template>
 
 <script>
 import { ref } from "vue";
+import ImgList from "@cp/ImgList.vue";
+import dayjs from "dayjs";
+import {cookbookStore} from "@/stores/cookbook.js";
 
 export default {
   name: "WesternFood",
+  components: {ImgList},
   setup() {
-    let westernList = ref(null)
+    let westernList = ref([])
     return {
       westernList
     }
   },
   mounted() {
-    this.getAllWesternList()
+    if (cookbookStore().westernCookbooks.length !== 0) {
+      this.westernList = cookbookStore().westernCookbooks;
+    }else {
+      this.getList()
+    }
   },
   methods: {
-    async getAllWesternList() {
-      this.westernList = await this.$api.cookbookService.getAllCookbook(1,10)
-      console.log(this.westernList)
+    async getList() {
+      const result = await this.$api.cookbookService.getCookBooksByCatId(1,10, 1)
+      if (result.data.records) {
+        let list = result.data.records;
+        list.forEach(item => item.updateTime = dayjs(item.updateTime).format('YYYY-MM-DD'))
+        this.westernList = list;
+        cookbookStore().westernCookbooks = list;
+      }
     }
   }
 }

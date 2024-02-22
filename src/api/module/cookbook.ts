@@ -13,3 +13,14 @@ export const getAllCookbook = (page: number, pageSize: number) => {
         }
     })
 }
+export const getCookBooksByCatId = (page: number, pageSize: number, catId: number) => {
+    return request({
+        url: '/cookbooks/byCatId',
+        method: 'get',
+        params: {
+            page,
+            pageSize,
+            categoryId: catId,
+        }
+    })
+}

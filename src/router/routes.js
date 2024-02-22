@@ -33,7 +33,18 @@ export const routes = [
                     { path: 'westernFood', name: 'westernFood', component: WesternFood }
                     // 可以继续添加其他子路由
                 ]
-            }
+            },
+            // {
+            //     path: 'cookbook2',
+            //     redirect: '/cookbook/chineseFood',
+            //     layout: true,
+            //     layoutName: 'cookbook2',
+            //     children: [
+            //         { path: 'chineseFood', name: 'chineseFood', component: ChineseFood },
+            //         { path: 'westernFood', name: 'westernFood', component: WesternFood }
+            //         // 可以继续添加其他子路由
+            //     ]
+            // }
         ]
     },
     {
