@@ -3,7 +3,7 @@
     <a-row align="center">
       <a-col :span="16">
         <a-descriptions title="User Info" size="large">
-          <a-descriptions-item v-for="item of data" :label="item.label" :span="item.span ?? 1">
+          <a-descriptions-item v-for="item of userInfo" :label="item.label" :span="item.span ?? 1">
             <a-tag>{{ item.value }}</a-tag>
           </a-descriptions-item>
         </a-descriptions>
@@ -30,40 +30,40 @@
 <script>
 import { ref } from 'vue';
 import {IconCamera } from '@arco-design/web-vue/es/icon';
-import {scheduleStore} from "@/stores/schedule.js";
+import { scheduleStore } from "@/stores/schedule.js";
+import { adminStore } from "@/stores/admin.js";
+import Verify from "@cp/Verify.vue";
+
 export default {
   name: 'Home',
   components: {
+    Verify,
     IconCamera,
   },
   setup() {
     const size = ref('medium');
-
-    const data = [{
-      label: 'Name',
-      value: 'Aki',
-    }, {
-      label: 'Mobile',
-      value: '123-1234-1234',
-    }, {
-      label: 'Residence',
-      value: 'Beijing'
-    }, {
-      label: 'Hometown',
-      value: 'Beijing',
-    }, {
-      label: 'Address',
-      value: 'Yingdu Building, Zhichun Road, Beijing'
-    }];
     const calendarValue = ref(new Date());
 
     return {
-      data,
       size,
       calendarValue,
     }
   },
+  mounted() {
+    this.initInfo();
+  },
+  computed: {
+    userInfo() {
+      return adminStore().getInfo() || []
+    }
+  },
   methods: {
+    async initInfo() {
+      if (adminStore().getInfo().length === 0){
+        const info = await this.$api.userService.getAdminInfo(localStorage.getItem('admin'));
+        adminStore().setInfo(info.data);
+      }
+    },
     handleClickCalendar(date) {
       const schedule = scheduleStore()
       if (schedule.checkEvent(date)){

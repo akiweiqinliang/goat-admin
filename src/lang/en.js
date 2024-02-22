@@ -1,0 +1,16 @@
+export const en = {
+    hello: 'hello',
+    username: 'Username',
+    email: 'Email',
+    mobile: 'Mobile',
+    cookbook: 'cookbook',
+    WeekdayRecipes: 'Weekday Recipes',
+    HolidayRecipes: 'Holiday Recipes',
+    chineseFood: 'Chinese Food',
+    westernFood: 'Western food',
+    dashboard: 'Dashboard',
+    home: 'Home',
+    map: 'Map',
+    login: 'login',
+    error: 'error',
+}

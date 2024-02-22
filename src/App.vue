@@ -1,20 +1,21 @@
 <script setup>
 import {useRoute} from "vue-router";
-import {ref} from "vue";
 import Login from "@pages/Login.vue";
 import Register from "@pages/Register.vue";
 const route = useRoute()
 const isLoginRoute = ref(route.name === "login");
 const isRegisterRoute = ref(route.name === "register");
+import { ref } from 'vue';
+
 </script>
 
 <template>
-  <!-- 登录 -->
-  <Login v-if="isLoginRoute" />
+    <!-- 登录 -->
+    <Login v-if="isLoginRoute" />
 
-  <!-- 注册 -->
-  <Register v-else-if="isRegisterRoute" />
-      <RouterView />
+    <!-- 注册 -->
+    <Register v-else-if="isRegisterRoute" />
+    <RouterView />
 </template>
 
 <style scoped>

@@ -2,7 +2,7 @@
   <a-result status="404" subtitle="Whoops, that page is gone.">
     <template #extra>
       <a-space>
-        <router-link to="/">
+        <router-link :to="{name: 'home'}">
           <a-button type="primary">Back</a-button>
         </router-link>
       </a-space>
@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: "404"
+  name: "404",
 }
 </script>
 

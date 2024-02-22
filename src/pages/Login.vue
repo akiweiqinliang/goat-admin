@@ -1,5 +1,6 @@
 <template>
     <a-row class="loginPage" align="center" justify="center">
+<!--      <Verify />-->
       <a-col :span="10" class="infoBox">
         <span>
         login your account
@@ -20,14 +21,17 @@
 </template>
 
 <script>
-import Api from "@/api/index";
 import { useRouter } from 'vue-router';
+import { adminStore } from "@/stores/admin.js";
+import Verify from "@cp/Verify.vue";
+
 export default {
   name: "Login",
+  components: {Verify},
   data() {
     return {
       username: 'aki',
-      password: '111',
+      password: '123',
       visibility: true,
     }
   },
@@ -47,12 +51,16 @@ export default {
       if (!this.username || !this.password) {
         return
       }
-      let result = await Api.login(this.username, this.password)
+      let result = await this.$api.loginService.login(this.username, this.password)
+      console.log(result)
       if (result) {
         localStorage.setItem('token', 'token time')
+        localStorage.setItem('admin', this.username)
+        const info = await this.$api.userService.getAdminInfo(this.username);
+        adminStore().setInfo(info.data);
         this.goHome()
       }
-    }
+    },
   }
 }
 </script>
