@@ -6,7 +6,7 @@
              v-for="tag in tagList"
              :key="`cookbook-tag-${tag.id}`"
              :checked="checkTagId === tag.tadId"
-             @check="checkTagId = tag.tadId"
+             @check="handleCheckTag(tag.tadId)"
              :bordered="false"
              class="cookbookTag"
       >
@@ -16,7 +16,8 @@
   </a-row>
   <a-row justify="flex-start">
     <a-col :span="6"
-           class="box" v-for="item in imgList"
+           class="box"
+           v-for="item in imgList"
            :key="`chinese-food-cookbook${item.id}`"
     >
       <a-image
@@ -29,7 +30,7 @@
         <template #extra>
           <div class="actions">
             <a-tooltip content="查看菜谱">
-              <span class="action"><icon-eye /></span>
+              <span class="action" @click="checkDetail(item.id)"><icon-eye /></span>
             </a-tooltip>
             <a-tooltip :content="item.tag">
               <span class="action"><icon-tag /></span>
@@ -42,22 +43,31 @@
 </template>
 
 <script>
-import { ref } from 'vue';
-import { IconEye, IconDownload, IconInfoCircle, IconTag } from '@arco-design/web-vue/es/icon';
+import {ref} from 'vue';
+import {useRouter} from "vue-router";
+import {IconDownload, IconEye, IconInfoCircle, IconTag} from '@arco-design/web-vue/es/icon';
+import {cookbookStore} from "@/stores/cookbook.js";
 
 export default {
   name: "ImgList",
   components: {
     IconEye, IconDownload, IconInfoCircle, IconTag
   },
+  emits: ['checkTag'],
   props: {
     imgList: {
-      require: true,
+      required: true,
       default: [],
       type: Array
+    },
+    listCategory: {
+      required: true,
+      default: 0,
+      type: Number
     }
   },
   setup() {
+    const router = useRouter();
     let checkTagId = ref(0)
     let tagList = ref([
       {
@@ -82,10 +92,20 @@ export default {
       },
     ])
     return {
+      router,
       tagList,
       checkTagId,
     }
   },
+  methods: {
+    async checkDetail(cookbookId) {
+      await this.router.push({name: 'cookbookDetail', params: {id: cookbookId}});
+    },
+    handleCheckTag(tagId) {
+      this.checkTagId = tagId;
+      this.$emit('checkTag', tagId);
+    }
+  }
 }
 </script>
 <style>
@@ -97,7 +117,7 @@ export default {
 </style>
 <style scoped lang="scss">
 .tagList{
-  padding: 20px 20px 0;
+  padding: 16px 20px 0;
 }
 .cookbookTag{
   border-radius: 14px;

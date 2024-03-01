@@ -13,4 +13,11 @@ export const zh = {
     map: '地图',
     login: '登录',
     error: '错误',
+    editCookbook: '新增菜谱',
+    backHome: '回到首页',
+    cancel: '取消',
+    add: '新增',
+    relatedCookbook: '相关菜谱推荐',
+    changeIt: '换一换'
+    // insertImg: '插入图片'
 }

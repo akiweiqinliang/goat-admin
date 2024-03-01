@@ -23,10 +23,9 @@
       </a-col>
     </a-row>
   </a-card>
-  <Editor />
-<!--  <a-card :bordered="false">-->
-<!--    <a-calendar v-model="calendarValue" @change="handleClickCalendar" />-->
-<!--  </a-card>-->
+  <a-card :bordered="false">
+    <a-calendar v-model="calendarValue" @change="handleClickCalendar" />
+  </a-card>
 </template>
 <script>
 import { ref } from 'vue';
@@ -34,12 +33,10 @@ import {IconCamera } from '@arco-design/web-vue/es/icon';
 import { scheduleStore } from "@/stores/schedule.js";
 import { adminStore } from "@/stores/admin.js";
 import Verify from "@cp/Verify.vue";
-import Editor from "@cp/Editor.vue";
 
 export default {
   name: 'Home',
   components: {
-    Editor,
     Verify,
     IconCamera,
   },

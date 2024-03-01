@@ -6,16 +6,21 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "compile": "babel src --out-dir compiled"
   },
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^41.1.0",
+    "@ckeditor/ckeditor5-image": "^41.1.0",
+    "@ckeditor/ckeditor5-style": "^41.1.0",
     "@ckeditor/ckeditor5-vue": "^5.1.0",
     "axios": "^1.6.7",
+    "ckeditor5-custom-akiweiqinliang": "^1.0.1",
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.10",
     "echarts": "^5.4.3",
     "pinia": "^2.1.7",
+    "qiniu": "^7.11.0",
     "vue": "^3.3.11",
     "vue-i18n": "^9.9.1",
     "vue-router": "^4.2.5",
@@ -25,6 +30,9 @@
   },
   "devDependencies": {
     "@arco-design/web-vue": "^2.54.2",
+    "@babel/cli": "^7.23.9",
+    "@babel/core": "^7.23.9",
+    "@babel/preset-env": "^7.23.9",
     "@typescript-eslint/eslint-plugin": "^6.19.1",
     "@typescript-eslint/parser": "^6.19.1",
     "@vitejs/plugin-vue": "^4.5.2",

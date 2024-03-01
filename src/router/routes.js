@@ -9,6 +9,8 @@ const Dashboard = () => import('@pages/Dashboard.vue')
 const About = () => import('@pages/About.vue')
 const ChineseFood = () => import('@pages/Cookbook/ChineseFood.vue')
 const WesternFood = () => import('@pages/Cookbook/WesternFood.vue')
+const EditCookbook = () => import('@pages/Cookbook/EditCookbook.vue')
+const CookbookDetail = () => import('@pages/Cookbook/Detail.vue')
 export const routes = [
     {
         path: '/',
@@ -34,19 +36,44 @@ export const routes = [
                     // 可以继续添加其他子路由
                 ]
             },
-            // {
-            //     path: 'cookbook2',
-            //     redirect: '/cookbook/chineseFood',
-            //     layout: true,
-            //     layoutName: 'cookbook2',
-            //     children: [
-            //         { path: 'chineseFood', name: 'chineseFood', component: ChineseFood },
-            //         { path: 'westernFood', name: 'westernFood', component: WesternFood }
-            //         // 可以继续添加其他子路由
-            //     ]
-            // }
         ]
     },
+    {
+        path: '/cookbooks/detail/:id',
+        component: CommonLayout, // 将 CommonLayout 设置为父组件
+        children: [
+            {
+                path: '',
+                component: CookbookDetail,
+                name: 'cookbookDetail',
+                meta: {
+                    requiresAuth: true,
+                }
+            }
+        ]
+    },
+    {
+        path: '/editCookbook',
+        component: CommonLayout, // 将 CommonLayout 设置为父组件
+        children: [
+            {
+                path: '',
+                component: EditCookbook,
+                name: 'editCookbook',
+                meta: {
+                    requiresAuth: true,
+                }
+            }
+        ]
+    },
+    // {
+    //     path: '/editCookbook',
+    //     component: EditCookbook,
+    //     name: 'editCookbook',
+    //     meta: {
+    //         requiresAuth: true,
+    //     },
+    // },
     {
         path: '/login',
         component: Login,

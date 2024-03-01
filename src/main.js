@@ -16,13 +16,12 @@ import './assets/custom.scss'
 import api from "@/api/index.ts";
 import {messages} from "@/lang/index.js";
 import CKEditor from '@ckeditor/ckeditor5-vue';
-
 const app = createApp(App);
 const i18n = createI18n({
     locale: 'zh', // 设置默认语言
     messages, // 引入的本地化消息
 });
-
+import "@/assets/css/htmlpreview.scss";
 app.use(router)
     .use(createPinia())
     .use(ArcoVue)
@@ -32,3 +31,4 @@ app.use(router)
     .mount('#app')
 
 app.config.globalProperties.$api = api;
+app.provide('api', api);
