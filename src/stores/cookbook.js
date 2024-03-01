@@ -6,6 +6,7 @@ export const cookbookStore = defineStore('cookbook', () => {
     const cookbooks = ref([])
     const chineseCookbooks = ref([])
     const westernCookbooks = ref([])
+
     function getAllCookbook() {
         return cookbooks.value;
     }

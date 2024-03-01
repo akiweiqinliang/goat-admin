@@ -234,7 +234,7 @@ export default defineComponent({
   }
 });
 </script>
-<style scoped>
+<style scoped lang="scss">
 .layout-demo {
   height: 100vh;
   background: var(--color-fill-2);
@@ -274,9 +274,14 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   justify-content: center;
-  color: var(--color-white);
   font-size: 16px;
   font-stretch: condensed;
   /*text-align: center;*/
+  .ck{
+    color: var(--color-text-2);
+    background: var(--color-bg-3);
+    background-color: var(--color-bg-3);
+  }
 }
+
 </style>

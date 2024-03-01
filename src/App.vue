@@ -35,13 +35,4 @@ import { ref } from 'vue';
 .example-step-extra-class{
   background: lightblue;
 }
-/*.layout-demo .arco-layout-footer, .layout-demo .arco-layout-content {*/
-/*  display: flex;*/
-/*  flex-direction: column;*/
-/*  justify-content: center;*/
-/*  color: red;*/
-/*  font-size: 16px;*/
-/*  font-stretch: condensed;*/
-/*  !* text-align: center; *!*/
-/*}*/
 </style>
