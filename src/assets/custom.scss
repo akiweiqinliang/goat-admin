@@ -17,3 +17,8 @@ body{
   //background: #000;
   //overscroll-behavior-y: none;
 }
+::-webkit-scrollbar {
+  //background-color: var(--color-background);
+  width: 0;
+  height: 0
+}

@@ -9,6 +9,7 @@ export const getAllCookbook = (page: number, pageSize: number) => {
         }
     })
 }
+// 中西餐
 export const getCookBooksByCatId = (page: number, pageSize: number, catId: number) => {
     return request({
         url: '/cookbooks/byCatId',

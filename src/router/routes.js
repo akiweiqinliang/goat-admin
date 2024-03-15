@@ -3,10 +3,13 @@ const CommonLayout = () => import('@/layouts/CommonLayout.vue')
 const Login = () => import('@pages/Login.vue')
 const Register = () => import('@pages/Register.vue')
 const Error = () => import('@pages/404.vue')
-
 const Home = () => import('@pages/Home.vue')
 const Dashboard = () => import('@pages/Dashboard.vue')
 const About = () => import('@pages/About.vue')
+const Notes = () => import('@pages/Learning/Notes.vue')
+const EditNote = () => import('@pages/Learning/EditNote.vue')
+const UpdateNote = () => import('@pages/Learning/UpdateNote.vue')
+const NoteDetail = () => import('@pages/Learning/NoteDetail.vue')
 const ChineseFood = () => import('@pages/Cookbook/ChineseFood.vue')
 const WesternFood = () => import('@pages/Cookbook/WesternFood.vue')
 const EditCookbook = () => import('@pages/Cookbook/EditCookbook.vue')
@@ -22,20 +25,22 @@ export const routes = [
             requiresAuth: true,
         },
         children: [
-            { path: '/home', alias: 'index', name: 'home', component: Home },
-            { path: '/dashboard', name: 'dashboard', component: Dashboard },
-            { path: '/map', name: 'map', component: About },
+            { path: '/home', alias: 'index', name: 'home', component: Home, iconName: 'IconHome' },
+            { path: '/dashboard', name: 'dashboard', component: Dashboard, iconName: 'IconCommon' },
+            { path: '/map', name: 'map', component: About, iconName: 'icon-storage' },
             {
                 path: 'cookbook',
                 redirect: '/cookbook/chineseFood',
                 layout: true,
                 layoutName: 'cookbook',
+                iconName: 'IconBook',
                 children: [
-                    { path: 'chineseFood', name: 'chineseFood', component: ChineseFood },
-                    { path: 'westernFood', name: 'westernFood', component: WesternFood }
+                    { path: 'chineseFood', name: 'chineseFood', component: ChineseFood, iconName: 'icon-chinese-fill'},
+                    { path: 'westernFood', name: 'westernFood', component: WesternFood, iconName: 'icon-english-fill' }
                     // 可以继续添加其他子路由
                 ]
             },
+            { path: '/notes', name: 'notes', component: Notes, iconName: 'IconEdit' },
         ]
     },
     {
@@ -53,7 +58,49 @@ export const routes = [
         ]
     },
     {
-        path: '/editCookbook',
+        path: '/notes/edit-note',
+        component: CommonLayout, // 将 CommonLayout 设置为父组件
+        children: [
+            {
+                path: '',
+                component: EditNote,
+                name: 'createNote',
+                meta: {
+                    requiresAuth: true,
+                }
+            }
+        ]
+    },
+    {
+        path: '/notes/update-note/:id',
+        component: CommonLayout, // 将 CommonLayout 设置为父组件
+        children: [
+            {
+                path: '',
+                component: UpdateNote,
+                name: 'updateNote',
+                meta: {
+                    requiresAuth: true,
+                }
+            }
+        ]
+    },
+    {
+        path: '/notes/:id',
+        component: CommonLayout, // 将 CommonLayout 设置为父组件
+        children: [
+            {
+                path: '',
+                component: NoteDetail,
+                name: 'noteDetail',
+                meta: {
+                    requiresAuth: true,
+                }
+            }
+        ]
+    },
+    {
+        path: '/cookbooks/editCookbook',
         component: CommonLayout, // 将 CommonLayout 设置为父组件
         children: [
             {
@@ -66,14 +113,6 @@ export const routes = [
             }
         ]
     },
-    // {
-    //     path: '/editCookbook',
-    //     component: EditCookbook,
-    //     name: 'editCookbook',
-    //     meta: {
-    //         requiresAuth: true,
-    //     },
-    // },
     {
         path: '/login',
         component: Login,

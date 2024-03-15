@@ -1,7 +1,5 @@
 <template>
-  <a-layout class="detailPage">
-    <a-layout>
-      <a-layout-content>
+  <a-card class="detailPage" :bordered="false">
         <div class="mainContent">
           <div class="left">
             <CookbookPreviewPage :cookbook="cookbook" />
@@ -36,9 +34,7 @@
             </div>
           </div>
         </div>
-      </a-layout-content>
-    </a-layout>
-  </a-layout>
+  </a-card>
 </template>
 
 <script>
@@ -65,17 +61,24 @@ export default {
     const getDetail = async (id) => {
       const result = await api.cookbookService.getCookBookById(id);
       state.cookbook = result.data;
-      await getCookbooksByTagId(state.cookbook.tagId);
+      await getCookbooksByTagId(state.cookbook.tagId, id);
     }
-    const getCookbooksByTagId = async (tagId) => {
+    const getCookbooksByTagId = async (tagId, routeId) => {
       const result = await api.cookbookService.getCookbookByParams({
         tagId,
       })
       let list = result.data.records;
-      list = list.filter(item => item.tagId === tagId);
+      // 获取当前展示的同类并滤掉当前展示的内容
+      list = list.filter(item => item.tagId === tagId && item.id !== routeId);
       list.forEach(item => item.updateTime = dayjs(item.updateTime).format('YYYY-MM-DD'));
       state.tagCookbooks = list;
-      state.relatedRecipes = list.slice(0, 4);
+      // 打乱
+      let array = list;
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      state.relatedRecipes = array.slice(0, 4);
     }
     function changeRecipes() {
       let array = state.tagCookbooks;
@@ -112,7 +115,7 @@ export default {
 
 <style scoped lang="scss">
 .detailPage{
-  padding: 40px;
+  padding: 24px;
   .mainContent{
     display: flex;
     .left{

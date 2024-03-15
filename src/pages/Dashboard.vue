@@ -4,13 +4,13 @@
       :style="{
       boxSizing: 'border-box',
       width: '100%',
-      backgroundColor: 'var(--color-fill-2)',
+      // backgroundColor: 'var(--color-fill-2)',
     }"
   >
     <a-row :gutter="20">
       <a-col :span="16">
         <a-row :gutter="20" :style="{ marginBottom: '20px' }">
-          <a-col :span="8">
+          <a-col :xs="24" :sm="12" :md="8">
             <a-card title="Study Card" :bordered="false" :style="{ width: '100%' }">
               <template #extra>
                 <a-link @click="studyShake = !studyShake">{{ !studyShake ? 'Edit' : 'Done' }}</a-link>
@@ -44,7 +44,7 @@
                 </draggable>
             </a-card>
           </a-col>
-          <a-col :span="8">
+          <a-col :xs="24" :sm="12" :md="8">
             <a-card title="Work Card" :bordered="false" :style="{ width: '100%' }">
               <template #extra>
                 <a-link>Edit</a-link>
@@ -76,7 +76,7 @@
               </draggable>
             </a-card>
           </a-col>
-          <a-col :span="8">
+          <a-col :xs="24" :sm="12" :md="8">
             <a-card title="Todo Card" :bordered="false" :style="{ width: '100%' }">
               <template #extra>
                 <a-link @click="todoShake = !todoShake">{{ !todoShake ? 'Edit' : 'Done' }}</a-link>

@@ -23,8 +23,8 @@ import {
   IconHome,
   IconCalendar,
 } from '@arco-design/web-vue/es/icon';
-import { routes } from '@/router/routes';
-import MenuItem from "@cp/MenuItem.vue";
+import { routes } from '@/router/routes.js';
+import MenuItem from "@cp/leftMenu/MenuItem.vue";
 
 export default defineComponent({
   name: 'Menu',

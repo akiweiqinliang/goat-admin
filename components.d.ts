@@ -13,8 +13,8 @@ declare module 'vue' {
     DefineGuide: typeof import('./src/components/DefineGuide.vue')['default']
     DragBox: typeof import('./src/components/DragBox.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
-    MapChart: typeof import('./src/components/MapChart.vue')['default']
-    Menu: typeof import('./src/components/Menu.vue')['default']
+    MapChart: typeof import('./src/components/charts/MapChart.vue')['default']
+    Menu: typeof import('./src/components/leftMenu/Menu.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

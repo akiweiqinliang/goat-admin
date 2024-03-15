@@ -16,7 +16,13 @@ export const en = {
     editCookbook: 'create cookbook',
     backHome: 'back to the homepage',
     cancel: 'Cancel',
+    back: 'Back',
     add: 'Add',
+    edit: 'Edit',
     relatedCookbook: 'Recommended related recipes',
     changeIt: 'Change it',
+    notes: 'Learn Notes',
+    hobby: 'Hobby',
+    search: 'Search',
+    deleteInfoMsg: 'Are you sure you want to delete?'
 }

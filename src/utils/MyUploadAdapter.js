@@ -81,6 +81,7 @@ class MyUploadAdapter {
 
         xhr.open("POST", uploadUrl, true);
         xhr.responseType = "json";
+        xhr.setRequestHeader('Authorization', `Bearer ${localStorage.getItem('token')}`)
     }
 
     _initListeners(resolve, reject, file) {

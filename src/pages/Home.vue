@@ -2,7 +2,7 @@
   <a-card :bordered="false">
     <a-row align="center">
       <a-col :span="16">
-        <a-descriptions title="User Info" size="large">
+        <a-descriptions title="User Info" size="large" :column="{xs:1, md:3, lg:4}">
           <a-descriptions-item v-for="item of userInfo" :label="item.label" :span="item.span ?? 1">
             <a-tag>{{ item.value }}</a-tag>
           </a-descriptions-item>
@@ -43,18 +43,18 @@ export default {
   setup() {
     const size = ref('medium');
     const calendarValue = ref(new Date());
-
     return {
       size,
       calendarValue,
     }
   },
   mounted() {
+    // bug!
     this.initInfo();
   },
   computed: {
     userInfo() {
-      return adminStore().getInfo() || []
+      return adminStore().info || []
     }
   },
   methods: {
