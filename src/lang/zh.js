@@ -16,8 +16,14 @@ export const zh = {
     editCookbook: '新增菜谱',
     backHome: '回到首页',
     cancel: '取消',
+    back: '返回',
     add: '新增',
+    edit: '修改',
     relatedCookbook: '相关菜谱推荐',
-    changeIt: '换一换'
+    changeIt: '换一换',
     // insertImg: '插入图片'
+    notes: '学习笔记',
+    hobby: '爱好',
+    search: '搜索',
+    deleteInfoMsg: '确认删除该记录？'
 }

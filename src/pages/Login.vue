@@ -51,10 +51,9 @@ export default {
       if (!this.username || !this.password) {
         return
       }
-      let result = await this.$api.loginService.login(this.username, this.password)
-      console.log(result)
-      if (result) {
-        localStorage.setItem('token', 'token time')
+      let result = await this.$api.loginService.login(this.username, this.password);
+      if (result.code === 0) {
+        localStorage.setItem('token', result.data.token)
         localStorage.setItem('admin', this.username)
         const info = await this.$api.userService.getAdminInfo(this.username);
         adminStore().setInfo(info.data);

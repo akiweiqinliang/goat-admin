@@ -2,13 +2,16 @@
   <template v-if="!menu.children">
     <router-link :to="{name: menu.name}">
       <a-menu-item :key="menu.name">
-        <IconHome />{{ $t(menu.name) }}</a-menu-item>
+        <SvgIcon :icon-name="menu.iconName" />
+        {{ $t(menu.name)}}</a-menu-item>
     </router-link>
   </template>
   <template v-else>
         <a-sub-menu :key="menu.layoutName">
           <template #title>
-            <span><IconCalendar />{{ $t(menu.layoutName) }}</span>
+            <span>
+             <SvgIcon :icon-name="menu.iconName" />
+              {{ $t(menu.layoutName) }}</span>
           </template>
           <MenuItem :menu="m" v-for="m in menu.children" :key="`m-${m.name}`"></MenuItem>
         </a-sub-menu>
@@ -23,6 +26,7 @@ import {
   IconHome,
   IconCalendar,
 } from '@arco-design/web-vue/es/icon';
+import SvgIcon from "@cp/SvgIcon.vue";
 export default {
   name: "MenuItem",
   props: {
@@ -32,6 +36,7 @@ export default {
     },
   },
   components: {
+    SvgIcon,
     IconCaretRight,
     IconCaretLeft,
     IconHome,

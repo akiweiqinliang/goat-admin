@@ -10,9 +10,6 @@
     "compile": "babel src --out-dir compiled"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-build-classic": "^41.1.0",
-    "@ckeditor/ckeditor5-image": "^41.1.0",
-    "@ckeditor/ckeditor5-style": "^41.1.0",
     "@ckeditor/ckeditor5-vue": "^5.1.0",
     "axios": "^1.6.7",
     "ckeditor5-custom-akiweiqinliang": "^1.0.1",

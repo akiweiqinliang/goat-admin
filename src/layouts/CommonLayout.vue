@@ -5,6 +5,8 @@
         hide-trigger
         collapsible
         :collapsed="collapsed"
+        breakpoint="lg"
+        @collapse="onCollapse"
     >
       <div class="logo tourBox" ref="tourLogo"><h1>😭</h1></div>
       <div ref="tourMenu" class="tourBox">
@@ -14,7 +16,7 @@
     <a-layout>
       <a-layout-header style="padding:0 20px;">
         <a-row justify="space-around">
-          <a-col :span="19">
+          <a-col :span="18">
             <div ref="tourControlBtn" class="tourBox" style="display: inline-flex">
               <a-button shape="round" @click="onCollapse">
                 <IconCaretRight v-if="collapsed" />
@@ -27,7 +29,7 @@
             <a-select
                 v-model="language"
                 @change="handleLanguageChange(language.value)"
-                :style="{width:'160px',borderRadius: '20px'}"
+                :style="{width:'100%',borderRadius: '20px'}"
                 placeholder="Select language"
                 :trigger-props="{ autoFitPopupMinWidth: true }"
             >
@@ -37,10 +39,10 @@
           <a-col :span="1">
             <a-switch checked-color="#000000" v-model="colorValue" @change="handleColorChange">
               <template #checked-icon>
-                🌛
+                <img src="../assets/imgs/layout/night.png" width="18" height="18" style="display:block;"/>
               </template>
               <template #unchecked-icon>
-                ☀️
+                <img src="../assets/imgs/layout/sun.png" width="18" height="18" style="display: block;"/>
               </template>
             </a-switch>
           </a-col>
@@ -48,9 +50,9 @@
       </a-layout-header>
       <a-layout style="padding: 24px;">
         <div ref="tourContent">
-          <a-layout-content>
+<!--          <a-layout-content>-->
             <RouterView />
-          </a-layout-content>
+<!--          </a-layout-content>-->
         </div>
         <a-layout-footer>
           copyright
@@ -71,7 +73,7 @@ import {
   IconCaretRight,
   IconCaretLeft,
 } from '@arco-design/web-vue/es/icon';
-import Menu from "../components/Menu.vue";
+import Menu from "@cp/leftMenu/Menu.vue";
 
 export default defineComponent({
   name: 'CommonLayout',
@@ -92,10 +94,10 @@ export default defineComponent({
         label: 'English',
         value: 'en',
       },
-      {
-        label: '跟随系统',
-        value: navigator.language || navigator.userLanguage,
-      }
+      // {
+      //   label: '跟随系统',
+      //   value: navigator.language.substring(0, 2) || navigator.userLanguage,
+      // }
     ])
     const language = ref({
       label: '中文',
@@ -103,6 +105,9 @@ export default defineComponent({
     });
     const onCollapse = () => {
       collapsed.value = !collapsed.value;
+      const resizeEvent = new Event('resize');
+      // 分派 resize 事件
+      window.dispatchEvent(resizeEvent);
     };
     const locales = {
       'zh': zhCN,
@@ -144,6 +149,7 @@ export default defineComponent({
       localStorage.setItem('theme-appearance', JSON.stringify(this.colorValue))
     },
     handleLanguageChange(locale) {
+      // console.log(locale)
       this.$i18n.locale = locale;
       this.localeType = locale;
     },

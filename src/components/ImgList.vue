@@ -4,9 +4,9 @@
       <a-tag checkable
              :default-checked="checkTagId === 0"
              v-for="tag in tagList"
-             :key="`cookbook-tag-${tag.id}`"
-             :checked="checkTagId === tag.tadId"
-             @check="handleCheckTag(tag.tadId)"
+             :key="`tag-${tag.id}`"
+             :checked="checkTagId === tag.tagId"
+             @check="handleCheckTag(tag.tagId)"
              :bordered="false"
              class="cookbookTag"
       >
@@ -15,7 +15,7 @@
     </a-space>
   </a-row>
   <a-row justify="flex-start">
-    <a-col :span="6"
+    <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6" :xxl="4"
            class="box"
            v-for="item in imgList"
            :key="`chinese-food-cookbook${item.id}`"
@@ -25,7 +25,7 @@
           :title='item.title'
           :description='item.updateTime'
           width="100%"
-          style="vertical-align: top;"
+          style="vertical-align: top; overflow: hidden; height: 100%;"
       >
         <template #extra>
           <div class="actions">
@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import {ref} from 'vue';
+import {inject, onMounted, ref} from 'vue';
 import {useRouter} from "vue-router";
 import {IconDownload, IconEye, IconInfoCircle, IconTag} from '@arco-design/web-vue/es/icon';
 import {cookbookStore} from "@/stores/cookbook.js";
@@ -60,6 +60,15 @@ export default {
       default: [],
       type: Array
     },
+    tagList: {
+      required: false,
+      default: [{
+        id: 0,
+        value: '全部',
+        tagId: 0,
+      }],
+      type: Array
+    },
     listCategory: {
       required: true,
       default: 0,
@@ -69,31 +78,8 @@ export default {
   setup() {
     const router = useRouter();
     let checkTagId = ref(0)
-    let tagList = ref([
-      {
-        id: 0,
-        tadId: 0,
-        value: '全部'
-      },
-      {
-        id: 1,
-        tadId: 1,
-        value: '懒人快手'
-      },
-      {
-        id: 2,
-        tadId: 2,
-        value: '清淡饮食'
-      },
-      {
-        id: 3,
-        tadId: 3,
-        value: '无辣不欢'
-      },
-    ])
     return {
       router,
-      tagList,
       checkTagId,
     }
   },
@@ -117,7 +103,8 @@ export default {
 </style>
 <style scoped lang="scss">
 .tagList{
-  padding: 16px 20px 0;
+  overflow-x: auto;
+  margin: 20px 16px 0;
 }
 .cookbookTag{
   border-radius: 14px;
@@ -125,6 +112,8 @@ export default {
 .box{
   padding: 20px;
   cursor: zoom-in;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
 }
 .actions {
   display: flex;

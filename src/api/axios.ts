@@ -1,7 +1,8 @@
 import axios, {AxiosResponse} from 'axios';
 import { showMessage } from "./status";   // 引入状态码文件
 import { Message } from "@arco-design/web-vue";
-
+import router from "../router";
+import {adminStore} from "../stores/admin";
 // 设置接口超时时间
 axios.defaults.timeout = 60000;
 // 环境的切换
@@ -26,7 +27,8 @@ axios.interceptors.request.use(
         config.headers = {
             //'Content-Type':'application/x-www-form-urlencoded',   // 传参方式表单
             'Content-Type':'application/json;charset=UTF-8',        // 传参方式json
-            'token':'80c483d59ca86ad0393cf8a98416e2a1'              // 这里自定义配置，这里传的是token
+            // 'token': localStorage.getItem('token') || '',             // 这里自定义配置，这里传的是token
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
         };
         return config;
     },
@@ -43,7 +45,17 @@ axios.interceptors.response.use(
     },
     (error: any) => {
         // do something
-        Message.error(showMessage(error.code))
+        const { response } = error;
+        if (response && response.status === 401) {
+            // localStorage.removeItem('admin')
+            // localStorage.removeItem('token')
+            // localStorage.removeItem('openMenu')
+            adminStore().info = []
+            router.push({ name: 'login' });
+        }else {
+            Message.error('请求出错');
+        }
+        // Message.error(showMessage(error.code))
         return Promise.reject(error);
     }
     // 请求成功

@@ -22,6 +22,8 @@ const i18n = createI18n({
     messages, // 引入的本地化消息
 });
 import "@/assets/css/htmlpreview.scss";
+// app.component('editor', CKEditor)
+
 app.use(router)
     .use(createPinia())
     .use(ArcoVue)
@@ -29,6 +31,5 @@ app.use(router)
     .use(i18n)
     .use( CKEditor )
     .mount('#app')
-
 app.config.globalProperties.$api = api;
 app.provide('api', api);
