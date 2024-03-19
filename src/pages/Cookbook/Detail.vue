@@ -1,10 +1,13 @@
 <template>
   <a-card class="detailPage" :bordered="false">
-        <div class="mainContent">
-          <div class="left">
+        <a-row class="mainContent" :gutter="20">
+          <a-col class="left" :span="16" :xs="24" :sm="16">
             <CookbookPreviewPage :cookbook="cookbook" />
-          </div>
-          <div class="right">
+            <a-divider>
+              end
+            </a-divider>
+          </a-col>
+          <a-col class="right" :span="8" :xs="24" :sm="8">
             <div class="relative">
               <a-row justify="space-between" class="topText">
                 <div>
@@ -32,8 +35,8 @@
                 </a-list-item>
               </a-list>
             </div>
-          </div>
-        </div>
+          </a-col>
+        </a-row>
   </a-card>
 </template>
 
@@ -114,17 +117,18 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
 .detailPage{
-  padding: 24px;
+  padding: 16px;
   .mainContent{
     display: flex;
     .left{
-      margin-right: 10px;
-      width: calc(70% - 10px);
+      //margin-right: 10px;
+      //width: calc(70% - 10px);
     }
     .right{
-      margin-left: 30px;
-      width: calc(30% - 30px);
+      //margin-left: 30px;
+      //width: calc(30% - 30px);
       .recipeItem{
         cursor: pointer;
         :hover{
@@ -153,5 +157,11 @@ export default {
     }
   }
 
+}
+
+@media screen and (max-width: 576px){
+  .detailPage{
+    padding: 4px;
+  }
 }
 </style>

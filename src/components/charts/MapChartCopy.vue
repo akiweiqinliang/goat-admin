@@ -9,27 +9,31 @@
         </a-breadcrumb>
       </a-row>
       <a-row>
-        <div ref="fatherNode" style="width: 60%;">
-          <div ref="worldDataMap"></div>
-        </div>
-        <div class="dataBox">
-          <ul>
-            <li v-for="(place, index) in currentData">
-              <div class="rankBox">
-                <div class="rank">
-                  <IconRank v-if="index <= 2" :rank="index+1"/>
-                  <div v-else class="otherRank">{{ index+1 }}</div>
+        <a-col :span="14" :xs="24" :sm="24" :md="14">
+          <div ref="fatherNode" style="width: 100%;">
+            <div ref="worldDataMap"></div>
+          </div>
+        </a-col>
+        <a-col :span="10" :xs="24" :sm="24" :md="10">
+          <div class="dataBox">
+            <ul>
+              <li v-for="(place, index) in currentData">
+                <div class="rankBox">
+                  <div class="rank">
+                    <IconRank v-if="index <= 2" :rank="index+1"/>
+                    <div v-else class="otherRank">{{ index+1 }}</div>
+                  </div>
                 </div>
-              </div>
-              <p>{{ place.name }}</p>
-              <div class="box">
-                <div class="bar" :style="`width: ${place.value / currentMost * 90}%;`">
+                <p>{{ place.name }}</p>
+                <div class="box">
+                  <div class="bar" :style="`width: ${place.value / currentMost * 90}%;`">
+                  </div>
+                  <span>{{ place.value }}</span>
                 </div>
-                <span>{{ place.value }}</span>
-              </div>
-            </li>
-          </ul>
-        </div>
+              </li>
+            </ul>
+          </div>
+        </a-col>
       </a-row>
     </div>
 </template>
@@ -282,7 +286,7 @@ export default {
   color: black;
 }
 .dataBox{
-  width: 40%;
+  width: 100%;
   ul{
     margin: 0;
     padding: 0;

@@ -59,4 +59,9 @@ export default {
 .learn{
   padding: 20px;
 }
+@media screen and (max-width: 576px){
+  .learn{
+    padding: 16px;
+  }
+}
 </style>

@@ -16,7 +16,13 @@ export default {
 
     const resizeTimer = ref(null);
     const option = {
-
+      grid: {
+        left: '5%',
+        right: '5%',
+        top: '20%',
+        bottom: '5%',
+        containLabel: true
+      },
       tooltip: {
         trigger: 'axis',
         axisPointer: {
@@ -26,17 +32,17 @@ export default {
           }
         }
       },
-      toolbox: {
-        feature: {
-          dataView: { show: true, readOnly: false },
-          magicType: { show: true, type: ['line', 'bar'] },
-          restore: { show: true },
-          saveAsImage: { show: true }
-        }
-      },
-      legend: {
-        data: ['Evaporation', 'Precipitation', 'Temperature']
-      },
+      // toolbox: {
+      //   feature: {
+      //     dataView: { show: true, readOnly: false },
+      //     magicType: { show: true, type: ['line', 'bar'] },
+      //     restore: { show: true },
+      //     saveAsImage: { show: true }
+      //   }
+      // },
+      // legend: {
+      //   data: ['Evaporation', 'Precipitation', 'Temperature']
+      // },
       xAxis: [
         {
           type: 'category',
@@ -51,7 +57,7 @@ export default {
           type: 'value',
           name: 'Precipitation',
           min: 0,
-          max: 250,
+          max: 200,
           interval: 50,
           axisLabel: {
             formatter: '{value} ml'
@@ -112,8 +118,16 @@ export default {
       resizeTimer.value = setTimeout(() => {
         // 获取新的父元素宽度
         const newParentWidth = fatherNode.value.offsetWidth;
+        const windowWidth = window.innerWidth;
+        console.log(newParentWidth)
         // 设置新的宽度并调用 resize() 方法
-        chart.value.resize({ width: newParentWidth, height: newParentWidth / 2 - 24});
+        if (windowWidth >= 768 ) {
+          chart.value.resize({ width: newParentWidth, height: newParentWidth / 2 - 24});
+        }else if (windowWidth >= 576 ){
+          chart.value.resize({ width: newParentWidth, height: (newParentWidth * 2) / 3 });
+        }else {
+          chart.value.resize({ width: newParentWidth, height: newParentWidth });
+        }
       }, 200); // 延迟时间可以根据实际情况进行调整
     }
     onMounted(() => {

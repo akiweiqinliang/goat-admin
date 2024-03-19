@@ -58,6 +58,20 @@ export const routes = [
         ]
     },
     {
+        path: '/cookbooks/editCookbook',
+        component: CommonLayout, // 将 CommonLayout 设置为父组件
+        children: [
+            {
+                path: '',
+                component: EditCookbook,
+                name: 'editCookbook',
+                meta: {
+                    requiresAuth: true,
+                }
+            }
+        ]
+    },
+    {
         path: '/notes/edit-note',
         component: CommonLayout, // 将 CommonLayout 设置为父组件
         children: [
@@ -99,20 +113,7 @@ export const routes = [
             }
         ]
     },
-    {
-        path: '/cookbooks/editCookbook',
-        component: CommonLayout, // 将 CommonLayout 设置为父组件
-        children: [
-            {
-                path: '',
-                component: EditCookbook,
-                name: 'editCookbook',
-                meta: {
-                    requiresAuth: true,
-                }
-            }
-        ]
-    },
+
     {
         path: '/login',
         component: Login,

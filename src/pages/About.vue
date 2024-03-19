@@ -1,11 +1,11 @@
 <template>
   <a-row :gutter="16" class="mbStyle">
-    <a-col :span="16">
+    <a-col :span="16" :xs="24" :sm="24" :md="16" class="barBox">
       <a-card>
         <BarChart />
       </a-card>
     </a-col>
-    <a-col :span="8">
+    <a-col :span="8" :xs="24" :sm="24" :md="8">
       <a-card>
         <DoughnutChart />
       </a-card>
@@ -45,5 +45,10 @@ export default {
 <style scoped>
 .mbStyle{
   margin-bottom: 16px;
+}
+@media screen and (max-width: 767px){
+  .barBox {
+    margin-bottom: 16px;
+  }
 }
 </style>

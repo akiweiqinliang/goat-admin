@@ -1,122 +1,212 @@
 <template>
   <a-layout-content>
-    <a-split :style="{
-        height: '100vh',
-        width: '100%',
-        minWidth: '500px',
-        border: '1px solid var(--color-border)'
-      }"
-             v-model:size="size"
-             min="80px"
-    >
-      <template #first>
-        <a-typography-paragraph>
-          <a-layout class="editLayout">
-            <a-layout-header class="header">
-              <a-row justify="space-between" align="center">
-                <a-space>
-                  {{ $t('editCookbook') }} 🥗
-                </a-space>
-                <a-button @click="resetForm">重置</a-button>
-              </a-row>
-            </a-layout-header>
-            <a-layout-content>
-              <a-form :model="form" :style="{ width: '100%' }" auto-label-width @submit="handleSubmit">
-                <a-form-item field="title" label="标题">
-                  <a-input v-model="form.title" placeholder="please enter title..."/>
-                </a-form-item>
-                <a-form-item field="description" label="简介">
-                  <a-input v-model="form.description" placeholder="please enter description..."/>
-                </a-form-item>
-                <a-form-item field="tagObj" label="标签">
-                  <a-select v-model="form.tagObj" :style="{width:'320px'}" placeholder="Please select ...">
-                    <a-option v-for="item of tagList" :value="item" :label="item.value" />
-                  </a-select>
-                </a-form-item>
-                <a-form-item field="category" label="类型">
-                  <a-radio-group v-model="form.category" :options="categoryOptions" />
-                </a-form-item>
-                <a-form-item field="imgUrl" label="封面">
-                  <a-upload
-                      :action="uploadUrl"
-                      :fileList="file ? [file] : []"
-                      :show-file-list="false"
-                      @change="onChange"
-                      @progress="onProgress"
-                      :response-url-key="fileItem => fileItem.response.data"
-                  >
-                    <template #upload-button>
-                      <div
-                          :class="`arco-upload-list-item${
+    <a-row>
+      <a-col :span="24" :xs="0" :sm="24">
+        <a-split class="splitStyle"
+                 v-model:size="size"
+                 min="80px"
+        >
+          <template #first>
+            <a-typography-paragraph>
+              <a-layout class="editLayout">
+                <a-layout-header class="header">
+                  <a-row justify="space-between" align="center">
+                    <a-space>
+                      {{ $t('editCookbook') }} 🥗
+                    </a-space>
+                    <a-button @click="resetForm">重置</a-button>
+                  </a-row>
+                </a-layout-header>
+                <a-layout-content>
+                  <a-form :model="form" :style="{ width: '100%' }" auto-label-width @submit="handleSubmit">
+                    <a-form-item field="title" label="标题">
+                      <a-input v-model="form.title" placeholder="please enter title..."/>
+                    </a-form-item>
+                    <a-form-item field="description" label="简介">
+                      <a-input v-model="form.description" placeholder="please enter description..."/>
+                    </a-form-item>
+                    <a-form-item field="tagObj" label="标签">
+                      <a-select v-model="form.tagObj" :style="{width:'320px'}" placeholder="Please select ...">
+                        <a-option v-for="item of tagList" :value="item" :label="item.value" />
+                      </a-select>
+                    </a-form-item>
+                    <a-form-item field="category" label="类型">
+                      <a-radio-group v-model="form.category" :options="categoryOptions" />
+                    </a-form-item>
+                    <a-form-item field="imgUrl" label="封面">
+                      <a-upload
+                          :action="uploadUrl"
+                          :fileList="file ? [file] : []"
+                          :show-file-list="false"
+                          @change="onChange"
+                          @progress="onProgress"
+                          :response-url-key="fileItem => fileItem.response.data"
+                      >
+                        <template #upload-button>
+                          <div
+                              :class="`arco-upload-list-item${
             file && file.status === 'error' ? ' arco-upload-list-item-error' : ''
           }`"
-                      >
-                        <div
-                            class="arco-upload-list-picture custom-upload-avatar"
-                            v-if="file && file.url"
-                        >
-                          <img :src="file.url" />
-                          <div class="arco-upload-list-picture-mask">
-                            <IconEdit />
-                          </div>
-                          <a-progress
-                              v-if="file.status === 'uploading' && file.percent < 100"
-                              :percent="file.percent"
-                              type="circle"
-                              size="mini"
-                              :style="{
+                          >
+                            <div
+                                class="arco-upload-list-picture custom-upload-avatar"
+                                v-if="file && file.url"
+                            >
+                              <img :src="file.url" />
+                              <div class="arco-upload-list-picture-mask">
+                                <IconEdit />
+                              </div>
+                              <a-progress
+                                  v-if="file.status === 'uploading' && file.percent < 100"
+                                  :percent="file.percent"
+                                  type="circle"
+                                  size="mini"
+                                  :style="{
                 position: 'absolute',
                 left: '50%',
                 top: '50%',
                 transform: 'translateX(-50%) translateY(-50%)',
               }"
-                          />
-                        </div>
-                        <div class="arco-upload-picture-card" v-else>
-                          <div class="arco-upload-picture-card-text">
-                            <IconPlus />
-                            <div style="margin-top: 10px;font-size: 12px;">上传封面图</div>
+                              />
+                            </div>
+                            <div class="arco-upload-picture-card" v-else>
+                              <div class="arco-upload-picture-card-text">
+                                <IconPlus />
+                                <div style="margin-top: 10px;font-size: 12px;">上传封面图</div>
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                      </div>
-                    </template>
-                  </a-upload>
-                </a-form-item>
-                <a-form-item field="cookingWay" label="做法">
-                </a-form-item>
-                <ckeditor :editor="editor" v-model="form.cookingWay" :config="editorConfig" @ready="initExtraPlugins"></ckeditor>
-                <a-row justify="end" class="footer">
+                        </template>
+                      </a-upload>
+                    </a-form-item>
+                    <a-form-item field="cookingWay" label="做法">
+                    </a-form-item>
+                    <ckeditor :editor="editor" v-model="form.cookingWay" :config="editorConfig" @ready="initExtraPlugins"></ckeditor>
+                    <a-row justify="end" class="footer">
+                      <a-space>
+                        <a-popconfirm content="确定删除全部内容并返回首页?" @ok="backHome">
+                          <a-tooltip :content="$t('backHome')">
+                            <a-button>{{ $t('cancel') }}</a-button>
+                          </a-tooltip>
+                        </a-popconfirm>
+                        <a-button html-type="submit" :disabled="submitCookbook">{{ $t('add') }}</a-button>
+                      </a-space>
+                    </a-row>
+                  </a-form>
+                </a-layout-content>
+              </a-layout>
+            </a-typography-paragraph>
+          </template>
+          <template #second>
+            <a-typography-paragraph>
+              <a-layout class="editLayout">
+                <a-layout-header class="header">
                   <a-space>
-                    <a-popconfirm content="确定删除全部内容并返回首页?" @ok="backHome">
-                      <a-tooltip :content="$t('backHome')">
-                        <a-button>{{ $t('cancel') }}</a-button>
-                      </a-tooltip>
-                    </a-popconfirm>
-                    <a-button html-type="submit" :disabled="submitCookbook">{{ $t('add') }}</a-button>
+                    预览效果 👀
                   </a-space>
-                </a-row>
-              </a-form>
-            </a-layout-content>
-            <a-layout-footer>
-            </a-layout-footer>
-          </a-layout>
-        </a-typography-paragraph>
-      </template>
-      <template #second>
-        <a-typography-paragraph>
-          <a-layout class="editLayout">
-            <a-layout-header class="header">
-              <a-space>
-                预览效果 👀
-              </a-space>
-            </a-layout-header>
-            <a-layout-content>
-              <CookbookPreviewPage :cookbook="form" />
-            </a-layout-content>
-          </a-layout>
-        </a-typography-paragraph>
-      </template>
-    </a-split>
+                </a-layout-header>
+                <a-layout-content>
+                  <CookbookPreviewPage :cookbook="form" />
+                </a-layout-content>
+              </a-layout>
+            </a-typography-paragraph>
+          </template>
+        </a-split>
+      </a-col>
+      <a-col :span="24" :xs="24" :sm="0">
+
+            <a-typography-paragraph>
+              <a-layout class="editLayout">
+                <a-layout-header class="header">
+                  <a-row justify="space-between" align="center">
+                    <a-space>
+                      {{ $t('editCookbook') }} 🥗
+                    </a-space>
+                    <a-button @click="resetForm">重置</a-button>
+                  </a-row>
+                </a-layout-header>
+                <a-layout-content>
+                  <a-form :model="form" :style="{ width: '100%' }" auto-label-width @submit="handleSubmit">
+                    <a-form-item field="title" label="标题">
+                      <a-input v-model="form.title" placeholder="please enter title..."/>
+                    </a-form-item>
+                    <a-form-item field="description" label="简介">
+                      <a-input v-model="form.description" placeholder="please enter description..."/>
+                    </a-form-item>
+                    <a-form-item field="tagObj" label="标签">
+                      <a-select v-model="form.tagObj" :style="{width:'320px'}" placeholder="Please select ...">
+                        <a-option v-for="item of tagList" :value="item" :label="item.value" />
+                      </a-select>
+                    </a-form-item>
+                    <a-form-item field="category" label="类型">
+                      <a-radio-group v-model="form.category" :options="categoryOptions" />
+                    </a-form-item>
+                    <a-form-item field="imgUrl" label="封面">
+                      <a-upload
+                          :action="uploadUrl"
+                          :fileList="file ? [file] : []"
+                          :show-file-list="false"
+                          @change="onChange"
+                          @progress="onProgress"
+                          :response-url-key="fileItem => fileItem.response.data"
+                      >
+                        <template #upload-button>
+                          <div
+                              :class="`arco-upload-list-item${
+            file && file.status === 'error' ? ' arco-upload-list-item-error' : ''
+          }`"
+                          >
+                            <div
+                                class="arco-upload-list-picture custom-upload-avatar"
+                                v-if="file && file.url"
+                            >
+                              <img :src="file.url" />
+                              <div class="arco-upload-list-picture-mask">
+                                <IconEdit />
+                              </div>
+                              <a-progress
+                                  v-if="file.status === 'uploading' && file.percent < 100"
+                                  :percent="file.percent"
+                                  type="circle"
+                                  size="mini"
+                                  :style="{
+                position: 'absolute',
+                left: '50%',
+                top: '50%',
+                transform: 'translateX(-50%) translateY(-50%)',
+              }"
+                              />
+                            </div>
+                            <div class="arco-upload-picture-card" v-else>
+                              <div class="arco-upload-picture-card-text">
+                                <IconPlus />
+                                <div style="margin-top: 10px;font-size: 12px;">上传封面图</div>
+                              </div>
+                            </div>
+                          </div>
+                        </template>
+                      </a-upload>
+                    </a-form-item>
+                    <a-form-item field="cookingWay" label="做法">
+                    </a-form-item>
+                    <ckeditor :editor="editor" v-model="form.cookingWay" :config="editorConfig" @ready="initExtraPlugins"></ckeditor>
+                    <a-row justify="end" class="footer">
+                      <a-space>
+                        <a-popconfirm content="确定删除全部内容并返回首页?" @ok="backHome">
+<!--                          <a-tooltip :content="$t('backHome')">-->
+                            <a-button>{{ $t('cancel') }}</a-button>
+<!--                          </a-tooltip>-->
+                        </a-popconfirm>
+                        <a-button html-type="submit" :disabled="submitCookbook">{{ $t('add') }}</a-button>
+                      </a-space>
+                    </a-row>
+                  </a-form>
+                </a-layout-content>
+              </a-layout>
+            </a-typography-paragraph>
+      </a-col>
+    </a-row>
+
 
   </a-layout-content>
 
@@ -278,6 +368,24 @@ export default {
   }
   .footer{
     margin: 40px 0;
+  }
+}
+
+.splitStyle{
+  height: 100vh;
+  width: 100%;
+  min-width: 500px;
+  border: 1px solid var(--color-border);
+}
+@media screen and (max-width: 576px){
+  .editLayout{
+    padding: 12px;
+    .header{
+      margin: 0;
+    }
+    .footer{
+      margin: 20px 0;
+    }
   }
 }
 </style>

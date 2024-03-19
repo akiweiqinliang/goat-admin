@@ -12,47 +12,86 @@
       <div ref="tourMenu" class="tourBox">
         <Menu />
       </div>
+      <a-row style="margin-top: 40px;">
+        <a-col :span="0" :xs="24" :sm="0" style="padding: 0 8px">
+          <a-row :justify="collapsed ? 'center' : 'space-between'" align="center">
+            <div style="margin-bottom: 10px">
+              <a-switch checked-color="#000000" v-model="colorValue" @change="handleColorChange">
+                <template #checked-icon>
+                  <img src="../assets/imgs/layout/night.png" width="18" height="18" style="display:block;"/>
+                </template>
+                <template #unchecked-icon>
+                  <img src="../assets/imgs/layout/sun.png" width="18" height="18" style="display: block;"/>
+                </template>
+              </a-switch>
+            </div>
+            <div style="margin-bottom: 10px">
+              <a-popover position="right" trigger="click" :popup-visible="popupVisible">
+                <a-button shape="circle" @click="popupVisible = !popupVisible">
+                  <SvgIcon v-if="language.value === 'zh'" icon-name="IconChineseFill" />
+                  <SvgIcon v-if="language.value === 'en'" icon-name="IconEnglishFill" />
+                </a-button>
+                <template #content>
+                  <a-button long type="text" v-for="item of langData" @click="handleSidePop(item)">{{ item.label }}</a-button>
+                </template>
+              </a-popover>
+            </div>
+          <div style="margin-bottom: 10px">
+            <a-button shape="circle" @click="onCollapse" >
+              <IconCaretRight v-if="collapsed" />
+              <IconCaretLeft v-else />
+            </a-button>
+          </div>
+          </a-row>
+        </a-col>
+      </a-row>
     </a-layout-sider>
     <a-layout>
-      <a-layout-header style="padding:0 20px;">
-        <a-row justify="space-around">
-          <a-col :span="18">
-            <div ref="tourControlBtn" class="tourBox" style="display: inline-flex">
-              <a-button shape="round" @click="onCollapse">
-                <IconCaretRight v-if="collapsed" />
-                <IconCaretLeft v-else />
-              </a-button>
-            </div>
-            <a-button shape="round" style="margin-left: 20px;" @click="replayGuide">➡️ click me to replay shepherd 💥</a-button>
-          </a-col>
-          <a-col :span="4">
-            <a-select
-                v-model="language"
-                @change="handleLanguageChange(language.value)"
-                :style="{width:'100%',borderRadius: '20px'}"
-                placeholder="Select language"
-                :trigger-props="{ autoFitPopupMinWidth: true }"
-            >
-              <a-option v-for="item of langData" :value="item" :label="item.label" />
-            </a-select>
-          </a-col>
-          <a-col :span="1">
-            <a-switch checked-color="#000000" v-model="colorValue" @change="handleColorChange">
-              <template #checked-icon>
-                <img src="../assets/imgs/layout/night.png" width="18" height="18" style="display:block;"/>
-              </template>
-              <template #unchecked-icon>
-                <img src="../assets/imgs/layout/sun.png" width="18" height="18" style="display: block;"/>
-              </template>
-            </a-switch>
-          </a-col>
-        </a-row>
-      </a-layout-header>
-      <a-layout style="padding: 24px;">
+      <a-row>
+        <a-col :span="24" :xs="0" :sm="24">
+          <a-layout-header class="arco-row arco-row-align-center arco-row-justify-space-between" style="padding:0 20px;">
+            <a-col :span="16">
+              <a-row align="center" justify="start" :wrap="false">
+                <div ref="tourControlBtn" class="tourBox" style="display: inline-flex">
+                  <a-button shape="round" @click="onCollapse">
+                    <IconCaretRight v-if="collapsed" />
+                    <IconCaretLeft v-else />
+                  </a-button>
+                </div>
+                <a-button
+                    shape="round"
+                    style="margin-left: 20px;"
+                    @click="replayGuide">➡️ click me to replay shepherd 💥</a-button>
+              </a-row>
+            </a-col>
+            <a-col :span="8">
+              <a-row justify="space-between" align="center" :wrap="false">
+                <a-select
+                    v-model="language"
+                    @change="handleLanguageChange(language.value)"
+                    :style="{width:'calc(100% - 20px)',borderRadius: '20px',marginRight: '20px'}"
+                    placeholder="Select language"
+                    :trigger-props="{ autoFitPopupMinWidth: true }"
+                >
+                  <a-option v-for="item of langData" :value="item" :label="item.label" />
+                </a-select>
+                <a-switch checked-color="#000000" v-model="colorValue" @change="handleColorChange">
+                  <template #checked-icon>
+                    <img src="../assets/imgs/layout/night.png" width="18" height="18" style="display:block;"/>
+                  </template>
+                  <template #unchecked-icon>
+                    <img src="../assets/imgs/layout/sun.png" width="18" height="18" style="display: block;"/>
+                  </template>
+                </a-switch>
+              </a-row>
+
+            </a-col>
+          </a-layout-header>
+        </a-col>
+      </a-row>
+      <a-layout class="layoutContainerPadding">
         <div ref="tourContent">
-<!--          <a-layout-content>-->
             <RouterView />
-<!--          </a-layout-content>-->
         </div>
         <a-layout-footer>
           copyright
@@ -74,15 +113,18 @@ import {
   IconCaretLeft,
 } from '@arco-design/web-vue/es/icon';
 import Menu from "@cp/leftMenu/Menu.vue";
+import SvgIcon from "@cp/SvgIcon.vue";
 
 export default defineComponent({
   name: 'CommonLayout',
   components: {
+    SvgIcon,
     Menu,
     IconCaretRight,
     IconCaretLeft,
   },
   setup() {
+    const popupVisible = ref(false)
     const colorValue = ref(JSON.parse(localStorage.getItem('theme-appearance')) || false);
     const collapsed = ref(false);
     const langData = ref([
@@ -125,7 +167,8 @@ export default defineComponent({
       collapsed,
       onCollapse,
       localeType,
-      locale
+      locale,
+      popupVisible
     };
   },
   mounted(){
@@ -138,6 +181,14 @@ export default defineComponent({
     }
   },
   methods: {
+    handleTriggerClick(e) {
+      this.popupVisible = !this.popupVisible;
+    },
+    handleSidePop(item) {
+      this.language = item;
+      this.handleLanguageChange(item.value)
+      this.popupVisible = false;
+    },
     handleColorChange() {
       if (this.colorValue) {
         document.body.setAttribute('arco-theme', 'dark')
@@ -281,7 +332,7 @@ export default defineComponent({
   flex-direction: column;
   justify-content: center;
   font-size: 16px;
-  font-stretch: condensed;
+  //font-stretch: condensed;
   /*text-align: center;*/
   .ck{
     color: var(--color-text-2);
@@ -289,5 +340,12 @@ export default defineComponent({
     background-color: var(--color-bg-3);
   }
 }
-
+.layoutContainerPadding{
+  padding: 24px;
+}
+@media screen and (max-width: 576px){
+  .layoutContainerPadding{
+    padding: 16px;
+  }
+}
 </style>

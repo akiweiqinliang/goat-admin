@@ -149,5 +149,9 @@ export default {
 }
 .noteItemMeta{
   cursor: pointer;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
 }
 </style>
