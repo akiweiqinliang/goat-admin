@@ -10,7 +10,8 @@ if (process.env.NODE_ENV == 'development') {
     // axios.defaults.baseURL = 'http://localhost:5000'; //线上数据库
     axios.defaults.baseURL = 'http://localhost:3000'; // 开发环境
 } else if (process.env.NODE_ENV == 'production') {
-    axios.defaults.baseURL = 'https://goat-nest-app-v1-0.onrender.com'; //生产环境
+    // axios.defaults.baseURL = 'https://goat-nest-app-v1-0.onrender.com'; //生产环境
+    axios.defaults.baseURL = 'http://120.27.156.229:81/'; //生产环境 aliyun
 }
 
 // @ts-ignore
