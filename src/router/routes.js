@@ -32,6 +32,7 @@ export const routes = [
                 path: 'cookbook',
                 redirect: '/cookbook/chineseFood',
                 layout: true,
+                name: 'cookbook',
                 layoutName: 'cookbook',
                 iconName: 'IconBook',
                 children: [
@@ -51,6 +52,20 @@ export const routes = [
                 path: '',
                 component: CookbookDetail,
                 name: 'cookbookDetail',
+                meta: {
+                    requiresAuth: true,
+                }
+            }
+        ]
+    },
+    {
+        path: '/cookbooks/editCookbook',
+        component: CommonLayout, // 将 CommonLayout 设置为父组件
+        children: [
+            {
+                path: '',
+                component: EditCookbook,
+                name: 'editCookbook',
                 meta: {
                     requiresAuth: true,
                 }
@@ -99,20 +114,7 @@ export const routes = [
             }
         ]
     },
-    {
-        path: '/cookbooks/editCookbook',
-        component: CommonLayout, // 将 CommonLayout 设置为父组件
-        children: [
-            {
-                path: '',
-                component: EditCookbook,
-                name: 'editCookbook',
-                meta: {
-                    requiresAuth: true,
-                }
-            }
-        ]
-    },
+
     {
         path: '/login',
         component: Login,

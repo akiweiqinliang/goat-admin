@@ -25,7 +25,7 @@
           :title='item.title'
           :description='item.updateTime'
           width="100%"
-          style="vertical-align: top; overflow: hidden; height: 100%;"
+          style="vertical-align: top; overflow: hidden; height: 100%; background-color: #fff"
       >
         <template #extra>
           <div class="actions">

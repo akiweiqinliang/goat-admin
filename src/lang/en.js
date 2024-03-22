@@ -24,5 +24,6 @@ export const en = {
     notes: 'Learn Notes',
     hobby: 'Hobby',
     search: 'Search',
-    deleteInfoMsg: 'Are you sure you want to delete?'
+    deleteInfoMsg: 'Are you sure you want to delete?',
+    todo: 'todo list',
 }

@@ -3,7 +3,12 @@
       <a-breadcrumb class="topBreadcrumb">
         <a-breadcrumb-item @click="back(1)" style="cursor: pointer;">{{ $t('notes') }}</a-breadcrumb-item>
         <a-breadcrumb-item @click="back(note.tagId)" style="cursor: pointer;">{{ note.tag }}</a-breadcrumb-item>
-        <a-breadcrumb-item>{{ note.title }}</a-breadcrumb-item>
+        <a-breadcrumb-item style="
+        -webkit-box-orient: vertical;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        overflow: hidden;"
+        >{{ note.title }}</a-breadcrumb-item>
       </a-breadcrumb>
       <a-button type="primary" @click="handleClick" class="directBtn">目录</a-button>
     <a-typography>
@@ -128,6 +133,7 @@ export default {
   display: inline-block;
   .topBreadcrumb{
     margin-bottom: -26px;
+    width: calc(100% - 80px);
   }
   .time{
     font-size: 14px;
@@ -155,5 +161,21 @@ export default {
   transform: translateY(-1px);
   margin-left: calc(100% - 60px);
   width: 60px;
+}
+.topBreadcrumbItem{}
+@media screen and (max-width: 576px){
+  .noteDetail{
+    padding: 16px;
+    .topBreadcrumb{
+      font-size: 12px;
+      margin-bottom: -28px;
+    }
+    .directBtn{
+      top: 40px;
+    }
+    h1.arco-typography{
+      font-size: 24px;
+    }
+  }
 }
 </style>

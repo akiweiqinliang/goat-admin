@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
-
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
@@ -26,6 +25,12 @@ export default defineConfig({
           'arcoblue-6': '#836f64',
         },
         javascriptEnabled: true,
+      },
+      postcss: {
+        plugins: [
+          // 在这里添加其他的 PostCSS 插件
+          //   'postcss-px-to-viewport-8-plugin'
+        ]
       }
     }
   },
