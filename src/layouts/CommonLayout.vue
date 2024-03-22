@@ -8,7 +8,16 @@
         breakpoint="lg"
         @collapse="onCollapse"
     >
-      <div class="logo tourBox" ref="tourLogo"><h1>😭</h1></div>
+      <div class="logo tourBox" ref="tourLogo" :style="collapsed ? 'justify-content: center;' : ''">
+        <a-row align="center" justify="space-between" :wrap="false">
+          <a-avatar>
+            <img src="../assets/goat.png" alt="goat"/>
+          </a-avatar>
+          <div style="font-stretch: 130%; font-weight: bold; margin-left: 12px;" :style="collapsed ? 'opacity: 0; width: 0;    transition: all .3s; margin-left: 0px;' : 'opacity: 1; width: auto;    transition: all .3s;' ">
+            Goat Admin
+          </div>
+        </a-row>
+      </div>
       <div ref="tourMenu" class="tourBox">
         <Menu />
       </div>
@@ -94,7 +103,22 @@
             <RouterView />
         </div>
         <a-layout-footer>
-          copyright
+          <a-divider />
+          <a-row justify="space-between" class="footerRow">
+            <span>
+              <SvgIcon icon-name="IconCopyright" />
+              2024 梁炜勤
+            </span>
+            <div class="footerRight">
+              <span>
+                <IconEmail />
+              Email: 13724116512@163.com
+              </span>
+              <a href="https://github.com/akiweiqinliang" target="_blank">
+                <IconGithub />
+              </a>
+            </div>
+          </a-row>
         </a-layout-footer>
       </a-layout>
     </a-layout>
@@ -111,6 +135,9 @@ import enUS from '@arco-design/web-vue/es/locale/lang/en-us';
 import {
   IconCaretRight,
   IconCaretLeft,
+  IconWechat,
+  IconGithub,
+    IconEmail
 } from '@arco-design/web-vue/es/icon';
 import Menu from "@cp/leftMenu/Menu.vue";
 import SvgIcon from "@cp/SvgIcon.vue";
@@ -122,6 +149,9 @@ export default defineComponent({
     Menu,
     IconCaretRight,
     IconCaretLeft,
+    IconGithub,
+    IconEmail,
+    IconWechat,
   },
   setup() {
     const popupVisible = ref(false)
@@ -292,6 +322,23 @@ export default defineComponent({
 });
 </script>
 <style scoped lang="scss">
+//.logoBox{
+//  width: 100%;
+//  //aspect-ratio: 1 / 1;
+//  //background-color: var(--color-fill-2);
+//  //border-radius: 4px;
+//  display: flex;
+//  justify-content: center;
+//  align-items: center;
+//  overflow: hidden;
+//  //padding: 10%;
+//  //box-sizing: border-box;
+//  img{
+//    width: auto;
+//    height: 100%;
+//    object-fit: contain;
+//  }
+//}
 .layout-demo {
   height: 100vh;
   background: var(--color-fill-2);
@@ -300,13 +347,15 @@ export default defineComponent({
 .layout-demo :deep(.arco-layout-sider) .logo {
   height: 32px;
   margin: 12px 8px;
-  background: rgba(255, 255, 255, 0.2);
+  //background: rgba(255, 255, 255, 0.2);
+  color: var(--color-text-1);
   display: flex;
   align-items: center;
-  justify-content: center;
+  //justify-content: center;
+  //overflow: hidden;
 }
 .layout-demo :deep(.arco-layout-sider-light) .logo{
-  background: var(--color-fill-2);
+  //background: var(--color-fill-2);
 }
 .layout-demo :deep(.arco-layout-header)  {
   height: 64px;
@@ -314,11 +363,11 @@ export default defineComponent({
   background: var(--color-bg-3);
 }
 .layout-demo :deep(.arco-layout-footer) {
-  height: 48px;
+  //height: 48px;
   color: var(--color-text-2);
   font-weight: 400;
   font-size: 14px;
-  line-height: 48px;
+  //line-height: 48px;
 }
 .layout-demo :deep(.arco-layout-content) {
   color: var(--color-text-2);
@@ -340,12 +389,45 @@ export default defineComponent({
     background-color: var(--color-bg-3);
   }
 }
+.layout-demo :deep(.arco-layout-footer){
+  flex: 1;
+  justify-content: end;
+}
 .layoutContainerPadding{
   padding: 24px;
+}
+.footerRow{
+  .footerRight{
+    span{
+      margin-right: 16px;
+    }
+  }
+  span{
+    font-size: 14px;
+  }
+  a{
+    text-decoration: none;
+    color: var(--color-text-1);
+  }
 }
 @media screen and (max-width: 576px){
   .layoutContainerPadding{
     padding: 16px;
+  }
+  .footerRow{
+    justify-content: center;
+    flex-direction: column;
+    span{
+      line-height: 20px;
+      font-size: 12px;
+      width: 100%;
+      display: inline-block;
+    }
+    .footerRight{
+      display: inline-flex;
+      justify-content: space-between;
+      width: 100%;
+    }
   }
 }
 </style>

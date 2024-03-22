@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import {defineComponent, ref} from 'vue';
+import {defineComponent, onMounted, ref, watch} from 'vue';
 import { Message } from '@arco-design/web-vue';
 import {
   IconCaretRight,
@@ -25,6 +25,7 @@ import {
 } from '@arco-design/web-vue/es/icon';
 import { routes } from '@/router/routes.js';
 import MenuItem from "@cp/leftMenu/MenuItem.vue";
+import {useRoute} from "vue-router";
 
 export default defineComponent({
   name: 'Menu',
@@ -36,27 +37,28 @@ export default defineComponent({
     IconCalendar,
   },
   setup() {
+    const route =useRoute();
     let selectedKeys = ref([])
     let defaultOpenKeys = ref(JSON.parse(localStorage.getItem('openMenu')) || [])
+
+    onMounted(() => {
+      selectedKeys.value = [route.name] || ['home'];
+    });
+    watch(
+        ()=> route.name,
+        (newValue, oldValue) => {
+          selectedKeys.value = [newValue] || ['home'];
+        }
+    )
     return {
       selectedKeys,
       defaultOpenKeys
     };
   },
-  mounted() {
-    this.selectedKeys = [this.$route.name] || ['home']
-  },
   computed: {
     myRouter() {
       return routes[0].children;
     },
-  },
-  watch: {
-    'this.$route.name': function (val) {
-      if (val) {
-        this.selectedKeys = [val]
-      }
-    }
   },
   methods: {
     onClickMenuItem(key) {

@@ -10,6 +10,7 @@
     "compile": "babel src --out-dir compiled"
   },
   "dependencies": {
+    "@amap/amap-jsapi-loader": "^1.0.1",
     "@ckeditor/ckeditor5-vue": "^5.1.0",
     "axios": "^1.6.7",
     "ckeditor5-custom-akiweiqinliang": "^1.0.1",

@@ -10,7 +10,7 @@ export const zh = {
     westernFood: '西餐',
     dashboard: '工作台',
     home: '主页',
-    map: '地图',
+    map: '图表数据',
     login: '登录',
     error: '错误',
     editCookbook: '新增菜谱',
@@ -25,5 +25,6 @@ export const zh = {
     notes: '学习笔记',
     hobby: '爱好',
     search: '搜索',
-    deleteInfoMsg: '确认删除该记录？'
+    deleteInfoMsg: '确认删除该记录？',
+    todo: '待办事项',
 }

@@ -15,6 +15,8 @@ import {
   IconEnglishFill,
   IconEdit,
   IconMoreVertical,
+  IconCopyright,
+
 } from '@arco-design/web-vue/es/icon';
 import {ref} from "vue";
 export default {
@@ -38,6 +40,7 @@ export default {
     IconBook,
     IconEdit,
     IconMoreVertical,
+    IconCopyright,
     // 动态导入图标组件
     // IconComponent: () => import(`@arco-design/web-vue/es/icon/${this.iconName}`) /* @vite-ignore */,
   },

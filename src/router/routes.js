@@ -32,6 +32,7 @@ export const routes = [
                 path: 'cookbook',
                 redirect: '/cookbook/chineseFood',
                 layout: true,
+                name: 'cookbook',
                 layoutName: 'cookbook',
                 iconName: 'IconBook',
                 children: [
