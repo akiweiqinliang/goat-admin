@@ -51,4 +51,9 @@ export default {
     margin-bottom: 16px;
   }
 }
+@media screen and (max-width: 576px){
+  .mbStyle, .barBox{
+    margin-bottom: 8px;
+  }
+}
 </style>

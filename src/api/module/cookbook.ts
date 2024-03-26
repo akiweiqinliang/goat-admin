@@ -29,6 +29,13 @@ export const createCookBook = (cookbook: object) => {
         data: cookbook,
     })
 }
+// 删
+export const deleteById = (id: number) => {
+    return request({
+        url: `/cookbooks/${id}`,
+        method: 'delete',
+    })
+}
 // 查
 export const getCookBookById = (id: number) => {
     return request({

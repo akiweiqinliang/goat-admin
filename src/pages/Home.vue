@@ -2,8 +2,8 @@
   <a-card :bordered="false">
     <a-row align="center">
 
-      <a-col :span="16" :xs="18" :sm="16">
-        <a-descriptions title="User Info" :column="{xs:1, md:3, lg:4}">
+      <a-col :span="16" :xs="18" :sm="16" style="overflow: scroll">
+        <a-descriptions :title="$t('userInfo')" :column="{xs:1, md:3, lg:4}">
           <a-descriptions-item v-for="item of userInfo" :label="item.label" :span="item.span ?? 1">
             <a-tag>{{ item.value }}</a-tag>
           </a-descriptions-item>
@@ -44,6 +44,7 @@
           default-value="2019-06-03"
           v-model:pickerValue="calendarValue"
           hide-trigger
+          class="pickerStyle"
           style="width: 100%; margin-top: 16px;"
           @change="handleClickCalendar"
       />

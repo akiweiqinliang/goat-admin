@@ -48,7 +48,7 @@ import { IconSync } from "@arco-design/web-vue/es/icon/index";
 import { cookbookStore } from "@/stores/cookbook.js";
 import dayjs from "dayjs";
 export default {
-  name: "Detail",
+  name: "CookbookDetail",
   components: {CookbookPreviewPage, IconSync},
   setup() {
     const api = inject("api")

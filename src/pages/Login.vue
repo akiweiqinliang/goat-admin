@@ -1,9 +1,10 @@
 <template>
     <a-row class="loginPage" align="center" justify="center">
 <!--      <Verify />-->
-      <a-col :span="10" class="infoBox">
+      <a-col class="infoBox" :xs="20" :sm="18" :md="16" :lg="13" :xl="10">
         <span>
-        login your account
+<!--        {{$t('loginTxt')}} 💐-->
+          - Login Your Account -
         </span>
         <a-input class="inputStyle" v-model="username" size="large" placeholder="Please enter user name" allow-clear />
         <a-input-password
@@ -70,7 +71,7 @@ export default {
   height: 100vh;
   background-size: cover;
   .infoBox{
-    height: 400px;
+    height: 38%;
     background: rgba(var(--primary-6), 0.14);
     border-radius: 0px;
     backdrop-filter: blur(6px);
@@ -79,6 +80,11 @@ export default {
     justify-content: center;
     flex-direction: column;
     padding: 40px;
+    span{
+      color: var(--color-text-1);
+      font-size: 16px;
+      font-weight: 500;
+    }
   }
 }
 .inputStyle{

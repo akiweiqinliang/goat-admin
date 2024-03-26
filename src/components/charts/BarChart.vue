@@ -119,7 +119,7 @@ export default {
         // 获取新的父元素宽度
         const newParentWidth = fatherNode.value.offsetWidth;
         const windowWidth = window.innerWidth;
-        console.log(newParentWidth)
+        // console.log(newParentWidth)
         // 设置新的宽度并调用 resize() 方法
         if (windowWidth >= 768 ) {
           chart.value.resize({ width: newParentWidth, height: newParentWidth / 2 - 24});

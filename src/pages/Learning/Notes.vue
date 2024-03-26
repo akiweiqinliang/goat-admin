@@ -61,7 +61,7 @@ export default {
 }
 @media screen and (max-width: 576px){
   .learn{
-    padding: 16px;
+    padding: 8px;
   }
 }
 </style>

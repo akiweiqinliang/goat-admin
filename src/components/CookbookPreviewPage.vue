@@ -1,7 +1,7 @@
 <template>
   <div class="previewPage">
-    <a-typography :style="{ marginTop: '-40px'}">
-      <a-typography-title>
+    <a-typography>
+      <a-typography-title class="CBtitle">
         {{ cookbook?.title }}
       </a-typography-title>
       <a-row justify="space-between" align="bottom">
@@ -59,6 +59,12 @@ export default {
   }
   .mainText{
     margin: 30px 0;
+  }
+}
+@media screen and (max-width: 576px){
+  .CBtitle{
+    font-size: 18px;
+    margin-top: 0px;
   }
 }
 </style>

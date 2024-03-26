@@ -10,7 +10,7 @@
         </a-button>
       </a-space>
     </a-row>
-    <ImgList :imgList="chineseList" :list-category="0" @checkTag="handleCheckTag" :tag-list="tagList"/>
+    <ImgList :imgList="chineseList" :list-category="0" @checkTag="handleCheckTag" :tag-list="tagList" @deleteCookbook="handleDelete"/>
     <a-row justify="center" class="pagination">
       <a-pagination :total="total" show-total :page-size="pageSize" :current="page" @change="handlePageChange"/>
     </a-row>
@@ -19,10 +19,11 @@
 
 <script>
 import ImgList from "@cp/ImgList.vue";
-import {inject, ref, onMounted,} from "vue";
+import {inject, ref, onMounted, onActivated,} from "vue";
 import dayjs from "dayjs";
 import {cookbookStore} from "@/stores/cookbook.js";
 import router from "@/router/index.js";
+import {Message} from "@arco-design/web-vue";
 export default {
   name: "ChineseFood",
   components: {ImgList},
@@ -82,7 +83,19 @@ export default {
       })
       tagList.value = list;
     }
+    const handleDelete = (id) => {
+      api.cookbookService.deleteById(id).then((res) => {
+        if (res.code === 0) {
+          getList(page.value, pageSize.value)
+          Message.success('删除成功')
+        }
+      });
+    }
     onMounted(() => {
+      getList(page.value, pageSize.value);
+      getTagList()
+    })
+    onActivated(() => {
       getList(page.value, pageSize.value);
       getTagList()
     })
@@ -92,6 +105,7 @@ export default {
       total,
       pageSize,
       page,
+      handleDelete,
       handlePageChange,
       toEditCookbookPage,
       handleCheckTag

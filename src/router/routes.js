@@ -13,7 +13,7 @@ const NoteDetail = () => import('@pages/Learning/NoteDetail.vue')
 const ChineseFood = () => import('@pages/Cookbook/ChineseFood.vue')
 const WesternFood = () => import('@pages/Cookbook/WesternFood.vue')
 const EditCookbook = () => import('@pages/Cookbook/EditCookbook.vue')
-const CookbookDetail = () => import('@pages/Cookbook/Detail.vue')
+const CookbookDetail = () => import('@pages/Cookbook/CookbookDetail.vue')
 export const routes = [
     {
         path: '/',
