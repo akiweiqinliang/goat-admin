@@ -34,6 +34,7 @@
     "@typescript-eslint/eslint-plugin": "^6.19.1",
     "@typescript-eslint/parser": "^6.19.1",
     "@vitejs/plugin-vue": "^4.5.2",
+    "autoprefixer": "^10.4.19",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.3",
@@ -46,6 +47,7 @@
     "prettier": "^3.2.4",
     "sass": "^1.69.7",
     "typescript": "^5.3.3",
-    "vite": "^5.0.8"
+    "vite": "^5.0.8",
+    "vite-plugin-compression": "^0.5.1"
   }
 }
