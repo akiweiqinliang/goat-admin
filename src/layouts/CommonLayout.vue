@@ -99,9 +99,15 @@
         </a-col>
       </a-row>
       <a-layout class="layoutContainerPadding">
-        <div ref="tourContent">
-            <RouterView />
-        </div>
+          <div ref="tourContent">
+<!--              <RouterView />-->
+            <router-view v-slot="{ Component }">
+              <keep-alive :exclude="['NoteDetail','CookbookDetail', 'ImgList' ]">
+                <component :is="Component" />
+              </keep-alive>
+            </router-view>
+
+          </div>
         <a-layout-footer>
           <a-divider />
           <a-row justify="space-between" class="footerRow">
@@ -412,7 +418,7 @@ export default defineComponent({
 }
 @media screen and (max-width: 576px){
   .layoutContainerPadding{
-    padding: 16px;
+    padding: 10px;
   }
   .footerRow{
     justify-content: center;

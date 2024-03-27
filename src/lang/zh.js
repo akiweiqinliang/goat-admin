@@ -19,6 +19,7 @@ export const zh = {
     back: '返回',
     add: '新增',
     edit: '修改',
+    done: '完成',
     relatedCookbook: '相关菜谱推荐',
     changeIt: '换一换',
     // insertImg: '插入图片'
@@ -27,4 +28,14 @@ export const zh = {
     search: '搜索',
     deleteInfoMsg: '确认删除该记录？',
     todo: '待办事项',
+    loginTxt: '登录你的账号',
+    userInfo: '用户信息',
+    totoTxt: '今天有新的灵感或待办事项吗？{user}',
+    checkDetail: '查看详情',
+    countNumber: '累计数目',
+    growthRate: '增速',
+    learn: '学习',
+    progress: '进度',
+    learnProgress: '学习进度'
+
 }

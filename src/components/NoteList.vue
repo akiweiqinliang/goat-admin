@@ -154,4 +154,9 @@ export default {
   -webkit-line-clamp: 2;
   overflow: hidden;
 }
+@media screen and (max-width: 576px){
+  .noteItem{
+    padding: 8px;
+  }
+}
 </style>

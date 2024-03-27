@@ -35,6 +35,7 @@
                     </a-form-item>
                     <a-form-item field="imgUrl" label="封面">
                       <a-upload
+                          :headers="uploadHeaders"
                           :action="uploadUrl"
                           :fileList="file ? [file] : []"
                           :show-file-list="false"
@@ -143,6 +144,7 @@
                     </a-form-item>
                     <a-form-item field="imgUrl" label="封面">
                       <a-upload
+                          :headers="uploadHeaders"
                           :action="uploadUrl"
                           :fileList="file ? [file] : []"
                           :show-file-list="false"
@@ -222,6 +224,7 @@ import {IconEdit, IconPlus} from '@arco-design/web-vue/es/icon';
 import {Message} from "@arco-design/web-vue";
 import CookbookPreviewPage from "@cp/CookbookPreviewPage.vue";
 import {onBeforeRouteLeave} from 'vue-router';
+import axios from "axios";
 
 export default {
   name: "EditCookbook",
@@ -323,6 +326,63 @@ export default {
     onBeforeUnmount(() => {
       window.removeEventListener('beforeunload', confirmLeave);
     })
+    const uploadUrl = ref(axios.defaults.baseURL+'/cookbooks/upload');
+    const uploadHeaders = { Authorization : `Bearer ${localStorage.getItem('token')}`}
+    const customRequest = (option) => {
+      // const {
+      //   action, // 后台上传文件接口
+      //   name, // 上传文件对应后台字段名
+      //   headers, // 请求头信息 {}
+      //   data, // {} 给后台除了文件之外的其他数据
+      //   fileItem, // 上传文件元素
+      //   onProgress,
+      //   onError,
+      //   onSuccess,
+      // } = option;
+      console.log(option)
+      // const xhr = new XMLHttpRequest();
+      // if (xhr.upload) {
+      //   xhr.upload.onprogress = function (event) {
+      //     let percent;
+      //     if (event.total > 0) {
+      //       // 0 ~ 1
+      //       percent = event.loaded / event.total;
+      //     }
+      //     onProgress(percent, event);
+      //   };
+      // }
+      // xhr.onerror = function error(e) {
+      //   onError(e);
+      // };
+      // xhr.onload = function onload() {
+      //   if (xhr.status < 200 || xhr.status >= 300) {
+      //     return onError(xhr.responseText);
+      //   }
+      //   onSuccess(xhr.response);
+      // };
+
+      const formData = new FormData();
+      // formData里的数据 一定是名-值对集合
+      formData.append(name, fileItem.file);
+      // 将data参数中的数据 添加 到formData
+      for (let prop in data) {
+        formData.append(prop, data[prop]);
+      }
+
+      xhr.open('post', action);
+      // 设置请求头--一定放在open方法之后
+      for (let h in headers) {
+        // 添加token头
+        xhr.setRequestHeader(h, headers[h]);
+      }
+      xhr.send(formData);
+
+      return {
+        abort() {
+          xhr.abort();
+        },
+      };
+    };
     return {
       form,
       file,
@@ -333,11 +393,14 @@ export default {
       categoryOptions,
       tagList,
       submitCookbook,
+      uploadUrl,
+      uploadHeaders,
+      customRequest
     };
   },
   data() {
     return {
-      uploadUrl: 'http://localhost:3000/cookbooks/upload',
+      // uploadUrl: 'http://localhost:3000/cookbooks/upload',
       size: 0.5,
       editor: ClassicEditor,
       editorConfig: {

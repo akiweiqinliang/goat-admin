@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import {inject, onMounted, ref, watch} from "vue";
+import {inject, onActivated, onMounted, ref, watch} from "vue";
 import {useRoute, useRouter} from "vue-router";
 import dayjs from "dayjs";
 import {noteStore} from "@/stores/note.js";

@@ -22,3 +22,25 @@ body{
   width: 0;
   height: 0
 }
+@media screen and (max-width: 576px){
+  .arco-list-medium .arco-list-content-wrapper .arco-list-footer, .arco-list-medium .arco-list-content-wrapper .arco-list-content > .arco-list-item, .arco-list-medium .arco-list-content-wrapper .arco-list-content .arco-list-col > .arco-list-item, .arco-list-medium .arco-list-content-wrapper .arco-list-content.arco-list-virtual .arco-list-item{
+    padding: 8px 12px;
+  }
+  .arco-card-size-medium .arco-card-body{
+    padding: 10px;
+  }
+  .arco-card-size-medium .arco-card-header-title, .arco-card-size-medium .arco-card-meta-title{
+    font-size: 14px;
+  }
+  .arco-card-size-medium .arco-card-header {
+    height: 40px;
+    padding: 10px 10px;
+  }
+  .arco-progress-size-large .arco-progress-line-text {
+    font-size: 14px;
+    margin-left: 16px;
+  }
+  .arco-timeline-item{
+    min-height: 64px;
+  }
+}
