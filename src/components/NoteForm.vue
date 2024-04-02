@@ -157,7 +157,11 @@ export default {
       window.removeEventListener('beforeunload', confirmLeave);
     })
     onActivated(() => {
-      resetForm()
+      if (props.action === "add") {
+        resetForm()
+      }else if (props.action === "edit") {
+        getForm()
+      }
     })
     return {
       form,
