@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import {inject, onMounted, ref, watch} from "vue";
+import {inject, onActivated, onMounted, ref, watch} from "vue";
 import {IconDelete, IconEdit, IconSearch} from "@arco-design/web-vue/es/icon/index";
 import {useRouter} from "vue-router";
 import {Message} from "@arco-design/web-vue";
@@ -116,6 +116,9 @@ export default {
           getNoteList()
         }
       })
+      getNoteList()
+    })
+    onActivated(() => {
       getNoteList()
     })
     return {

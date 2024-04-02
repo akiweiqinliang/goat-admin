@@ -7,6 +7,7 @@
         :collapsed="collapsed"
         breakpoint="lg"
         @collapse="onCollapse"
+        :collapsed-width="collapsedAll ? 0 : 48"
     >
       <div class="logo tourBox" ref="tourLogo" :style="collapsed ? 'justify-content: center;' : ''">
         <a-row align="center" justify="space-between" :wrap="false">
@@ -52,6 +53,18 @@
             </a-button>
           </div>
           </a-row>
+        </a-col>
+      </a-row>
+      <a-row style="position: absolute;bottom: 20px; right: 8px">
+        <a-col :span="0" :xs="24" :sm="0" style="display: flex;justify-content: center">
+<!--          <template v-if="collapsed">-->
+            <a-button @click="closeAll" type="primary" shape="circle">
+              <IconMenuFold />
+            </a-button>
+            <a-button v-if="collapsedAll" @click="collapsedAll = !collapsedAll" type="primary" shape="circle" size="large" style="position:fixed;right: 20px; bottom: 80px; z-index: 999">
+              <icon-menu-unfold />
+            </a-button>
+<!--          </template>   -->
         </a-col>
       </a-row>
     </a-layout-sider>
@@ -143,7 +156,9 @@ import {
   IconCaretLeft,
   IconWechat,
   IconGithub,
-    IconEmail
+  IconEmail,
+  IconMenuFold,
+  IconMenuUnfold
 } from '@arco-design/web-vue/es/icon';
 import Menu from "@cp/leftMenu/Menu.vue";
 import SvgIcon from "@cp/SvgIcon.vue";
@@ -158,8 +173,11 @@ export default defineComponent({
     IconGithub,
     IconEmail,
     IconWechat,
+    IconMenuFold,
+    IconMenuUnfold,
   },
   setup() {
+    const collapsedAll = ref(false)
     const popupVisible = ref(false)
     const colorValue = ref(JSON.parse(localStorage.getItem('theme-appearance')) || false);
     const collapsed = ref(false);
@@ -191,6 +209,11 @@ export default defineComponent({
       'zh': zhCN,
       'en': enUS,
     };
+    const closeAll = () => {
+      popupVisible.value = false;
+      collapsedAll.value = !collapsedAll.value
+      collapsed.value = true
+    }
 
     const localeType = ref('zh');
     const locale = computed(() => {
@@ -204,7 +227,9 @@ export default defineComponent({
       onCollapse,
       localeType,
       locale,
-      popupVisible
+      popupVisible,
+      collapsedAll,
+      closeAll
     };
   },
   mounted(){
@@ -217,9 +242,9 @@ export default defineComponent({
     }
   },
   methods: {
-    handleTriggerClick(e) {
-      this.popupVisible = !this.popupVisible;
-    },
+    // handleTriggerClick(e) {
+    //   this.popupVisible = !this.popupVisible;
+    // },
     handleSidePop(item) {
       this.language = item;
       this.handleLanguageChange(item.value)
@@ -328,27 +353,15 @@ export default defineComponent({
 });
 </script>
 <style scoped lang="scss">
-//.logoBox{
-//  width: 100%;
-//  //aspect-ratio: 1 / 1;
-//  //background-color: var(--color-fill-2);
-//  //border-radius: 4px;
-//  display: flex;
-//  justify-content: center;
-//  align-items: center;
-//  overflow: hidden;
-//  //padding: 10%;
-//  //box-sizing: border-box;
-//  img{
-//    width: auto;
-//    height: 100%;
-//    object-fit: contain;
-//  }
-//}
 .layout-demo {
   height: 100vh;
+  max-width: 1440px;
+  margin: auto;
   background: var(--color-fill-2);
   border: 1px solid var(--color-border);
+}
+.layout-demo :deep(.arco-layout-sider){
+  box-shadow: none;
 }
 .layout-demo :deep(.arco-layout-sider) .logo {
   height: 32px;

@@ -36,4 +36,6 @@ export const en = {
     learn: 'Learning',
     progress: 'Progress',
     learnProgress: 'Learning Progress',
+    title: 'Title',
+    detail: 'Detail',
 }

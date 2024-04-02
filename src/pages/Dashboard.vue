@@ -126,7 +126,7 @@
     </a-row>
 
     <a-drawer
-        :width="340"
+        width="100%"
         height="80%"
         :visible="visible"
         placement="bottom"
@@ -135,7 +135,6 @@
         :footer="false"
         @close="handleCancel"
     >
-      {{newTodo}}
       <template #title v-if="!onlyRead">
         {{$t('add')}}{{ $t('todo') }}
       </template>
@@ -143,10 +142,10 @@
         {{ $t('todo') }}
       </template>
       <a-form layout="vertical" :model="newTodo">
-        <a-form-item label="标题">
-          <a-input v-model="newTodo.title" />
+        <a-form-item :label="$t('title')">
+          <a-input v-model="newTodo.title" placeholder="Please enter something" />
         </a-form-item>
-        <a-form-item label="内容">
+        <a-form-item :label="$t('detail')">
           <a-textarea v-model.trim="newTodo.detail" placeholder="Please enter something" allow-clear/>
         </a-form-item>
       </a-form>

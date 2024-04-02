@@ -85,10 +85,8 @@
                     <ckeditor :editor="editor" v-model="form.cookingWay" :config="editorConfig" @ready="initExtraPlugins"></ckeditor>
                     <a-row justify="end" class="footer">
                       <a-space>
-                        <a-popconfirm content="确定删除全部内容并返回首页?" @ok="backHome">
-                          <a-tooltip :content="$t('backHome')">
+                        <a-popconfirm content="确定删除全部内容并返回?" @ok="back">
                             <a-button>{{ $t('cancel') }}</a-button>
-                          </a-tooltip>
                         </a-popconfirm>
                         <a-button html-type="submit" :disabled="submitCookbook">{{ $t('add') }}</a-button>
                       </a-space>
@@ -194,10 +192,8 @@
                     <ckeditor :editor="editor" v-model="form.cookingWay" :config="editorConfig" @ready="initExtraPlugins"></ckeditor>
                     <a-row justify="end" class="footer">
                       <a-space>
-                        <a-popconfirm content="确定删除全部内容并返回首页?" @ok="backHome">
-<!--                          <a-tooltip :content="$t('backHome')">-->
+                        <a-popconfirm content="确定删除全部内容并返回?" @ok="back">
                             <a-button>{{ $t('cancel') }}</a-button>
-<!--                          </a-tooltip>-->
                         </a-popconfirm>
                         <a-button html-type="submit" :disabled="submitCookbook">{{ $t('add') }}</a-button>
                       </a-space>
@@ -217,7 +213,7 @@
 
 <script>
 import router from "@/router/index.js";
-import {inject, onBeforeUnmount, onMounted, reactive, ref} from 'vue';
+import {inject, onActivated, onBeforeUnmount, onMounted, reactive, ref} from 'vue';
 import ClassicEditor from "ckeditor5-custom-akiweiqinliang";
 import MyUploadAdapter from "@/utils/MyUploadAdapter";
 import {IconEdit, IconPlus} from '@arco-design/web-vue/es/icon';
@@ -323,66 +319,14 @@ export default {
       getTagList()
       window.addEventListener('beforeunload', confirmLeave);
     })
+    onActivated(() => {
+      resetForm()
+    })
     onBeforeUnmount(() => {
       window.removeEventListener('beforeunload', confirmLeave);
     })
     const uploadUrl = ref(axios.defaults.baseURL+'/cookbooks/upload');
     const uploadHeaders = { Authorization : `Bearer ${localStorage.getItem('token')}`}
-    const customRequest = (option) => {
-      // const {
-      //   action, // 后台上传文件接口
-      //   name, // 上传文件对应后台字段名
-      //   headers, // 请求头信息 {}
-      //   data, // {} 给后台除了文件之外的其他数据
-      //   fileItem, // 上传文件元素
-      //   onProgress,
-      //   onError,
-      //   onSuccess,
-      // } = option;
-      console.log(option)
-      // const xhr = new XMLHttpRequest();
-      // if (xhr.upload) {
-      //   xhr.upload.onprogress = function (event) {
-      //     let percent;
-      //     if (event.total > 0) {
-      //       // 0 ~ 1
-      //       percent = event.loaded / event.total;
-      //     }
-      //     onProgress(percent, event);
-      //   };
-      // }
-      // xhr.onerror = function error(e) {
-      //   onError(e);
-      // };
-      // xhr.onload = function onload() {
-      //   if (xhr.status < 200 || xhr.status >= 300) {
-      //     return onError(xhr.responseText);
-      //   }
-      //   onSuccess(xhr.response);
-      // };
-
-      const formData = new FormData();
-      // formData里的数据 一定是名-值对集合
-      formData.append(name, fileItem.file);
-      // 将data参数中的数据 添加 到formData
-      for (let prop in data) {
-        formData.append(prop, data[prop]);
-      }
-
-      xhr.open('post', action);
-      // 设置请求头--一定放在open方法之后
-      for (let h in headers) {
-        // 添加token头
-        xhr.setRequestHeader(h, headers[h]);
-      }
-      xhr.send(formData);
-
-      return {
-        abort() {
-          xhr.abort();
-        },
-      };
-    };
     return {
       form,
       file,
@@ -395,7 +339,6 @@ export default {
       submitCookbook,
       uploadUrl,
       uploadHeaders,
-      customRequest
     };
   },
   data() {
@@ -416,8 +359,9 @@ export default {
         return new MyUploadAdapter(loader);
       };
     },
-    backHome() {
-      router.push({ name: 'home' })
+    back() {
+      // router.push({ name: 'home' })
+      router.back()
     },
   }
 }

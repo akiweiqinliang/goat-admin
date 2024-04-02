@@ -3,8 +3,7 @@
 <!--      <Verify />-->
       <a-col class="infoBox" :xs="20" :sm="18" :md="16" :lg="13" :xl="10">
         <span>
-<!--        {{$t('loginTxt')}} 💐-->
-          - Login Your Account -
+          <img src=".././assets/imgs/auth/text-login.png" alt=" Login Your Account " style="width: 100%;">
         </span>
         <a-input class="inputStyle" v-model="username" size="large" placeholder="Please enter user name" allow-clear />
         <a-input-password
@@ -16,7 +15,7 @@
             allow-clear
             size="large"
         />
-        <a-button @click="login" type="primary" long class="inputStyle" size="large">Login</a-button>
+        <a-button @click="login" shape="round" type="primary" long class="inputStyle" size="large">Sign in</a-button>
       </a-col>
     </a-row>
 </template>
@@ -71,9 +70,9 @@ export default {
   height: 100vh;
   background-size: cover;
   .infoBox{
-    height: 38%;
+    height: 400px;
     background: rgba(var(--primary-6), 0.14);
-    border-radius: 0px;
+    border-radius: 30px;
     backdrop-filter: blur(6px);
     display: flex;
     align-items: center;
@@ -84,11 +83,18 @@ export default {
       color: var(--color-text-1);
       font-size: 16px;
       font-weight: 500;
+      display: flex;
+      justify-content: center;
+      img{
+        width: 100%;
+        max-width: 300px;
+      }
     }
   }
 }
 .inputStyle{
   width: 100%;
   margin: 20px 0 0;
+  border-radius: 30px;
 }
 </style>

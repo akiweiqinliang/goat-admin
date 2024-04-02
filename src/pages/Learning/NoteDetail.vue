@@ -34,7 +34,7 @@
         </a-typography>
   </a-layout-content>
   <a-drawer
-      :width="340"
+      :width="320"
       :visible="visible"
       @ok="handleOk"
       @cancel="handleCancel"
@@ -165,7 +165,7 @@ export default {
 .topBreadcrumbItem{}
 @media screen and (max-width: 576px){
   .noteDetail{
-    padding: 16px;
+    padding: 12px;
     .topBreadcrumb{
       font-size: 12px;
       margin-bottom: -28px;
@@ -174,7 +174,20 @@ export default {
       top: 40px;
     }
     h1.arco-typography{
-      font-size: 24px;
+      font-size: 16px;
+      margin: 8px 0 20px;
+    }
+    .time{
+      font-size: 12px;
+    }
+    .description{
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--color-text-1);
+    }
+    .mainText{
+      margin: 10px 0;
+      font-size: 14px;
     }
   }
 }
