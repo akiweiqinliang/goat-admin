@@ -11,7 +11,7 @@ if (process.env.NODE_ENV == 'development') {
 } else if (process.env.NODE_ENV == 'production') {
     // axios.defaults.baseURL = 'https://goat-nest-app-v1-0.onrender.com'; //生产环境
     // axios.defaults.baseURL = 'http://120.27.156.229:81'; //生产环境 aliyun
-    axios.defaults.baseURL = 'http://150.158.48.253:88'; //生产环境 tencent
+    axios.defaults.baseURL = 'http://150.158.48.253:88'; //生产环境 tencent 一年
 }
 
 // @ts-ignore
