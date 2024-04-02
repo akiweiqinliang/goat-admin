@@ -64,7 +64,7 @@ export default defineComponent({
     onClickMenuItem(key) {
       this.selectedKeys = []
       this.selectedKeys.push(key)
-      Message.info({ content: `${key}`, showIcon: true });
+      // Message.info({ content: `${key}`, showIcon: true });
     },
     onClickSubMenu(key) {
       if (!key) {

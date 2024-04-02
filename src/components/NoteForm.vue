@@ -33,7 +33,7 @@
 
 <script>
 import {onBeforeRouteLeave, useRoute, useRouter} from "vue-router";
-import {inject, onBeforeUnmount, onMounted, reactive, ref} from "vue";
+import {inject, onActivated, onBeforeUnmount, onMounted, reactive, ref} from "vue";
 import ClassicEditor from "ckeditor5-custom-akiweiqinliang";
 import {Message} from "@arco-design/web-vue";
 import MyUploadAdapter from "@/utils/MyUploadAdapter.js";
@@ -118,10 +118,17 @@ export default {
           duration: 5000,
           closable: true,
         })
-        setTimeout(() => {
-          submitting.value = false;
-        }, 3000)
+
+      }else {
+        Message.error({
+          content: result.message,
+          duration: 5000,
+          closable: true
+        })
       }
+      setTimeout(() => {
+        submitting.value = false;
+      }, 3000)
       console.log(result)
     };
     const back = () => {
@@ -148,6 +155,9 @@ export default {
     })
     onBeforeUnmount(() => {
       window.removeEventListener('beforeunload', confirmLeave);
+    })
+    onActivated(() => {
+      resetForm()
     })
     return {
       form,

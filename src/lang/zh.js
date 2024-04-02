@@ -36,6 +36,8 @@ export const zh = {
     growthRate: '增速',
     learn: '学习',
     progress: '进度',
-    learnProgress: '学习进度'
+    learnProgress: '学习进度',
+    title: '标题',
+    detail: '内容',
 
 }

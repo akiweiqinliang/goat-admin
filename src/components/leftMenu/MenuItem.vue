@@ -1,10 +1,8 @@
 <template>
   <template v-if="!menu.children">
-    <router-link :to="{name: menu.name}">
-      <a-menu-item :key="menu.name">
+      <a-menu-item :key="menu.name" @click="routerPush(menu.name)">
         <SvgIcon :icon-name="menu.iconName" />
         {{ $t(menu.name)}}</a-menu-item>
-    </router-link>
   </template>
   <template v-else>
         <a-sub-menu :key="menu.layoutName">
@@ -27,6 +25,7 @@ import {
   IconCalendar,
 } from '@arco-design/web-vue/es/icon';
 import SvgIcon from "@cp/SvgIcon.vue";
+import {useRouter} from "vue-router";
 export default {
   name: "MenuItem",
   props: {
@@ -34,6 +33,15 @@ export default {
       required: true,
       type: Object,
     },
+  },
+  setup() {
+    const router = useRouter();
+    const routerPush = (name) => {
+      router.push({name: name})
+    }
+    return{
+      routerPush
+    }
   },
   components: {
     SvgIcon,

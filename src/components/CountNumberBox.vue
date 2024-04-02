@@ -1,11 +1,11 @@
 <template>
   <a-space size="large">
-    <a-statistic title="累计数目" :value="number" show-group-separator >
+    <a-statistic :title="$t('countNumber')" :value="number" show-group-separator >
       <template #suffix>
         <icon-arrow-rise />
       </template>
     </a-statistic>
-    <a-statistic title="Growth Rate" :value="rate" :precision="2" :value-style="{ color: color }">
+    <a-statistic :title="$t('growthRate')" :value="rate" :precision="2" :value-style="{ color: color }">
       <template #prefix>
         <icon-arrow-rise />
       </template>
