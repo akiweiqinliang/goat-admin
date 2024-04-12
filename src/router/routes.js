@@ -1,6 +1,7 @@
 const CommonLayout = () => import('@/layouts/CommonLayout.vue')
 
 const Login = () => import('@pages/Login.vue')
+const Landing = () => import('@pages/Landing.vue')
 const Register = () => import('@pages/Register.vue')
 const Error = () => import('@pages/404.vue')
 const Home = () => import('@pages/Home.vue')
@@ -18,7 +19,7 @@ export const routes = [
     {
         path: '/',
         component: CommonLayout,
-        redirect: 'home',
+        redirect: 'landing',
         layout: true,
         layoutName: 'home',
         meta: {
@@ -114,7 +115,6 @@ export const routes = [
             }
         ]
     },
-
     {
         path: '/login',
         component: Login,
@@ -123,6 +123,22 @@ export const routes = [
             requiresAuth: false,
             icon: 'icon-dashboard',
             title: '登录',
+            isDisableBreadcrumbLink: true,
+            isShowBreadcrumb: false,
+            addToSidebar: false,
+            sidebarIcon: 'icon-dashboard',
+            sidebarIconAlt: '',
+            isNoLogin: true,
+        },
+    },
+    {
+        path: '/landing',
+        component: Landing,
+        name: 'landing',
+        meta: {
+            requiresAuth: false,
+            icon: 'icon-dashboard',
+            title: 'hello',
             isDisableBreadcrumbLink: true,
             isShowBreadcrumb: false,
             addToSidebar: false,
