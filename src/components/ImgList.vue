@@ -177,7 +177,7 @@ export default {
   justify-content: end;
 }
 .action {
-  padding: 5px 4px;
+  //padding: 5px 4px;
   font-size: 14px;
   margin-left: 12px;
   border-radius: 2px;

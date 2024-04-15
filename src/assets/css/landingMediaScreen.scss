@@ -1,0 +1,210 @@
+
+@media screen and (max-width: 992px) and (min-width: 768px){
+  .page-fourth .mbright{
+    margin: calc(19% - 40px) 0;
+  }
+  //5
+  .page-fifth .inputContainer{
+    margin-bottom: 60px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .common {
+    min-height: initial;
+    height: auto;
+    overflow-x: hidden;
+  }
+  .page-first {
+    height: 100vh;
+    background-attachment: fixed;
+  }
+  .page-first .desktop01ImgBox{
+    width: 50vw;
+    height: 240px;
+    margin: auto;
+  }
+  .page-second, .page-second .container {
+    height: auto;
+    overflow: visible;
+  }
+  .pc{
+    display: none !important;
+  }
+  .mobile {
+    display: initial;
+  }
+  //desktop1
+  .linearBg {
+    position: absolute;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(255, 255, 255, 1));
+    height: 100%;
+    width: 100%;
+    transform: translateY(4px);
+  }
+  .words {
+    margin-bottom: 20px;
+  }
+  .page-first .container .words .title {
+    font-size: 40px;
+  }
+  .page-first .container .words span {
+    font-size: 18px;
+  }
+  .paintCard .info {
+    margin-top: 10px;
+  }
+  .page-first .container .paintCard ::after {
+    width: 30px;
+    height: 30px;
+    bottom: -30px;
+    left: -30px;
+  }
+  .page-first .dropArrow {
+    width: 88px;
+    height: 88px;
+  }
+
+  //  desktop2
+  .page-second .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-attachment: fixed; /* 让背景图像固定 */
+  }
+  .page-second .container img {
+    width: 100%;
+    height: auto;
+    border-radius: 0px;
+
+    position: sticky;
+    top: 0px;
+    z-index: -1;
+    position: relative;
+  }
+  .page-second .container .textBox {
+    padding: 30px 30px 70px 30px;
+    //position: sticky;
+    //top: 80px;
+    //z-index: -1;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 10%, rgba(255, 255, 255, 1));
+  }
+  .page-second .container .textBox span {
+    font-size: 14px;
+  }
+  .page-second .container .textBox span:nth-child(1) {
+    font-size: 30px;
+    margin-bottom: 20px;
+  }
+  .page-second .container .textBox p {
+    margin-top: 47px;
+    font-size: 14px;
+  }
+
+
+  //  desktop3
+  .linearBg3 {
+  }
+  .page-third {
+    padding: 0;
+    background: black;
+
+    .paintCard {
+      width: 100%;
+      padding: 0;
+      aspect-ratio: auto;
+      background: black;
+      color: white;
+
+      .info {
+        padding: 20px 30px;
+      }
+    }
+  }
+  .page-third .container{
+    margin-bottom: 120px;
+  }
+  .page-third .container svg{
+    right: 30px;
+  }
+  .page-third .cardList{
+    padding: 0 30px;
+    box-sizing: border-box;
+  }
+  .page-third .cardList .cardItem {
+    box-shadow: inset 0 0px 2px rgba(255, 255, 255, 0.5);
+  }
+  .page-third .cardList .cardItem span{
+    font-size: 20px;
+  }
+  .page-third .cardList .cardItem span:nth-child(1){
+    font-size: 14px;
+  }
+
+  //desktop4
+  .page-fourth .container{
+    padding: 0 30px;
+  }
+  .page-fourth .container .left{
+    padding: 0;
+    padding-right: 20px;
+    margin-bottom: 120px;
+  }
+  .page-fourth .container .left span{
+    font-size: 40px;
+  }
+  .page-fourth .container .left span svg{
+    right: -36px;
+  }
+  //desktop5
+  .page-fifth .container{
+    padding: 0;
+  }
+  .page-fifth .upper {
+    padding: 54% 30px 0;
+  }
+  .page-fifth .container .title{
+    font-size: 40px;
+  }
+  .page-fifth .container .desc{
+    margin-bottom: 40px;
+  }
+  .page-fifth .inputContainer{
+    padding: 0;
+    justify-content: center;
+    margin-bottom: 40px;
+  }
+  .page-fifth .footer{
+    padding: 0 20px;
+    margin-bottom: 100px;
+  }
+  .page-fifth .endBox{
+    color: rgba(0, 0, 0, 0.7);
+    font-size: 12px;
+    svg{
+      fill: rgba(0, 0, 0, 1);
+    }
+  }
+}
+@media screen and (max-width: 576px){
+  .page-first .container .words p{
+    //display: none;
+    position: absolute;
+    color: #C8ACA8;
+    opacity: 0.3;
+  }
+  .page-fourth .container .left{
+    padding: 0;
+  }
+  .page-fourth .container .left span{
+    font-size: 30px;
+    margin-bottom: 10px;
+    display: inline-block;
+  }
+  .page-fourth .navigationBtnBox{
+    margin: 0;
+  }
+  .page-fourth .container .left .exploreBtn::before{
+    display: none;
+  }
+}

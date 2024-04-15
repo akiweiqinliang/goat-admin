@@ -45,12 +45,6 @@ export default defineConfig({
     // rollup 配置
     rollupOptions: {
       output: {
-        // manualChunks: {
-        //   // vue vue-router合并打包
-        //   vue: ['vue', 'vue-router'],
-        //   // 两个文件合并成一个文件
-        //   // a: ['src/components/a.vue','src/components/b.vue'],
-        // }
         manualChunks(id) {
           if (id.includes("node_modules")) {
             // 让每个插件都打包成独立的文件
