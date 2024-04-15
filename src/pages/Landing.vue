@@ -7,91 +7,104 @@
       <a-button class="loginBtn" @click="redirectLogin">Sign in</a-button>
     </a-row>
     <section class="common page-first" ref="pageFirst">
-      <div class="linearBg mobile"></div>
-      <a-row class="container">
-        <a-col :span="13" :xs="24" :sm="24" :md="13">
-          <div class="words">
+        <div class="linearBg mobile"></div>
+        <a-row class="container">
+          <a-col :span="13" :xs="24" :sm="24" :md="13">
+            <div class="words">
       <span class="title slide-up" ref="desktop1Title">
       “Explore Infinite Possibilities”
     </span>
-            <span>
+              <span>
         this is a landing page
       </span>
-          </div>
-        </a-col>
-        <a-col :span="11" :xs="24" :sm="24" :md="11">
-          <div class="paintCard" style="margin-left: 80px">
-            <div class="paintBox">
-              <!--            <img src="http://image-goat.test.upcdn.net/image/503838ldsdl.jpg" alt="first">-->
-              <img src="../assets/imgs/landing/desktop1.jpg" alt="first">
+              <p>
+                Oscar-Claude Monet (French: Oscar-Claude Monet, pronounced: [klod mɔnɛ]; November 14, 1840 - December 5, 1926) was a French painter, a representative figure and one of the founders of Impressionism. The word "Impression" comes from his famous painting "Impression Sunrise", which was exhibited in the first independent exhibition organized by Monet and his colleagues in 1874.
+              </p>
             </div>
-            <div class="info">
-              <div class="title">Charing-Cross Bridge in London</div>
-              <div class="date">(circa 1902)</div>
+          </a-col>
+          <a-col :span="11" :xs="24" :sm="24" :md="11">
+            <div class="paintCard desktop01ImgBox">
+              <div class="info">
+                <div class="title">Charing-Cross Bridge in London</div>
+                <div class="date">(circa 1902)</div>
+              </div>
             </div>
+          </a-col>
+        </a-row>
+
+        <a-row class="box-group">
+          <div class="box box1"></div>
+          <div class="box box2"></div>
+          <div class="box box3"></div>
+        </a-row>
+
+        <a-row justify="center">
+          <div class="dropArrow" @click="handleSlideUp(1)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="52" viewBox="0 0 16 52" fill="none">
+              <path d="M9 1C9 0.447715 8.55228 0 8 0C7.44772 0 7 0.447715 7 1L9 1ZM7.29289 51.7071C7.68342 52.0976 8.31658 52.0976 8.70711 51.7071L15.0711 45.3431C15.4616 44.9526 15.4616 44.3195 15.0711 43.9289C14.6805 43.5384 14.0474 43.5384 13.6569 43.9289L8 49.5858L2.34315 43.9289C1.95262 43.5384 1.31946 43.5384 0.928932 43.9289C0.538408 44.3195 0.538408 44.9526 0.928932 45.3431L7.29289 51.7071ZM7 1L7 51H9L9 1L7 1Z" fill="black"/>
+            </svg>
           </div>
-        </a-col>
-      </a-row>
-
-      <a-row class="box-group">
-        <div class="box box1"></div>
-        <div class="box box2"></div>
-        <div class="box box3"></div>
-      </a-row>
-
-      <a-row justify="center">
-        <div class="dropArrow" @click="handleSlideUp">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="52" viewBox="0 0 16 52" fill="none">
-            <path d="M9 1C9 0.447715 8.55228 0 8 0C7.44772 0 7 0.447715 7 1L9 1ZM7.29289 51.7071C7.68342 52.0976 8.31658 52.0976 8.70711 51.7071L15.0711 45.3431C15.4616 44.9526 15.4616 44.3195 15.0711 43.9289C14.6805 43.5384 14.0474 43.5384 13.6569 43.9289L8 49.5858L2.34315 43.9289C1.95262 43.5384 1.31946 43.5384 0.928932 43.9289C0.538408 44.3195 0.538408 44.9526 0.928932 45.3431L7.29289 51.7071ZM7 1L7 51H9L9 1L7 1Z" fill="black"/>
-          </svg>
-        </div>
-      </a-row>
+        </a-row>
     </section>
     <section class="common page-second">
       <a-row class="container">
         <!--      <img src="http://image-goat.test.upcdn.net/image/Group%209%20right%20img%20box.png" alt="woman" />-->
-        <img src="../assets/imgs/landing/desktop2.png" alt="woman" class="pc"/>
-        <div class="arrowBtn">
+<!--        <img src="../assets/imgs/landing/desktop2.png" alt="woman" class="pc"/>-->
+        <div class="arrowBtn" @click="handleSlideUp(2)">
           <svg xmlns="http://www.w3.org/2000/svg" width="39" height="16" viewBox="0 0 39 16" fill="none">
             <path d="M1.72794 7.27209C1.17565 7.27209 0.727936 7.71981 0.727936 8.27209C0.727936 8.82438 1.17565 9.27209 1.72794 9.27209V7.27209ZM38.435 8.9792C38.8256 8.58868 38.8256 7.95551 38.435 7.56499L32.0711 1.20103C31.6806 0.810503 31.0474 0.810503 30.6569 1.20103C30.2663 1.59155 30.2663 2.22472 30.6569 2.61524L36.3137 8.27209L30.6569 13.9289C30.2663 14.3195 30.2663 14.9526 30.6569 15.3432C31.0474 15.7337 31.6806 15.7337 32.0711 15.3432L38.435 8.9792ZM1.72794 9.27209L37.7279 9.27209V7.27209L1.72794 7.27209V9.27209Z" fill="black"/>
           </svg>
         </div>
-        <div class="imgCover mobile"></div>
         <img src="../assets/imgs/landing/m-desktop2.jpg" alt="woman" class="mobile"/>
         <a-col :span="10" class="textBox" :xs="24" :sm="24" :md="10">
-        <span>
+           <span>
           This is my favorite one
         </span>
-          <span>
+            <span>
           Woman with a Parasol – Madame Monet and Her Son (1875)
         </span>
-          <p>
-            Oscar-Claude Monet was a French painter and founder of impressionist painting who is seen as a key precursor to modernism, especially in his attempts to paint nature as he perceived it. During his long career, he was the most consistent and prolific practitioner of impressionism's philosophy of expressing one's perceptions before
-            nature,especially as applied to plein air (outdoor) landscape painting. The term "Impressionism" is derived from the title of his painting Impression, soleil levant, exhibited in the 1874 ("exhibition of rejects") initiated by Monet and his associates as an alternative to the Salon.
-          </p>
+            <p>
+              Oscar-Claude Monet was a French painter and founder of impressionist painting who is seen as a key precursor to modernism, especially in his attempts to paint nature as he perceived it. During his long career, he was the most consistent and prolific practitioner of impressionism's philosophy of expressing one's perceptions before
+              nature,especially as applied to plein air (outdoor) landscape painting. The term "Impressionism" is derived from the title of his painting Impression, soleil levant, exhibited in the 1874 ("exhibition of rejects") initiated by Monet and his associates as an alternative to the Salon.
+            </p>
         </a-col>
+          <div class="desktop02ImgBox pc"></div>
       </a-row>
     </section>
     <section class="common page-third">
       <div class="linearBg3 mobile"></div>
       <a-row class="container">
-        <svg xmlns="http://www.w3.org/2000/svg" width="151" height="16" viewBox="0 0 151 16" fill="none">
+        <svg @click="handleSlideUp(3)" xmlns="http://www.w3.org/2000/svg" width="151" height="16" viewBox="0 0 151 16" fill="none">
           <path d="M150.707 8.70711C151.098 8.31658 151.098 7.68342 150.707 7.29289L144.343 0.928932C143.953 0.538408 143.319 0.538408 142.929 0.928932C142.538 1.31946 142.538 1.95262 142.929 2.34315L148.586 8L142.929 13.6569C142.538 14.0474 142.538 14.6805 142.929 15.0711C143.319 15.4616 143.953 15.4616 144.343 15.0711L150.707 8.70711ZM0 9H150V7H0V9Z" fill="white"/>
         </svg>
-        <a-col :span="10" :xs="0" :sm="0" :md="10">
-          <div  ref="mouseOverContainer" class="mouseContainer">
-            <div class="paintCard mouseElement" ref="element">
-              <div class="paintBox">
-                <!--            <img src="http://image-goat.test.upcdn.net/image/503832ldsdl.jpg" alt="first">-->
-                <img src="../assets/imgs/landing/desktop3.jpg" alt="first">
-              </div>
-              <div class="info">
-                <div class="title">A Seascape, Shipping by Moonlight</div>
-                <div class="date">(1864)</div>
-              </div>
+        <div class="pcDesktop03 pc">
+          <div class="desktop03ImgBox">
+            <div class="info">
+              <div class="title">A Seascape, Shipping by Moonlight</div>
+              <div class="date">(1864)</div>
             </div>
           </div>
-        </a-col>
+          <div class="desktop03DescList">
+            <ul class="cardList">
+              <li class="cardItem">
+                <span>Medium</span>
+                <span>oil on canvas</span>
+              </li>
+              <li class="cardItem">
+                <span>Measurements</span>
+                <span>H 60 x W 73.8 cm</span>
+              </li>
+              <li class="cardItem">
+                <span>Acquisition method</span>
+                <span>purchased, 1980</span>
+              </li>
+              <li class="cardItem">
+                <span>Accession number</span>
+                <span>NG 2399</span>
+              </li>
+            </ul>
+          </div>
+        </div>
         <a-col :span="0" :xs="24" :sm="24" :md="0" class="mobile">
           <div class="paintCard">
             <div class="paintBox">
@@ -104,7 +117,7 @@
             </div>
           </div>
         </a-col>
-        <a-col :span="14" :xs="24" :sm="24" :md="14">
+        <a-col :span="14" :xs="24" :sm="24" :md="14" class="mobile">
           <ul class="cardList">
             <li class="cardItem">
               <span>Medium</span>
@@ -124,12 +137,10 @@
             </li>
           </ul>
         </a-col>
-
       </a-row>
     </section>
     <section class="common page-fourth">
       <a-row class="container">
-
         <a-col :span="10" class="left" :xs="24" :sm="12" :md="14" :lg="10">
         <span>
           Find Your Favorite
@@ -185,7 +196,7 @@
           </p>
           <a-row justify="end">
             <div class="exploreBtn">
-              <div class="explore">
+              <div class="explore" @click="handleSlideUp(4)">
                 Explore
                 <svg xmlns="http://www.w3.org/2000/svg" width="31" height="16" viewBox="0 0 31 16" fill="none">
                   <path d="M30.7071 8.70711C31.0976 8.31658 31.0976 7.68342 30.7071 7.29289L24.3431 0.928932C23.9526 0.538408 23.3195 0.538408 22.9289 0.928932C22.5384 1.31946 22.5384 1.95262 22.9289 2.34315L28.5858 8L22.9289 13.6569C22.5384 14.0474 22.5384 14.6805 22.9289 15.0711C23.3195 15.4616 23.9526 15.4616 24.3431 15.0711L30.7071 8.70711ZM0 9H30V7H0V9Z" fill="white"/>
@@ -195,6 +206,7 @@
           </a-row>
         </a-col>
         <a-col :span="14" :xs="0" :sm="0" :md="0" :lg="14" class="right">
+          <div class="topCover pc"></div>
           <div class="first">
             <div class="imgList">
               <div class="imgItem" v-for="item in imgList">
@@ -279,7 +291,7 @@
                 <icon-caret-right />
               </a-button>
             </a-row>
-            <swiper-slide v-for="item in imgList" style="color: black">
+            <swiper-slide v-for="item in allImgList" style="color: black">
               <div class="paintCard" style="margin: 40px auto; width: auto;">
                 <div class="paintBox">
                   <img :src="item.url" alt="item.url"/>
@@ -356,23 +368,6 @@
       </a-row>
     </section>
   </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </template>
 
 <script>
@@ -398,10 +393,10 @@ import {useRouter} from "vue-router";
      IconCaretRight
    },
    setup() {
-     function handleSlideUp () {
+     function handleSlideUp (page) {
        const pageFirst = document.querySelector('.page-first');
        window.scrollTo({
-         top: window.innerHeight,
+         top: window.innerHeight * page,
          behavior: "smooth"
        });
      }
@@ -425,43 +420,62 @@ import {useRouter} from "vue-router";
      };
 
      const router = useRouter()
+     const allImgList = [
+       {
+         url: 'https://mdl.artvee.com/ft/541431ld.jpg',
+       }, {
+         url: 'https://d3d00swyhr67nd.cloudfront.net/w800h800/collection/NG/NG/NG_NG_NG4240-001.jpg',
+       }, {
+         url: 'https://mdl.artvee.com/ft/541439ld.jpg',
+       }, {
+         url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Monet_Snow_at_Argenteuil_1875.jpg/440px-Monet_Snow_at_Argenteuil_1875.jpg',
+       },{
+         url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Claude_Monet%2C_Impression%2C_soleil_levant.jpg/440px-Claude_Monet%2C_Impression%2C_soleil_levant.jpg',
+       },{
+         url: 'https://mdl.artvee.com/ft/541440ld.jpg',
+       }, {
+         url: 'https://d3d00swyhr67nd.cloudfront.net/w1200h1200/collection/CIA/CIA/CIA_CIA_P_1948_SC_276-001.jpg',
+       },{
+         url: 'https://d3d00swyhr67nd.cloudfront.net/w800h800/collection/NG/NG/NG_NG_NG6608-001.jpg'
+       }
+     ]
      const imgList = [
        {
-         url: 'src/assets/imgs/landing/paint/01.jpg',
+         url: 'https://mdl.artvee.com/ft/541431ld.jpg',
        }, {
-         url: 'src/assets/imgs/landing/paint/02.jpeg',
+         url: 'https://d3d00swyhr67nd.cloudfront.net/w800h800/collection/NG/NG/NG_NG_NG4240-001.jpg',
        }, {
-         url: 'src/assets/imgs/landing/paint/03.jpg',
+         url: 'https://mdl.artvee.com/ft/541439ld.jpg',
        }, {
-         url: 'src/assets/imgs/landing/paint/04.jpeg',
+         url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Monet_Snow_at_Argenteuil_1875.jpg/440px-Monet_Snow_at_Argenteuil_1875.jpg',
+       },{
+         url: 'https://mdl.artvee.com/ft/541431ld.jpg',
        }, {
-         url: 'src/assets/imgs/landing/paint/01.jpg',
+         url: 'https://d3d00swyhr67nd.cloudfront.net/w800h800/collection/NG/NG/NG_NG_NG4240-001.jpg',
        }, {
-         url: 'src/assets/imgs/landing/paint/02.jpeg',
+         url: 'https://mdl.artvee.com/ft/541439ld.jpg',
        }, {
-         url: 'src/assets/imgs/landing/paint/03.jpg',
-       }, {
-         url: 'src/assets/imgs/landing/paint/04.jpeg',
+         url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Monet_Snow_at_Argenteuil_1875.jpg/440px-Monet_Snow_at_Argenteuil_1875.jpg',
        },
      ];
      const imgList2 = [
        {
-         url: 'src/assets/imgs/landing/paint/05.jpeg',
+         url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Claude_Monet%2C_Impression%2C_soleil_levant.jpg/440px-Claude_Monet%2C_Impression%2C_soleil_levant.jpg',
+       },{
+         url: 'https://mdl.artvee.com/ft/541440ld.jpg',
        }, {
-         url: 'src/assets/imgs/landing/paint/06.jpg',
+         url: 'https://d3d00swyhr67nd.cloudfront.net/w1200h1200/collection/CIA/CIA/CIA_CIA_P_1948_SC_276-001.jpg',
+       },{
+         url: 'https://d3d00swyhr67nd.cloudfront.net/w800h800/collection/NG/NG/NG_NG_NG6608-001.jpg'
+       },{
+         url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Claude_Monet%2C_Impression%2C_soleil_levant.jpg/440px-Claude_Monet%2C_Impression%2C_soleil_levant.jpg',
+       },{
+         url: 'https://mdl.artvee.com/ft/541440ld.jpg',
        }, {
-         url: 'src/assets/imgs/landing/paint/07.jpeg',
-       }, {
-         url: 'src/assets/imgs/landing/paint/08.jpeg',
-       }, {
-         url: 'src/assets/imgs/landing/paint/05.jpeg',
-       }, {
-         url: 'src/assets/imgs/landing/paint/06.jpg',
-       }, {
-         url: 'src/assets/imgs/landing/paint/07.jpeg',
-       }, {
-         url: 'src/assets/imgs/landing/paint/08.jpeg',
-       },
+         url: 'https://d3d00swyhr67nd.cloudfront.net/w1200h1200/collection/CIA/CIA/CIA_CIA_P_1948_SC_276-001.jpg',
+       },{
+         url: 'https://d3d00swyhr67nd.cloudfront.net/w800h800/collection/NG/NG/NG_NG_NG6608-001.jpg'
+       }
      ];
      const redirectLogin = () => {
        router.push({
@@ -482,20 +496,21 @@ import {useRouter} from "vue-router";
      onMounted(() => {
        // desktop1Play()
        customSTyle()
-       mouseOverContainer.value.addEventListener('mousemove', (e) => {
-         window.requestAnimationFrame(function () {
-           transformElement(e.clientX, e.clientY);
-         });
-       });
-       mouseOverContainer.value.addEventListener('mouseleave', (e) => {
-         window.requestAnimationFrame(function () {
-           element.value.style.transform = "rotateX(0) rotateY(0)";
-         });
-       });
+       // mouseOverContainer.value.addEventListener('mousemove', (e) => {
+       //   window.requestAnimationFrame(function () {
+       //     transformElement(e.clientX, e.clientY);
+       //   });
+       // });
+       // mouseOverContainer.value.addEventListener('mouseleave', (e) => {
+       //   window.requestAnimationFrame(function () {
+       //     element.value.style.transform = "rotateX(0) rotateY(0)";
+       //   });
+       // });
 
      })
 
      return {
+       allImgList,
        imgList,
        imgList2,
        modules: [EffectFlip,Navigation, Pagination, Mousewheel],
@@ -528,7 +543,6 @@ import {useRouter} from "vue-router";
     }
   }
 }
-
 .paintCard{
   //width: 360px;
   width: 25vw;
@@ -597,11 +611,25 @@ import {useRouter} from "vue-router";
   overflow-x: hidden;
 }
 .page-first{
-  //background-image: url("http://image-goat.test.upcdn.net/image/503838ldsdl.jpg");
-  background-image: url("../assets/imgs/landing/desktop1.jpg");
-  background-size: cover;
-  background-position: center;
   position: relative;
+  .desktop01ImgBox{
+    padding: 0;
+    border-radius: 0;
+    margin-bottom: 20px;
+    margin-left: 80px;
+    background-size: cover;
+    background-position: left;
+    position: relative;
+    background-image: url("https://mdl.artvee.com/ft/503838ld.jpg");
+    ::after{
+      display: none;
+    }
+    .info{
+      position: absolute;
+      bottom: -40px;
+      right: 0;
+    }
+  }
   .container{
     box-sizing: border-box;
     width: 100%;
@@ -610,9 +638,10 @@ import {useRouter} from "vue-router";
     position: absolute;
     z-index: 10;
     .words{
-      color: white;
+      color: black;
       font-weight: bold;
       text-align: end;
+      position: relative;
       span{
         font-size: 24px;
       }
@@ -620,6 +649,15 @@ import {useRouter} from "vue-router";
         display: block;
         text-align: left;
         font-size: 48px;
+      }
+      p{
+        display: block;
+        text-align: left;
+        //position: absolute;
+        width: 100%;
+        line-height: 28px;
+        font-size: 16px;
+        margin-top: 120px;
       }
     }
     .paintCard{
@@ -638,24 +676,30 @@ import {useRouter} from "vue-router";
   .box-group{
     //position: relative;
     .box{
-      background: white;
+      //background: white;
       opacity: 0.3;
       position: absolute;
       border-radius: 8px;
     }
     .box1{
+      background: #B3BACB;
+      opacity: 16%;
       width: 20.8%;
       aspect-ratio: 5 / 6;
       top: 33.6%;
       left: 16.9%;
     }
     .box2{
+      background: #CDAA7E;
+      opacity: 13%;
       width: 41.7%;
       aspect-ratio: 6 / 5;
       top: 11.8%;
       left: 29.2%;
     }
     .box3 {
+      background: #C8ACA8;
+      opacity: 16%;
       width: 41.7%;
       aspect-ratio: 3 / 2;
       top: 42.1%;
@@ -666,7 +710,7 @@ import {useRouter} from "vue-router";
     width: 108px;
     height: 108px;
     border-radius: 50%;
-    background: white;
+    //background: white;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -680,6 +724,20 @@ import {useRouter} from "vue-router";
     width: 100%;
     height: 100vh;
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .desktop02ImgBox{
+      max-width: 468px;
+      width: 32.5vw;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      //background-image: url("https://mdl.artvee.com/ft/200457fg.jpg");
+      background-image: url("../assets/imgs/landing/desktop02Img.png");
+      aspect-ratio: 468 / 576;
+      margin-left: 80px;
+    }
     img{
       position: absolute;
       height: 100%;
@@ -698,11 +756,18 @@ import {useRouter} from "vue-router";
       display: flex;
       justify-content: center;
       align-items: center;
+      cursor: pointer;
+      transition: all .3s ease-in-out;
+    }
+    .arrowBtn:hover{
+      transition: all .5s;
+      transform: rotate(90deg);
     }
     .textBox{
-      padding: 18.2% 20px 0 3.2%;
-      height: 100%;
+      //padding: 18.2% 20px 0 3.2%;
+      //height: 100%;
       background: white;
+      width: 40%;
       span{
         font-weight: bold;
         font-size: 20px;
@@ -723,15 +788,17 @@ import {useRouter} from "vue-router";
   }
 }
 .page-third{
-  //background-image: url("http://image-goat.test.upcdn.net/image/Desktop%20-%203.png");
-  background-image: url("../assets/imgs/landing/desktop3bg.png");
-  background-size: cover;
-  background-position: center;
-  position: relative;
+  background: black;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 8.26%;
+  svg{
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+  }
+  svg:hover{
+    transform: translateX(8px);
+    transition: all .3s ease-in-out;
+  }
   .container{
     width: 100%;
     position: relative;
@@ -789,6 +856,53 @@ import {useRouter} from "vue-router";
     .cardItem:nth-child(1), .cardItem:nth-child(3){
       margin-right: 20px;
     }
+  }
+  .pcDesktop03{
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    .desktop03ImgBox{
+      width: calc(60% + 80px);
+      aspect-ratio: 830 / 616;
+      max-height: 600px;
+      background-image: url("../assets/imgs/landing/desktop3.jpg");
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      .info{
+        position: absolute;
+        right: 0;
+        bottom: -50px;
+        color: white;
+        text-align: right;
+        font-weight: bold;
+      }
+    }
+    .desktop03DescList{
+      width: calc(40% - 176px);
+      margin-left: 60px;
+      margin-right: 36px;
+      .cardList{
+        width: 100%;
+        .cardItem{
+          width: 100%;
+          height: auto;
+          aspect-ratio: auto;
+          background: none;
+          padding: 0;
+          margin-bottom: 40px;
+          span{
+            //font-size: 24px;
+          }
+          span:nth-child(1){
+            font-size: 20px;
+          }
+        }
+      }
+    }
+  }
+  .container svg{
+    right: 38px;
   }
 }
 .page-fourth{
@@ -865,6 +979,15 @@ import {useRouter} from "vue-router";
       display: flex;
       justify-content: end;
       width: 100%;
+      position: relative;
+      .topCover{
+        width: 100%;
+        height: 60px;
+        position: absolute;
+        top: 0;
+        z-index: 15;
+        background: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0.5), rgba(0,0,0,0.1), rgba(0,0,0,0));
+      }
       .first, .second{
         width: calc(50% - 10px);
         //transform: rotate(20deg);
@@ -976,6 +1099,7 @@ import {useRouter} from "vue-router";
   .footer{
     display: flex;
     align-items: center;
+    margin-bottom: 80px;
     span{
       font-size: 16px;
       font-weight: bold;
@@ -996,8 +1120,9 @@ import {useRouter} from "vue-router";
     width: 100%;
     box-sizing: border-box;
     padding: 0 20px;
-    //position: absolute;
+    position: absolute;
     //position: sticky;
+    bottom: 0;
     margin-bottom: 10px;
     svg{
       fill: rgba(0, 0, 0, 1);
@@ -1005,6 +1130,24 @@ import {useRouter} from "vue-router";
     .endDivider{
       margin-bottom: 10px;
     }
+  }
+}
+
+.page-1-2{
+  .decorateBg{
+    width: 100%;
+    height: 80px;
+  }
+  .bg1{
+    background-attachment: fixed;
+    background-color: #eed9d1;
+  }
+  .bg2{
+    background-attachment: scroll;
+    background-color: rgba(245, 245, 220, 0.74);
+  }
+  .bg3{
+    background-color: rgba(245, 245, 220, 0.17);
   }
 }
 
