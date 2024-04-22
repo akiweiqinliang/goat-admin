@@ -9,8 +9,8 @@
         @collapse="onCollapse"
         :collapsed-width="collapsedAll ? 0 : 48"
     >
-      <div class="logo tourBox" ref="tourLogo" :style="collapsed ? 'justify-content: center;' : ''">
-        <a-row align="center" justify="space-between" :wrap="false">
+      <div class="logo tourBox" ref="tourLogo" @click="toLandingPage" :style="collapsed ? 'justify-content: center;' : ''">
+        <a-row align="center" justify="space-between" :wrap="false" >
           <a-avatar>
             <img src="../assets/goat.png" alt="goat"/>
           </a-avatar>
@@ -87,24 +87,38 @@
               </a-row>
             </a-col>
             <a-col :span="8">
-              <a-row justify="space-between" align="center" :wrap="false">
-                <a-select
-                    v-model="language"
-                    @change="handleLanguageChange(language.value)"
-                    :style="{width:'calc(100% - 20px)',borderRadius: '20px',marginRight: '20px'}"
-                    placeholder="Select language"
-                    :trigger-props="{ autoFitPopupMinWidth: true }"
-                >
-                  <a-option v-for="item of langData" :value="item" :label="item.label" />
-                </a-select>
-                <a-switch checked-color="#000000" v-model="colorValue" @change="handleColorChange">
-                  <template #checked-icon>
-                    <img src="../assets/imgs/layout/night.png" width="18" height="18" style="display:block;"/>
-                  </template>
-                  <template #unchecked-icon>
-                    <img src="../assets/imgs/layout/sun.png" width="18" height="18" style="display: block;"/>
-                  </template>
-                </a-switch>
+              <a-row justify="end" align="center" :wrap="false">
+                <a-space>
+                  <a-trigger position="br" auto-fit-position :unmount-on-close="false">
+<!--                    <a-avatar style="background: rgb(var(&#45;&#45;primary-4))"  :size="36">-->
+                      <a-tag>{{ user }}</a-tag>
+<!--                    </a-avatar>-->
+                    <template #content>
+                      <a-space>
+                        <router-link :to="{name: 'login'}">
+                          <a-button type="primary" style="margin-top: 10px;" >{{ $t('signOut') }}</a-button>
+                        </router-link>
+                      </a-space>
+                    </template>
+                  </a-trigger>
+                  <a-select
+                      v-model="language"
+                      @change="handleLanguageChange(language.value)"
+                      :style="{width:'auto',borderRadius: '20px'}"
+                      placeholder="Select language"
+                      :trigger-props="{ autoFitPopupMinWidth: true }"
+                  >
+                    <a-option v-for="item of langData" :value="item" :label="item.label" />
+                  </a-select>
+                  <a-switch checked-color="#000000" v-model="colorValue" @change="handleColorChange">
+                    <template #checked-icon>
+                      <img src="../assets/imgs/layout/night.png" width="18" height="18" style="display:block;"/>
+                    </template>
+                    <template #unchecked-icon>
+                      <img src="../assets/imgs/layout/sun.png" width="18" height="18" style="display: block;"/>
+                    </template>
+                  </a-switch>
+                </a-space>
               </a-row>
 
             </a-col>
@@ -126,7 +140,7 @@
           <a-row justify="space-between" class="footerRow">
             <span>
               <SvgIcon icon-name="IconCopyright" />
-              2024 梁炜勤
+              2024 梁炜勤 粤ICP备2024233910号
             </span>
             <div class="footerRight">
               <span>
@@ -162,6 +176,8 @@ import {
 } from '@arco-design/web-vue/es/icon';
 import Menu from "@cp/leftMenu/Menu.vue";
 import SvgIcon from "@cp/SvgIcon.vue";
+import {useRouter} from "vue-router";
+import {adminStore} from "../stores/admin.js";
 
 export default defineComponent({
   name: 'CommonLayout',
@@ -177,6 +193,13 @@ export default defineComponent({
     IconMenuUnfold,
   },
   setup() {
+    const user = computed(() => {
+      return localStorage.getItem('admin');
+    })
+    const router = useRouter();
+    function toLandingPage() {
+      router.push({ name: 'landing' })
+    }
     const collapsedAll = ref(false)
     const popupVisible = ref(false)
     const colorValue = ref(JSON.parse(localStorage.getItem('theme-appearance')) || false);
@@ -220,6 +243,7 @@ export default defineComponent({
       return locales[localeType.value] || zhCN;
     });
     return {
+      user,
       langData,
       language,
       colorValue,
@@ -229,7 +253,8 @@ export default defineComponent({
       locale,
       popupVisible,
       collapsedAll,
-      closeAll
+      closeAll,
+      toLandingPage,
     };
   },
   mounted(){
@@ -242,6 +267,7 @@ export default defineComponent({
     }
   },
   methods: {
+    adminStore,
     // handleTriggerClick(e) {
     //   this.popupVisible = !this.popupVisible;
     // },
@@ -364,6 +390,7 @@ export default defineComponent({
   box-shadow: none;
 }
 .layout-demo :deep(.arco-layout-sider) .logo {
+  cursor: pointer;
   height: 32px;
   margin: 12px 8px;
   //background: rgba(255, 255, 255, 0.2);

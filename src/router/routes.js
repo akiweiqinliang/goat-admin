@@ -7,6 +7,7 @@ const Error = () => import('@pages/404.vue')
 const Home = () => import('@pages/Home.vue')
 const Dashboard = () => import('@pages/Dashboard.vue')
 const About = () => import('@pages/About.vue')
+const Fun = () => import('@pages/Fun.vue')
 const Notes = () => import('@pages/Learning/Notes.vue')
 const EditNote = () => import('@pages/Learning/EditNote.vue')
 const UpdateNote = () => import('@pages/Learning/UpdateNote.vue')
@@ -28,7 +29,7 @@ export const routes = [
         children: [
             { path: '/home', alias: 'index', name: 'home', component: Home, iconName: 'IconHome' },
             { path: '/dashboard', name: 'dashboard', component: Dashboard, iconName: 'IconCommon' },
-            { path: '/map', name: 'map', component: About, iconName: 'icon-storage' },
+            { path: '/fun', name: 'fun', component: Fun, iconName: 'icon-face-smile-fill' },
             {
                 path: 'cookbook',
                 redirect: '/cookbook/chineseFood',
@@ -43,6 +44,7 @@ export const routes = [
                 ]
             },
             { path: '/notes', name: 'notes', component: Notes, iconName: 'IconEdit' },
+            { path: '/map', name: 'map', component: About, iconName: 'icon-storage' },
         ]
     },
     {

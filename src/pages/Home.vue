@@ -54,6 +54,9 @@
         <a-calendar v-model="calendarValue" @change="handleClickCalendar" />
       </a-card>
     </a-col>
+    <a-col :span="0" :xs="24" :sm="0">
+        <a-button long type="primary" @click="toLogin" style="margin-top: 16px;" shape="round" size="large">{{ $t('signOut') }}</a-button>
+    </a-col>
   </a-row>
 
 
@@ -64,6 +67,7 @@ import {IconCamera } from '@arco-design/web-vue/es/icon';
 import { scheduleStore } from "@/stores/schedule.js";
 import { adminStore } from "@/stores/admin.js";
 import Verify from "@cp/Verify.vue";
+import {useRouter} from "vue-router";
 
 export default {
   name: 'Home',
@@ -72,16 +76,24 @@ export default {
     IconCamera,
   },
   setup() {
+    const router = useRouter()
     const size = ref('medium');
     const api = inject('api');
     const userInfo = ref([]);
     const calendarValue = ref(new Date());
+    const toLogin = () => {
+      localStorage.removeItem('token')
+      localStorage.removeItem('tokenExpirationDate')
+      localStorage.removeItem('admin')
+      router.push({ name: 'landing' })
+    }
     const initInfo = async () => {
-      if (adminStore().info.length === 0){
-        const info = await api.userService.getAdminInfo(localStorage.getItem('admin'));
-        adminStore().setInfo(info.data);
+        // const info = await api.userService.getAdminInfo(localStorage.getItem('admin'));
+      const info = await api.userService.getAdminInfo();
+        adminStore().setInfo(info.data)
+      for (const key in info.data) {
+        userInfo.value.push({label: key, value: info.data[key]})
       }
-      userInfo.value = adminStore().getInfo()
     }
     onMounted(() => {
       initInfo()
@@ -90,6 +102,7 @@ export default {
       size,
       calendarValue,
       userInfo,
+      toLogin
     }
   },
   methods: {
