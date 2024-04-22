@@ -160,9 +160,7 @@
 </template>
 
 <script>
-import DragBox from "../components/DragBox.vue";
 import {IconArrowRise, IconArrowRight, IconCloseCircleFill, IconDelete} from '@arco-design/web-vue/es/icon';
-import draggable from "vuedraggable";
 import {scheduleStore} from "@/stores/schedule.js";
 import TimeLineBox from "@cp/TimeLineBox.vue";
 import CountNumberBox from "@cp/CountNumberBox.vue";
@@ -174,7 +172,7 @@ export default {
   name: "Dashboard",
   components: {
     WeatherCard,
-    CountNumberBox, TimeLineBox, DragBox, draggable, IconCloseCircleFill, IconArrowRight, IconArrowRise, IconDelete},
+    CountNumberBox, TimeLineBox, IconCloseCircleFill, IconArrowRight, IconArrowRise, IconDelete},
   setup() {
     const api = inject('api');
     const router = useRouter()

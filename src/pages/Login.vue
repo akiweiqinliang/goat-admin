@@ -24,18 +24,24 @@
 import { useRouter } from 'vue-router';
 import { adminStore } from "@/stores/admin.js";
 import Verify from "@cp/Verify.vue";
+import {onMounted} from "vue";
 
 export default {
   name: "Login",
   components: {Verify},
   data() {
     return {
-      username: 'aki',
-      password: '123',
+      username: '',
+      password: '',
       visibility: true,
     }
   },
   setup() {
+    onMounted(() => {
+      localStorage.removeItem('token')
+      localStorage.removeItem('tokenExpirationDate')
+      localStorage.removeItem('admin')
+    })
     const router = useRouter()
     const goHome = () => {
       router.push({
@@ -53,10 +59,9 @@ export default {
       }
       let result = await this.$api.loginService.login(this.username, this.password);
       if (result.code === 0) {
+        localStorage.setItem('tokenExpirationDate', result.data.tokenExpirationDate)
         localStorage.setItem('token', result.data.token)
         localStorage.setItem('admin', this.username)
-        const info = await this.$api.userService.getAdminInfo(this.username);
-        adminStore().setInfo(info.data);
         this.goHome()
       }
     },

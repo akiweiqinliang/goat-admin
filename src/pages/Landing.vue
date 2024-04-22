@@ -4,7 +4,10 @@
       <a-avatar class="logo" :size="52">
         <img src="../assets/goat.png" alt="goat"/>
       </a-avatar>
-      <a-button class="loginBtn" @click="redirectLogin">Sign in</a-button>
+      <a-button class="loginBtn" @click="redirectLogin" v-show="!loginFlag">Sign in</a-button>
+      <a-space v-show="loginFlag">
+        <a-button class="loginBtn" @click="redirectHome">Dashboard</a-button>
+      </a-space>
     </a-row>
     <section class="common page-first" ref="pageFirst">
         <div class="linearBg mobile"></div>
@@ -55,7 +58,8 @@
             <path d="M1.72794 7.27209C1.17565 7.27209 0.727936 7.71981 0.727936 8.27209C0.727936 8.82438 1.17565 9.27209 1.72794 9.27209V7.27209ZM38.435 8.9792C38.8256 8.58868 38.8256 7.95551 38.435 7.56499L32.0711 1.20103C31.6806 0.810503 31.0474 0.810503 30.6569 1.20103C30.2663 1.59155 30.2663 2.22472 30.6569 2.61524L36.3137 8.27209L30.6569 13.9289C30.2663 14.3195 30.2663 14.9526 30.6569 15.3432C31.0474 15.7337 31.6806 15.7337 32.0711 15.3432L38.435 8.9792ZM1.72794 9.27209L37.7279 9.27209V7.27209L1.72794 7.27209V9.27209Z" fill="black"/>
           </svg>
         </div>
-        <img src="../assets/imgs/landing/m-desktop2.jpg" alt="woman" class="mobile"/>
+        <img src="https://mdl.artvee.com/ft/200457fg.jpg" alt="woman" class="mobile"/>
+<!--        <img src="../assets/imgs/landing/m-desktop2.jpg" alt="woman" class="mobile"/>-->
         <a-col :span="10" class="textBox" :xs="24" :sm="24" :md="10">
            <span>
           This is my favorite one
@@ -359,7 +363,7 @@
         <a-divider class="endDivider"/>
         <a-row justify="space-between" align="center" class="fullWidth">
         <span>
-        Copyright ©️2023 akiweiqinliang
+        Copyright ©️2024 梁炜勤 粤ICP备2024233910号
       </span>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path d="M6.51734 17.1132C6.91177 17.6905 8.10883 18.9228 9.74168 19.2333M9.86428 22C8.83582 21.8306 2 19.6057 2 12.0926C2 5.06329 8.0019 2 12.0008 2C15.9996 2 22 5.06329 22 12.0926C22 19.6057 15.1642 21.8306 14.1357 22C14.1357 22 13.9267 18.5826 14.0487 17.9969C14.1706 17.4113 13.7552 16.4688 13.7552 16.4688C14.7262 16.1055 16.2043 15.5847 16.7001 14.1874C17.0848 13.1032 17.3268 11.5288 16.2508 10.0489C16.2508 10.0489 16.5318 7.65809 15.9996 7.56548C15.4675 7.47287 13.8998 8.51192 13.8998 8.51192C13.4432 8.38248 12.4243 8.13476 12.0018 8.17939C11.5792 8.13476 10.5568 8.38248 10.1002 8.51192C10.1002 8.51192 8.53249 7.47287 8.00036 7.56548C7.46823 7.65809 7.74917 10.0489 7.74917 10.0489C6.67316 11.5288 6.91516 13.1032 7.2999 14.1874C7.79575 15.5847 9.27384 16.1055 10.2448 16.4688C10.2448 16.4688 9.82944 17.4113 9.95135 17.9969C10.0733 18.5826 9.86428 22 9.86428 22Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -382,10 +386,13 @@ import 'swiper/css/effect-flip';
 import 'swiper/css/pagination';
 // import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
-import {onMounted, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import {useRouter} from "vue-router";
+import router from "@/router/index.js";
+import {adminStore} from "../stores/admin.js";
  export default {
    name: "Landing",
+   methods: {adminStore},
    components: {
      Swiper,
      SwiperSlide,
@@ -393,6 +400,23 @@ import {useRouter} from "vue-router";
      IconCaretRight
    },
    setup() {
+     const loginFlag = computed(() => {
+       const token = localStorage.getItem('token')
+       const tokenExpirationDate = localStorage.getItem('tokenExpirationDate');
+       // 如果存在token和tokenExpirationDate
+       if (token && tokenExpirationDate) {
+         // 获取当前时间
+         const currentTime = new Date().getTime();
+         if (currentTime <= Date.parse(tokenExpirationDate)) {
+           // 如果token未过期
+           return true
+         } else {
+           // 如果token已过期
+           return false
+         }
+       }
+       return false
+     })
      function handleSlideUp (page) {
        const pageFirst = document.querySelector('.page-first');
        window.scrollTo({
@@ -477,22 +501,24 @@ import {useRouter} from "vue-router";
          url: 'https://d3d00swyhr67nd.cloudfront.net/w800h800/collection/NG/NG/NG_NG_NG6608-001.jpg'
        }
      ];
-     const redirectLogin = () => {
-       router.push({
-         name: 'login'
-       })
-     }
-     const mouseOverContainer = ref(null)
-     const element = ref(null)
-     const multiple = 10;
-     function transformElement(x, y) {
-       let box = element.value.getBoundingClientRect();
-       const calcX = -(y - box.y - box.height / 2) / multiple;
-       const calcY = (x - box.x - box.width / 2) / multiple;
-       const percentage = parseInt((x - box.x) / box.width * 1000) / 10;
 
-       element.value.style.transform = "rotateX(" + calcX + "deg) " + "rotateY(" + calcY + "deg)";
+     const redirectLogin = () => {
+       router.push({name: 'login'})
      }
+     const redirectHome = () => {
+       router.push({name: 'home'})
+     }
+     // const mouseOverContainer = ref(null)
+     // const element = ref(null)
+     // const multiple = 10;
+     // function transformElement(x, y) {
+     //   let box = element.value.getBoundingClientRect();
+     //   const calcX = -(y - box.y - box.height / 2) / multiple;
+     //   const calcY = (x - box.x - box.width / 2) / multiple;
+     //   const percentage = parseInt((x - box.x) / box.width * 1000) / 10;
+     //
+     //   element.value.style.transform = "rotateX(" + calcX + "deg) " + "rotateY(" + calcY + "deg)";
+     // }
      onMounted(() => {
        // desktop1Play()
        customSTyle()
@@ -510,18 +536,20 @@ import {useRouter} from "vue-router";
      })
 
      return {
+       redirectHome,
+       loginFlag,
        allImgList,
        imgList,
        imgList2,
        modules: [EffectFlip,Navigation, Pagination, Mousewheel],
-       mouseOverContainer,
-       element,
+       // mouseOverContainer,
+       // element,
        redirectLogin,
        // swiper,
        slider,
        onSwiper,
        handleSlideUp,
-       desktop1Title
+       desktop1Title,
      }
    }
  }
@@ -549,6 +577,7 @@ import {useRouter} from "vue-router";
   min-width: 240px;
   aspect-ratio: 360 / 460;
   background: white;
+  color: black;
   border-radius: 8px;
   box-sizing: border-box;
   //margin-left: 80px;
@@ -612,6 +641,7 @@ import {useRouter} from "vue-router";
 }
 .page-first{
   position: relative;
+  background: white;
   .desktop01ImgBox{
     padding: 0;
     border-radius: 0;
@@ -720,6 +750,7 @@ import {useRouter} from "vue-router";
   }
 }
 .page-second{
+  background: white;
   .container{
     width: 100%;
     height: 100vh;
@@ -1029,6 +1060,7 @@ import {useRouter} from "vue-router";
 }
 .page-fifth{
   //overflow: hidden;
+  background: white;
   position: relative;
   img{
     position: absolute;
@@ -1037,7 +1069,7 @@ import {useRouter} from "vue-router";
     object-fit: cover;
     width: 100%;
     max-width: max-content;
-    z-index: -1;
+    z-index: 1;
     transform: scaleX(1.05);
   }
   .upper{
@@ -1045,6 +1077,8 @@ import {useRouter} from "vue-router";
     //margin-top: 40vh;
   }
   .container{
+    position: relative;
+    z-index: 2;
     padding: 0 100px;
     .title{
       font-size: 48px;
@@ -1129,6 +1163,7 @@ import {useRouter} from "vue-router";
     }
     .endDivider{
       margin-bottom: 10px;
+      border-color: rgba(0,0,0,0.3);
     }
   }
 }

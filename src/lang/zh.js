@@ -39,5 +39,11 @@ export const zh = {
     learnProgress: '学习进度',
     title: '标题',
     detail: '内容',
-
+    fun: '玩',
+    signOut: '登出',
+    all: '整体',
+    love: '情感',
+    work: '事业',
+    money: '财富',
+    health: '健康'
 }

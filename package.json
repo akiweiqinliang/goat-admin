@@ -18,6 +18,7 @@
     "dayjs": "^1.11.10",
     "echarts": "^5.4.3",
     "pinia": "^2.1.7",
+    "pinyin-pro": "^3.20.2",
     "qiniu": "^7.11.0",
     "rough-notation": "^0.5.1",
     "scrollreveal": "^4.0.9",
@@ -26,8 +27,7 @@
     "vue-i18n": "^9.9.1",
     "vue-router": "^4.2.5",
     "vue-shepherd": "^3.0.0",
-    "vue3-recaptcha2": "^1.8.0",
-    "vuedraggable": "^4.1.0"
+    "vue3-recaptcha2": "^1.8.0"
   },
   "devDependencies": {
     "@arco-design/web-vue": "^2.54.2",

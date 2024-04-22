@@ -38,4 +38,11 @@ export const en = {
     learnProgress: 'Learning Progress',
     title: 'Title',
     detail: 'Detail',
+    fun: 'Fun',
+    signOut: 'Sign out',
+    all: 'All',
+    love: 'Love',
+    work: 'Work',
+    money: 'Money',
+    health: 'Health'
 }

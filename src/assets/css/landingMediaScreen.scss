@@ -76,17 +76,12 @@
     width: 100%;
     height: auto;
     border-radius: 0px;
-
-    position: sticky;
     top: 0px;
-    z-index: -1;
+    z-index: 1;
     position: relative;
   }
   .page-second .container .textBox {
     padding: 30px 30px 70px 30px;
-    //position: sticky;
-    //top: 80px;
-    //z-index: -1;
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 10%, rgba(255, 255, 255, 1));
   }
   .page-second .container .textBox span {
