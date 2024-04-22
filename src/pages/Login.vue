@@ -71,7 +71,7 @@ export default {
 
 <style scoped lang="scss">
 .loginPage{
-  background-image: url("../assets/imgs/auth/goat.jpg");
+  background-image: url("https://cdn.qiniuyun.akiweiqinliang.fun/login/bg.jpg");
   height: 100vh;
   background-size: cover;
   .infoBox{
