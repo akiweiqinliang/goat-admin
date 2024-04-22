@@ -51,15 +51,12 @@
     </section>
     <section class="common page-second">
       <a-row class="container">
-        <!--      <img src="http://image-goat.test.upcdn.net/image/Group%209%20right%20img%20box.png" alt="woman" />-->
-<!--        <img src="../assets/imgs/landing/desktop2.png" alt="woman" class="pc"/>-->
         <div class="arrowBtn" @click="handleSlideUp(2)">
           <svg xmlns="http://www.w3.org/2000/svg" width="39" height="16" viewBox="0 0 39 16" fill="none">
             <path d="M1.72794 7.27209C1.17565 7.27209 0.727936 7.71981 0.727936 8.27209C0.727936 8.82438 1.17565 9.27209 1.72794 9.27209V7.27209ZM38.435 8.9792C38.8256 8.58868 38.8256 7.95551 38.435 7.56499L32.0711 1.20103C31.6806 0.810503 31.0474 0.810503 30.6569 1.20103C30.2663 1.59155 30.2663 2.22472 30.6569 2.61524L36.3137 8.27209L30.6569 13.9289C30.2663 14.3195 30.2663 14.9526 30.6569 15.3432C31.0474 15.7337 31.6806 15.7337 32.0711 15.3432L38.435 8.9792ZM1.72794 9.27209L37.7279 9.27209V7.27209L1.72794 7.27209V9.27209Z" fill="black"/>
           </svg>
         </div>
-        <img src="https://mdl.artvee.com/ft/200457fg.jpg" alt="woman" class="mobile"/>
-<!--        <img src="../assets/imgs/landing/m-desktop2.jpg" alt="woman" class="mobile"/>-->
+        <img src="https://cdn.qiniuyun.akiweiqinliang.fun/landing/page2.jpg" alt="woman" class="mobile"/>
         <a-col :span="10" class="textBox" :xs="24" :sm="24" :md="10">
            <span>
           This is my favorite one
@@ -112,8 +109,7 @@
         <a-col :span="0" :xs="24" :sm="24" :md="0" class="mobile">
           <div class="paintCard">
             <div class="paintBox">
-              <!--            <img src="http://image-goat.test.upcdn.net/image/503832ldsdl.jpg" alt="first">-->
-              <img src="../assets/imgs/landing/desktop3.jpg" alt="first">
+              <img src="https://cdn.qiniuyun.akiweiqinliang.fun/landing/page3.jpg" alt="first">
             </div>
             <div class="info">
               <div class="title">A Seascape, Shipping by Moonlight</div>
@@ -144,7 +140,7 @@
       </a-row>
     </section>
     <section class="common page-fourth">
-      <a-row class="container">
+      <a-row class="container" :class="imgPlay ? 'play' : 'playStop'">
         <a-col :span="10" class="left" :xs="24" :sm="12" :md="14" :lg="10">
         <span>
           Find Your Favorite
@@ -200,7 +196,8 @@
           </p>
           <a-row justify="end">
             <div class="exploreBtn">
-              <div class="explore" @click="handleSlideUp(4)">
+<!--              <div class="explore" @click="handleSlideUp(4)">-->
+                <div class="explore" @click="imgPlay = !imgPlay">
                 Explore
                 <svg xmlns="http://www.w3.org/2000/svg" width="31" height="16" viewBox="0 0 31 16" fill="none">
                   <path d="M30.7071 8.70711C31.0976 8.31658 31.0976 7.68342 30.7071 7.29289L24.3431 0.928932C23.9526 0.538408 23.3195 0.538408 22.9289 0.928932C22.5384 1.31946 22.5384 1.95262 22.9289 2.34315L28.5858 8L22.9289 13.6569C22.5384 14.0474 22.5384 14.6805 22.9289 15.0711C23.3195 15.4616 23.9526 15.4616 24.3431 15.0711L30.7071 8.70711ZM0 9H30V7H0V9Z" fill="white"/>
@@ -214,7 +211,6 @@
           <div class="first">
             <div class="imgList">
               <div class="imgItem" v-for="item in imgList">
-                <!--              <img :src="item.url" alt="1" />-->
                 <div class="paintCard">
                   <div class="paintBox">
                     <img :src="item.url" alt="item.url"/>
@@ -228,7 +224,6 @@
             </div>
             <div class="imgList2">
               <div class="imgItem" v-for="item in imgList">
-                <!--              <img :src="item.url" alt="1" />-->
                 <div class="paintCard">
                   <div class="paintBox">
                     <img :src="item.url" alt="item.url"/>
@@ -244,7 +239,6 @@
           <div class="second">
             <div class="imgList">
               <div class="imgItem" v-for="item in imgList2">
-                <!--              <img :src="item.url" alt="1" />-->
                 <div class="paintCard">
                   <div class="paintBox">
                     <img :src="item.url" alt="item.url"/>
@@ -258,7 +252,6 @@
             </div>
             <div class="imgList2">
               <div class="imgItem" v-for="item in imgList2">
-                <!--              <img :src="item.url" alt="1" />-->
                 <div class="paintCard">
                   <div class="paintBox">
                     <img :src="item.url" alt="item.url"/>
@@ -311,7 +304,7 @@
       </a-row>
     </section>
     <section class="common page-fifth">
-      <img src="../assets/imgs/landing/desktop5-2.png" alt="fifth page" />
+      <img src="https://cdn.qiniuyun.akiweiqinliang.fun/landing/page5.png" alt="fifth page" />
       <a-row class="upper">
         <a-col :span="10" :xs="0" :sm="0" :md="0" :lg="6" :xl="10"></a-col>
         <a-col :span="14" :xs="24" :sm="24" :md="24" :lg="18" :xl="14">
@@ -400,6 +393,7 @@ import {adminStore} from "../stores/admin.js";
      IconCaretRight
    },
    setup() {
+     const imgPlay = ref(false)
      const loginFlag = computed(() => {
        const token = localStorage.getItem('token')
        const tokenExpirationDate = localStorage.getItem('tokenExpirationDate');
@@ -446,60 +440,60 @@ import {adminStore} from "../stores/admin.js";
      const router = useRouter()
      const allImgList = [
        {
-         url: 'https://mdl.artvee.com/ft/541431ld.jpg',
+         url: 'https://cdn.qiniuyun.akiweiqinliang.fun/landing/section4/01.jpg',
        }, {
-         url: 'https://d3d00swyhr67nd.cloudfront.net/w800h800/collection/NG/NG/NG_NG_NG4240-001.jpg',
-       }, {
-         url: 'https://mdl.artvee.com/ft/541439ld.jpg',
-       }, {
-         url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Monet_Snow_at_Argenteuil_1875.jpg/440px-Monet_Snow_at_Argenteuil_1875.jpg',
-       },{
-         url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Claude_Monet%2C_Impression%2C_soleil_levant.jpg/440px-Claude_Monet%2C_Impression%2C_soleil_levant.jpg',
-       },{
-         url: 'https://mdl.artvee.com/ft/541440ld.jpg',
-       }, {
-         url: 'https://d3d00swyhr67nd.cloudfront.net/w1200h1200/collection/CIA/CIA/CIA_CIA_P_1948_SC_276-001.jpg',
-       },{
-         url: 'https://d3d00swyhr67nd.cloudfront.net/w800h800/collection/NG/NG/NG_NG_NG6608-001.jpg'
-       }
+         url: 'https://cdn.qiniuyun.akiweiqinliang.fun/landing/section4/02.jpeg',
+       },  {
+         url: 'https://cdn.qiniuyun.akiweiqinliang.fun/landing/section4/03.jpeg',
+       },  {
+         url: 'https://cdn.qiniuyun.akiweiqinliang.fun/landing/section4/04.jpeg',
+       },  {
+         url: 'https://cdn.qiniuyun.akiweiqinliang.fun/landing/section4/05.jpg',
+       },  {
+         url: 'https://cdn.qiniuyun.akiweiqinliang.fun/landing/section4/06.jpeg',
+       },  {
+         url: 'https://cdn.qiniuyun.akiweiqinliang.fun/landing/section4/07.jpg',
+       },  {
+         url: 'https://cdn.qiniuyun.akiweiqinliang.fun/landing/section4/08.jpeg',
+       },
      ]
      const imgList = [
        {
-         url: 'https://mdl.artvee.com/ft/541431ld.jpg',
+         url: 'https://cdn.qiniuyun.akiweiqinliang.fun/landing/section4/01.jpg',
        }, {
-         url: 'https://d3d00swyhr67nd.cloudfront.net/w800h800/collection/NG/NG/NG_NG_NG4240-001.jpg',
-       }, {
-         url: 'https://mdl.artvee.com/ft/541439ld.jpg',
-       }, {
-         url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Monet_Snow_at_Argenteuil_1875.jpg/440px-Monet_Snow_at_Argenteuil_1875.jpg',
+         url: 'https://cdn.qiniuyun.akiweiqinliang.fun/landing/section4/02.jpeg',
+       },  {
+         url: 'https://cdn.qiniuyun.akiweiqinliang.fun/landing/section4/03.jpeg',
+       },  {
+         url: 'https://cdn.qiniuyun.akiweiqinliang.fun/landing/section4/04.jpeg',
        },{
-         url: 'https://mdl.artvee.com/ft/541431ld.jpg',
+         url: 'https://cdn.qiniuyun.akiweiqinliang.fun/landing/section4/01.jpg',
        }, {
-         url: 'https://d3d00swyhr67nd.cloudfront.net/w800h800/collection/NG/NG/NG_NG_NG4240-001.jpg',
-       }, {
-         url: 'https://mdl.artvee.com/ft/541439ld.jpg',
-       }, {
-         url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Monet_Snow_at_Argenteuil_1875.jpg/440px-Monet_Snow_at_Argenteuil_1875.jpg',
+         url: 'https://cdn.qiniuyun.akiweiqinliang.fun/landing/section4/02.jpeg',
+       },  {
+         url: 'https://cdn.qiniuyun.akiweiqinliang.fun/landing/section4/03.jpeg',
+       },  {
+         url: 'https://cdn.qiniuyun.akiweiqinliang.fun/landing/section4/04.jpeg',
        },
      ];
      const imgList2 = [
        {
-         url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Claude_Monet%2C_Impression%2C_soleil_levant.jpg/440px-Claude_Monet%2C_Impression%2C_soleil_levant.jpg',
-       },{
-         url: 'https://mdl.artvee.com/ft/541440ld.jpg',
+         url: 'https://cdn.qiniuyun.akiweiqinliang.fun/landing/section4/05.jpg',
+       },  {
+         url: 'https://cdn.qiniuyun.akiweiqinliang.fun/landing/section4/06.jpeg',
+       },  {
+         url: 'https://cdn.qiniuyun.akiweiqinliang.fun/landing/section4/07.jpg',
+       },  {
+         url: 'https://cdn.qiniuyun.akiweiqinliang.fun/landing/section4/08.jpeg',
        }, {
-         url: 'https://d3d00swyhr67nd.cloudfront.net/w1200h1200/collection/CIA/CIA/CIA_CIA_P_1948_SC_276-001.jpg',
-       },{
-         url: 'https://d3d00swyhr67nd.cloudfront.net/w800h800/collection/NG/NG/NG_NG_NG6608-001.jpg'
-       },{
-         url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Claude_Monet%2C_Impression%2C_soleil_levant.jpg/440px-Claude_Monet%2C_Impression%2C_soleil_levant.jpg',
-       },{
-         url: 'https://mdl.artvee.com/ft/541440ld.jpg',
-       }, {
-         url: 'https://d3d00swyhr67nd.cloudfront.net/w1200h1200/collection/CIA/CIA/CIA_CIA_P_1948_SC_276-001.jpg',
-       },{
-         url: 'https://d3d00swyhr67nd.cloudfront.net/w800h800/collection/NG/NG/NG_NG_NG6608-001.jpg'
-       }
+         url: 'https://cdn.qiniuyun.akiweiqinliang.fun/landing/section4/05.jpg',
+       },  {
+         url: 'https://cdn.qiniuyun.akiweiqinliang.fun/landing/section4/06.jpeg',
+       },  {
+         url: 'https://cdn.qiniuyun.akiweiqinliang.fun/landing/section4/07.jpg',
+       },  {
+         url: 'https://cdn.qiniuyun.akiweiqinliang.fun/landing/section4/08.jpeg',
+       },
      ];
 
      const redirectLogin = () => {
@@ -508,31 +502,8 @@ import {adminStore} from "../stores/admin.js";
      const redirectHome = () => {
        router.push({name: 'home'})
      }
-     // const mouseOverContainer = ref(null)
-     // const element = ref(null)
-     // const multiple = 10;
-     // function transformElement(x, y) {
-     //   let box = element.value.getBoundingClientRect();
-     //   const calcX = -(y - box.y - box.height / 2) / multiple;
-     //   const calcY = (x - box.x - box.width / 2) / multiple;
-     //   const percentage = parseInt((x - box.x) / box.width * 1000) / 10;
-     //
-     //   element.value.style.transform = "rotateX(" + calcX + "deg) " + "rotateY(" + calcY + "deg)";
-     // }
      onMounted(() => {
-       // desktop1Play()
        customSTyle()
-       // mouseOverContainer.value.addEventListener('mousemove', (e) => {
-       //   window.requestAnimationFrame(function () {
-       //     transformElement(e.clientX, e.clientY);
-       //   });
-       // });
-       // mouseOverContainer.value.addEventListener('mouseleave', (e) => {
-       //   window.requestAnimationFrame(function () {
-       //     element.value.style.transform = "rotateX(0) rotateY(0)";
-       //   });
-       // });
-
      })
 
      return {
@@ -542,14 +513,12 @@ import {adminStore} from "../stores/admin.js";
        imgList,
        imgList2,
        modules: [EffectFlip,Navigation, Pagination, Mousewheel],
-       // mouseOverContainer,
-       // element,
        redirectLogin,
-       // swiper,
        slider,
        onSwiper,
        handleSlideUp,
        desktop1Title,
+       imgPlay,
      }
    }
  }
@@ -650,7 +619,7 @@ import {adminStore} from "../stores/admin.js";
     background-size: cover;
     background-position: left;
     position: relative;
-    background-image: url("https://mdl.artvee.com/ft/503838ld.jpg");
+    background-image: url("https://cdn.qiniuyun.akiweiqinliang.fun/landing/page1.jpg");
     ::after{
       display: none;
     }
@@ -764,8 +733,7 @@ import {adminStore} from "../stores/admin.js";
       background-size: cover;
       background-position: center;
       position: relative;
-      //background-image: url("https://mdl.artvee.com/ft/200457fg.jpg");
-      background-image: url("../assets/imgs/landing/desktop02Img.png");
+      background-image: url("https://cdn.qiniuyun.akiweiqinliang.fun/landing/page2.jpg");
       aspect-ratio: 468 / 576;
       margin-left: 80px;
     }
@@ -896,7 +864,7 @@ import {adminStore} from "../stores/admin.js";
       width: calc(60% + 80px);
       aspect-ratio: 830 / 616;
       max-height: 600px;
-      background-image: url("../assets/imgs/landing/desktop3.jpg");
+      background-image: url("https://cdn.qiniuyun.akiweiqinliang.fun/landing/page3.jpg");
       background-size: cover;
       background-position: center;
       position: relative;
@@ -1028,6 +996,7 @@ import {adminStore} from "../stores/admin.js";
       }
       .second{
         margin-left: 10px;
+        transform: translateY(-55%);
         //transform: rotate(20deg) translateX(20px);
       }
       .imgList, .imgList2{
@@ -1189,7 +1158,7 @@ import {adminStore} from "../stores/admin.js";
 .fullWidth{
   width: 100%;
 }
-.page-fourth{
+.page-fourth .play{
   .first{
     .imgList{
       animation: scrollBanner 18s linear infinite;
@@ -1204,6 +1173,24 @@ import {adminStore} from "../stores/admin.js";
     }
     .imgList2{
       animation: scrollBanner4 36s linear infinite;
+    }
+  }
+}
+.page-fourth .playStop{
+  .first{
+    .imgList{
+      animation-fill-mode: forwards;
+    }
+    .imgList2{
+      animation-fill-mode: forwards;
+    }
+  }
+  .second{
+    .imgList{
+      animation-fill-mode: forwards;
+    }
+    .imgList2{
+      animation-fill-mode: forwards;
     }
   }
 }
