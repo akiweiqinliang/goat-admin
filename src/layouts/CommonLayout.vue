@@ -26,8 +26,8 @@
       </div>
     </a-layout-sider>
     <a-layout>
-      <a-row class="mobile mbHeader">
-        <a-col :span="24" :xs="24" :sm="0">
+      <a-row class="mbHeader">
+        <a-col :span="24" :xs="24" :sm="0" class="mobile mbHeader">
           <a-layout-header>
               <a-row align="center" justify="space-between" :wrap="false" style="padding: 0 10px;">
                   <a-space>
@@ -147,6 +147,7 @@
           </a-layout-header>
         </a-col>
       </a-row>
+
       <a-layout class="layoutContainerPadding">
           <div ref="tourContent">
             <router-view v-slot="{ Component }">
