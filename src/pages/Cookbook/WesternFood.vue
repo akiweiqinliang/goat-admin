@@ -1,16 +1,16 @@
 <template>
   <a-layout-content>
-    <a-row class="foodBtns">
+    <a-row class="foodBtns" align="center">
       <a-space>
         {{ $t('westernFood') }}
       </a-space>
-      <a-space>
+<!--      <a-space>-->
         <a-button shape="round" @click="toEditCookbookPage">
           {{ $t('editCookbook') }}
         </a-button>
-      </a-space>
+<!--      </a-space>-->
     </a-row>
-    <ImgList :imgList="westernList" :list-category="1" @checkTag="handleCheckTag" @deleteCookbook="handleDelete"/>
+    <ImgList :imgList="westernList" :list-category="1" @checkTag="handleCheckTag" :tag-list="tagList" @deleteCookbook="handleDelete"/>
     <a-row justify="center" class="pagination">
       <a-pagination :total="total" show-total :page-size="pageSize" :current="page" @change="handlePageChange"/>
     </a-row>
@@ -34,7 +34,18 @@ export default {
     let total = ref(0)
     let pageSize = ref(12)
     let page = ref(1)
+    let tagList = ref()
     let currentTagId = ref(0)
+    const getTagList = async () => {
+      const result = await api.tagService.getCookbookTagList();
+      let list = JSON.parse(JSON.stringify(result.data.records))
+      list.unshift({
+        id: 0,
+        value: '全部',
+        tagId: 0,
+      })
+      tagList.value = list;
+    }
     const getList = async (page, pageSize) => {
       let result;
       if (currentTagId.value === 0) {
@@ -82,6 +93,7 @@ export default {
     }
     onMounted(() => {
       getList(page.value, pageSize.value);
+      getTagList()
     })
     onActivated(() => {
       getList(page.value, pageSize.value);
@@ -91,6 +103,7 @@ export default {
       total,
       pageSize,
       page,
+      tagList,
       handleDelete,
       handlePageChange,
       toEditCookbookPage,

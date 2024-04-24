@@ -1,14 +1,14 @@
 <template>
   <a-layout-content>
-    <a-row class="foodBtns">
+    <a-row class="foodBtns" align="center">
       <a-space>
         {{ $t('chineseFood') }}
       </a-space>
-      <a-space>
+<!--      <a-space>-->
         <a-button shape="round" @click="toEditCookbookPage">
           {{ $t('editCookbook') }}
         </a-button>
-      </a-space>
+<!--      </a-space>-->
     </a-row>
     <ImgList :imgList="chineseList" :list-category="0" @checkTag="handleCheckTag" :tag-list="tagList" @deleteCookbook="handleDelete"/>
     <a-row justify="center" class="pagination">
@@ -35,6 +35,7 @@ export default {
     let pageSize = ref(12)
     let page = ref(1)
     let currentTagId = ref(0)
+    let tagList = ref()
     const getList = async (page, pageSize) => {
       let params;
       if (currentTagId.value === 0) {
@@ -73,7 +74,7 @@ export default {
       currentTagId.value = tagId;
       getList(page.value, pageSize.value);
     }
-    let tagList = ref();
+
     const getTagList = async () => {
       const result = await api.tagService.getCookbookTagList();
       let list = JSON.parse(JSON.stringify(result.data.records))
@@ -98,7 +99,6 @@ export default {
     })
     onActivated(() => {
       getList(page.value, pageSize.value);
-      getTagList()
     })
     return {
       chineseList,

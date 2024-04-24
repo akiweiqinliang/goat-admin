@@ -200,8 +200,13 @@
   }
   .page-fourth .navigationBtnBox{
     margin: 0;
+    display: flex;
+    justify-content: end;
   }
   .page-fourth .container .left .exploreBtn::before{
     display: none;
+  }
+  .page-fifth .footer ul li{
+    font-size: 14px;
   }
 }

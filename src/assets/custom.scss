@@ -52,6 +52,11 @@ body{
   .arco-tooltip-popup-arrow{
     display: none !important;
   }
+  .arco-list-header{
+    font-size: 14px;
+  }
 }
 
-
+.arco-form-item-label-col.arco-form-item-label-col-flex{
+  box-sizing: border-box;
+}

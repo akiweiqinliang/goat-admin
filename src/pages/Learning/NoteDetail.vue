@@ -49,6 +49,7 @@
             @click="toDetail(item.id)"
             v-for="item in directory"
             :key="`directory-${item.id}`"
+            class="directListItem"
             :class="item.id === note.id ? 'directoryActive' : 'directoryItem'"
         >
           {{ item.title }}
@@ -145,11 +146,13 @@ export default {
     margin: 30px 0;
   }
 }
-
-.directoryItem:hover{
-  background-color: var(--color-fill-1);
-  cursor: pointer;
+@media (hover: hover) {
+  .directoryItem:hover{
+    background-color: var(--color-fill-1);
+    cursor: pointer;
+  }
 }
+
 .directoryActive{
   color: #fff;
   background-color: rgb(var(--primary-6));
@@ -164,6 +167,9 @@ export default {
 }
 .topBreadcrumbItem{}
 @media screen and (max-width: 576px){
+  .directListItem{
+    font-size: 12px;
+  }
   .noteDetail{
     padding: 12px;
     .topBreadcrumb{
