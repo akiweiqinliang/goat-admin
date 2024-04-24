@@ -1,4 +1,5 @@
 <template>
+
   <a-config-provider :locale="locale">
   <a-layout class="layout-demo">
     <a-layout-sider
@@ -8,6 +9,7 @@
         breakpoint="lg"
         @collapse="onCollapse"
         :collapsed-width="collapsedAll ? 0 : 48"
+        class="pc"
     >
       <div class="logo tourBox" ref="tourLogo" @click="toLandingPage" :style="collapsed ? 'justify-content: center;' : ''">
         <a-row align="center" justify="space-between" :wrap="false" >
@@ -22,54 +24,76 @@
       <div ref="tourMenu" class="tourBox">
         <Menu />
       </div>
-      <a-row style="margin-top: 40px;">
-        <a-col :span="0" :xs="24" :sm="0" style="padding: 0 8px">
-          <a-row :justify="collapsed ? 'center' : 'space-between'" align="center">
-            <div style="margin-bottom: 10px">
-              <a-switch checked-color="#000000" v-model="colorValue" @change="handleColorChange">
-                <template #checked-icon>
-                  <img src="../assets/imgs/layout/night.png" width="18" height="18" style="display:block;"/>
-                </template>
-                <template #unchecked-icon>
-                  <img src="../assets/imgs/layout/sun.png" width="18" height="18" style="display: block;"/>
-                </template>
-              </a-switch>
-            </div>
-            <div style="margin-bottom: 10px">
-              <a-popover position="right" trigger="click" :popup-visible="popupVisible">
-                <a-button shape="circle" @click="popupVisible = !popupVisible">
-                  <SvgIcon v-if="language.value === 'zh'" icon-name="IconChineseFill" />
-                  <SvgIcon v-if="language.value === 'en'" icon-name="IconEnglishFill" />
-                </a-button>
-                <template #content>
-                  <a-button long type="text" v-for="item of langData" @click="handleSidePop(item)">{{ item.label }}</a-button>
-                </template>
-              </a-popover>
-            </div>
-          <div style="margin-bottom: 10px">
-            <a-button shape="circle" @click="onCollapse" >
-              <IconCaretRight v-if="collapsed" />
-              <IconCaretLeft v-else />
-            </a-button>
-          </div>
-          </a-row>
-        </a-col>
-      </a-row>
-      <a-row style="position: absolute;bottom: 20px; right: 8px">
-        <a-col :span="0" :xs="24" :sm="0" style="display: flex;justify-content: center">
-<!--          <template v-if="collapsed">-->
-            <a-button @click="closeAll" type="primary" shape="circle">
-              <IconMenuFold />
-            </a-button>
-            <a-button v-if="collapsedAll" @click="collapsedAll = !collapsedAll" type="primary" shape="circle" size="large" style="position:fixed;right: 20px; bottom: 80px; z-index: 999">
-              <icon-menu-unfold />
-            </a-button>
-<!--          </template>   -->
-        </a-col>
-      </a-row>
     </a-layout-sider>
     <a-layout>
-      <a-row>
+      <a-row class="mbHeader">
+        <a-col :span="24" :xs="24" :sm="0" class="mobile mbHeader">
+          <a-layout-header>
+              <a-row align="center" justify="space-between" :wrap="false" style="padding: 0 10px;">
+                  <a-space>
+                    <router-link :to="{name: 'landing'}">
+                    <a-avatar>
+                      <img src="../assets/goat.png" alt="goat"/>
+                    </a-avatar>
+                    <span style="color: var(--color-text-1); font-weight: bold;" >
+                    Goat Admin
+                  </span>
+                    </router-link>
+                  </a-space>
+
+                <a-space>
+                  <a-trigger position="br" trigger="click" auto-fit-position :unmount-on-close="false">
+                    <a-tag size="large">{{ user }}</a-tag>
+                    <template #content>
+                      <a-space>
+                        <router-link :to="{name: 'login'}">
+                          <a-button type="primary" style="margin-top: 10px;" >{{ $t('signOut') }}</a-button>
+                        </router-link>
+                      </a-space>
+                    </template>
+                  </a-trigger>
+                  <a-button @click="mbCollapsed = !mbCollapsed">
+                    <template #icon>
+                      <icon-menu />
+                    </template>
+                  </a-button>
+                </a-space>
+
+                <a-modal :modal-style="{backgroundColor: 'var(--color-bg-2)', right: '-30px', boxShadow: '0 0 20px var(--color-fill-3)'}" width="70%" v-model:visible="mbCollapsed" :top="64" :align-center="false" :footer="false" :hide-title="true">
+                  <a-row justify="end" style="margin-bottom: 8px;">
+                    <a-button shape="circle" size="small" @click="mbCollapsed = false">
+                      <template #icon>
+                        <IconClose />
+                      </template>
+                    </a-button>
+                  </a-row>
+                  <Menu />
+                  <a-divider />
+                  <a-row justify="space-between">
+                    <a-switch checked-color="#000000" v-model="colorValue" @change="handleColorChange">
+                      <template #checked-icon>
+                        <img src="../assets/imgs/layout/night.png" width="18" height="18" style="display:block;"/>
+                      </template>
+                      <template #unchecked-icon>
+                        <img src="../assets/imgs/layout/sun.png" width="18" height="18" style="display: block;"/>
+                      </template>
+                    </a-switch>
+                  <a-select
+                      v-model="language"
+                      @change="handleLanguageChange(language.value)"
+                      :style="{width:'auto',borderRadius: '20px'}"
+                      placeholder="Select language"
+                      :trigger-props="{ autoFitPopupMinWidth: true }"
+                      size="small"
+                  >
+                    <a-option v-for="item of langData" :value="item" :label="item.label" />
+                  </a-select>
+
+                  </a-row>
+                </a-modal>
+              </a-row>
+          </a-layout-header>
+        </a-col>
         <a-col :span="24" :xs="0" :sm="24">
           <a-layout-header class="arco-row arco-row-align-center arco-row-justify-space-between" style="padding:0 20px;">
             <a-col :span="16">
@@ -90,9 +114,7 @@
               <a-row justify="end" align="center" :wrap="false">
                 <a-space>
                   <a-trigger position="br" auto-fit-position :unmount-on-close="false">
-<!--                    <a-avatar style="background: rgb(var(&#45;&#45;primary-4))"  :size="36">-->
                       <a-tag>{{ user }}</a-tag>
-<!--                    </a-avatar>-->
                     <template #content>
                       <a-space>
                         <router-link :to="{name: 'login'}">
@@ -125,15 +147,14 @@
           </a-layout-header>
         </a-col>
       </a-row>
+
       <a-layout class="layoutContainerPadding">
           <div ref="tourContent">
-<!--              <RouterView />-->
             <router-view v-slot="{ Component }">
               <keep-alive :exclude="['NoteDetail','CookbookDetail', 'ImgList' ]">
                 <component :is="Component" />
               </keep-alive>
             </router-view>
-
           </div>
         <a-layout-footer>
           <a-divider />
@@ -157,6 +178,7 @@
     </a-layout>
   </a-layout>
   </a-config-provider>
+
 </template>
 <script>
 import { defineComponent, ref, computed } from 'vue';
@@ -172,7 +194,9 @@ import {
   IconGithub,
   IconEmail,
   IconMenuFold,
-  IconMenuUnfold
+  IconMenuUnfold,
+  IconMenu,
+  IconClose
 } from '@arco-design/web-vue/es/icon';
 import Menu from "@cp/leftMenu/Menu.vue";
 import SvgIcon from "@cp/SvgIcon.vue";
@@ -191,6 +215,8 @@ export default defineComponent({
     IconWechat,
     IconMenuFold,
     IconMenuUnfold,
+    IconMenu,
+    IconClose,
   },
   setup() {
     const user = computed(() => {
@@ -204,6 +230,7 @@ export default defineComponent({
     const popupVisible = ref(false)
     const colorValue = ref(JSON.parse(localStorage.getItem('theme-appearance')) || false);
     const collapsed = ref(false);
+    const mbCollapsed = ref(true)
     const langData = ref([
       {
         label: '中文',
@@ -213,10 +240,6 @@ export default defineComponent({
         label: 'English',
         value: 'en',
       },
-      // {
-      //   label: '跟随系统',
-      //   value: navigator.language.substring(0, 2) || navigator.userLanguage,
-      // }
     ])
     const language = ref({
       label: '中文',
@@ -224,6 +247,7 @@ export default defineComponent({
     });
     const onCollapse = () => {
       collapsed.value = !collapsed.value;
+      mbCollapsed.value = !mbCollapsed.value;
       const resizeEvent = new Event('resize');
       // 分派 resize 事件
       window.dispatchEvent(resizeEvent);
@@ -248,6 +272,7 @@ export default defineComponent({
       language,
       colorValue,
       collapsed,
+      mbCollapsed,
       onCollapse,
       localeType,
       locale,
@@ -474,6 +499,26 @@ export default defineComponent({
       justify-content: space-between;
       width: 100%;
     }
+  }
+}
+.mobile{
+  display: none;
+}
+.mbHeader{
+  position: sticky;
+  top: 0;
+  z-index: 998;
+  box-shadow: 0 10px 20px var(--color-fill-3);
+  a{
+    text-decoration: none;
+  }
+}
+@media screen and (max-width: 576px){
+  .pc{
+    display: none;
+  }
+  .mobile{
+    display: initial;
   }
 }
 </style>

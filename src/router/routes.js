@@ -15,6 +15,7 @@ const NoteDetail = () => import('@pages/Learning/NoteDetail.vue')
 const ChineseFood = () => import('@pages/Cookbook/ChineseFood.vue')
 const WesternFood = () => import('@pages/Cookbook/WesternFood.vue')
 const EditCookbook = () => import('@pages/Cookbook/EditCookbook.vue')
+const UpdateCookbook = () => import('@pages/Cookbook/UpdateCookbook.vue')
 const CookbookDetail = () => import('@pages/Cookbook/CookbookDetail.vue')
 export const routes = [
     {
@@ -69,6 +70,20 @@ export const routes = [
                 path: '',
                 component: EditCookbook,
                 name: 'editCookbook',
+                meta: {
+                    requiresAuth: true,
+                }
+            }
+        ]
+    },
+    {
+        path: '/cookbooks/update-cookbook/:id',
+        component: CommonLayout, // 将 CommonLayout 设置为父组件
+        children: [
+            {
+                path: '',
+                component: UpdateCookbook,
+                name: 'updateCookbook',
                 meta: {
                     requiresAuth: true,
                 }

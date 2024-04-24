@@ -45,5 +45,6 @@ export const zh = {
     love: '情感',
     work: '事业',
     money: '财富',
-    health: '健康'
+    health: '健康',
+    updateCookbook: '更新菜谱'
 }

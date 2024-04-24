@@ -22,6 +22,9 @@ body{
   width: 0;
   height: 0
 }
+.arco-list-item-content{
+  word-break: break-all;
+}
 @media screen and (max-width: 576px){
   .arco-list-medium .arco-list-content-wrapper .arco-list-footer, .arco-list-medium .arco-list-content-wrapper .arco-list-content > .arco-list-item, .arco-list-medium .arco-list-content-wrapper .arco-list-content .arco-list-col > .arco-list-item, .arco-list-medium .arco-list-content-wrapper .arco-list-content.arco-list-virtual .arco-list-item{
     padding: 8px 12px;
@@ -43,4 +46,17 @@ body{
   .arco-timeline-item{
     min-height: 64px;
   }
+  .arco-tooltip-content{
+    display: none;
+  }
+  .arco-tooltip-popup-arrow{
+    display: none !important;
+  }
+  .arco-list-header{
+    font-size: 14px;
+  }
+}
+
+.arco-form-item-label-col.arco-form-item-label-col-flex{
+  box-sizing: border-box;
 }

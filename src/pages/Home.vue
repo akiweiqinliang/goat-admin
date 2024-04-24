@@ -54,9 +54,6 @@
         <a-calendar v-model="calendarValue" @change="handleClickCalendar" />
       </a-card>
     </a-col>
-    <a-col :span="0" :xs="24" :sm="0">
-        <a-button long type="primary" @click="toLogin" style="margin-top: 16px;" shape="round" size="large">{{ $t('signOut') }}</a-button>
-    </a-col>
   </a-row>
 
 

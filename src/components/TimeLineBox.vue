@@ -65,9 +65,6 @@
         </a-timeline-item>
       </a-timeline>
     </a-col>
-
-
-
   </a-row>
 </template>
 

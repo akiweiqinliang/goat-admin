@@ -50,8 +50,7 @@ function imgCutdown(file) {
         render.readAsDataURL(file);
     });
 }
-const uploadUrl = axios.defaults.baseURL + '/cookbooks/upload';
-// const uploadUrl = process.env.NODE_ENV === 'production' ? 'https://goat-nest-app-v1-0.onrender.com/cookbooks/upload' : 'http://localhost:3000/cookbooks/upload';
+const uploadUrl = axios.defaults.baseURL + '/upload/editor';
 
 // 自定义适配器类
 class MyUploadAdapter {

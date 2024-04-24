@@ -8,6 +8,7 @@ axios.defaults.timeout = 60000;
 if (process.env.NODE_ENV == 'development') {
     axios.defaults.baseURL = 'http://localhost:3000/api/v1'; // 开发环境
     // axios.defaults.baseURL = 'http://localhost:5000/api/v1'; // 本地测试环境
+    // axios.defaults.baseURL = 'https://v5gcvpgs-3000.asse.devtunnels.ms/api/v1'; // 本地测试环境
     // axios.defaults.baseURL = 'https://akiweiqinliang.fun/api/v1'; //生产环境 test
 } else if (process.env.NODE_ENV == 'production') {
     // axios.defaults.baseURL = 'https://goat-nest-app-v1-0.onrender.com'; //生产环境

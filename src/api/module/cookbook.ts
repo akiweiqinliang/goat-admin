@@ -46,6 +46,14 @@ export const getCookBookById = (id: number) => {
         }
     })
 }
+// 改
+export const updateCookbook = (id: number, updateCookbook: object) => {
+    return request({
+        url: `/cookbooks/update/${id}`,
+        method: "put",
+        data: updateCookbook
+    })
+}
 export const getCookbookByTagId = (tagId: number) => {
     return request({
         url: `/cookbooks/findByTagId`,

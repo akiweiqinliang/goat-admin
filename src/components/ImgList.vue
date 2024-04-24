@@ -36,11 +36,10 @@
             </span>
           </a-col>
           <a-col class="actions" :span="12">
-            <a-tooltip :content="item.title">
-              <span class="action"><icon-eye /></span>
-            </a-tooltip>
-            <a-tooltip :content="item.tag">
-              <span class="action"><icon-tag /></span>
+            <a-tooltip content="编辑">
+              <span class="action" @click="updateCookbook(item.id)">
+                <icon-edit />
+              </span>
             </a-tooltip>
             <a-popconfirm
                 @ok="deleteCookbook(item.id)"
@@ -57,12 +56,12 @@
 <script>
 import {ref} from 'vue';
 import {useRouter} from "vue-router";
-import {IconDownload, IconEye, IconInfoCircle, IconTag, IconDelete} from '@arco-design/web-vue/es/icon';
+import {IconDownload, IconEye, IconInfoCircle, IconTag, IconEdit, IconDelete} from '@arco-design/web-vue/es/icon';
 
 export default {
   name: "ImgList",
   components: {
-    IconEye, IconDownload, IconInfoCircle, IconTag, IconDelete
+    IconEye, IconDownload, IconInfoCircle, IconTag, IconDelete, IconEdit
   },
   emits: ['checkTag', 'deleteCookbook'],
   props: {
@@ -89,15 +88,20 @@ export default {
   setup($emit) {
     const router = useRouter();
     let checkTagId = ref(0);
+    const updateCookbook = (id) => {
+      router.push({name: 'updateCookbook', params: {id: id}});
+    }
+    async function checkDetail(cookbookId) {
+      await router.push({name: 'cookbookDetail', params: {id: cookbookId}});
+    }
     return {
       router,
       checkTagId,
+      checkDetail,
+      updateCookbook,
     }
   },
   methods: {
-    async checkDetail(cookbookId) {
-      await this.router.push({name: 'cookbookDetail', params: {id: cookbookId}});
-    },
     deleteCookbook(id) {
        this.$emit('deleteCookbook', id)
     },
@@ -167,8 +171,10 @@ export default {
   .imageBox{
     vertical-align: top;
     overflow: hidden;
-    height: 100%;
+    //height: 100%;
+    width: 100%;
     background-color: var(--color-fill-1);
+    object-fit: cover;
   }
 }
 .actions {
@@ -178,11 +184,12 @@ export default {
 }
 .action {
   //padding: 5px 4px;
-  font-size: 14px;
+  font-size: 16px;
   margin-left: 12px;
   border-radius: 2px;
   line-height: 1;
   cursor: pointer;
+  padding: 4px;
 }
 .action:first-child {
   margin-left: 0;

@@ -44,5 +44,6 @@ export const en = {
     love: 'Love',
     work: 'Work',
     money: 'Money',
-    health: 'Health'
+    health: 'Health',
+    updateCookbook: 'Update Cookbook'
 }

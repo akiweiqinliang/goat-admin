@@ -61,10 +61,13 @@ export default {
     margin: 30px 0;
   }
 }
+.CBtitle{
+  margin-top: 10px;
+}
 @media screen and (max-width: 576px){
   .CBtitle{
     font-size: 18px;
-    margin-top: 0px;
+    margin: 10px 0 12px;
   }
 }
 </style>
