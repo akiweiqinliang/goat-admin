@@ -2,6 +2,7 @@
   <a-card class="detailPage" :bordered="false">
         <a-row class="mainContent" :gutter="20">
           <a-col class="left" :span="16" :xs="24" :sm="16">
+            <img :src="cookbook.imgUrl" alt="封面图" style="width: 100%; aspect-ratio: 550 / 160; height: auto;object-fit: cover" />
             <CookbookPreviewPage :cookbook="cookbook" />
             <a-divider>
               end

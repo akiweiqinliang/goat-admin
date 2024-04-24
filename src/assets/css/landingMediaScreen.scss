@@ -172,6 +172,8 @@
   .page-fifth .footer{
     padding: 0 20px;
     margin-bottom: 100px;
+    position: relative;
+    z-index: 2;
   }
   .page-fifth .endBox{
     color: rgba(0, 0, 0, 0.7);

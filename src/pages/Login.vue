@@ -84,6 +84,7 @@ export default {
     justify-content: center;
     flex-direction: column;
     padding: 40px;
+    max-width: 600px;
     span{
       color: var(--color-text-1);
       font-size: 16px;

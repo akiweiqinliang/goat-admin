@@ -61,7 +61,7 @@
             <a-button @click="closeAll" type="primary" shape="circle">
               <IconMenuFold />
             </a-button>
-            <a-button v-if="collapsedAll" @click="collapsedAll = !collapsedAll" type="primary" shape="circle" size="large" style="position:fixed;right: 20px; bottom: 80px; z-index: 999">
+            <a-button v-if="collapsedAll" @click="collapsedAll = !collapsedAll" type="primary" shape="circle" size="large" style="position:fixed;right: 20px; bottom: 20px; z-index: 999">
               <icon-menu-unfold />
             </a-button>
 <!--          </template>   -->

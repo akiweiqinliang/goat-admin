@@ -22,12 +22,13 @@ import ImgList from "@cp/ImgList.vue";
 import {inject, ref, onMounted, onActivated,} from "vue";
 import dayjs from "dayjs";
 import {cookbookStore} from "@/stores/cookbook.js";
-import router from "@/router/index.js";
 import {Message} from "@arco-design/web-vue";
+import {useRouter} from "vue-router";
 export default {
   name: "WesternFood",
   components: {ImgList},
   setup() {
+    const router = useRouter()
     const api = inject('api')
     let westernList = ref([])
     let total = ref(0)

@@ -147,6 +147,9 @@ export default {
   justify-content: center;
   margin-top: 16px;
 }
+.noteItem{
+  box-sizing: border-box;
+}
 .noteItem:hover{
   background-color:var(--color-fill-1);
 }

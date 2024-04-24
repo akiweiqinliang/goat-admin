@@ -41,6 +41,7 @@
                           :show-file-list="false"
                           @change="onChange"
                           @progress="onProgress"
+                          @success="onSuccess"
                           :response-url-key="fileItem => fileItem.response.data"
                       >
                         <template #upload-button>
@@ -88,7 +89,7 @@
                         <a-popconfirm content="确定删除全部内容并返回?" @ok="back">
                             <a-button>{{ $t('cancel') }}</a-button>
                         </a-popconfirm>
-                        <a-button html-type="submit" :disabled="submitCookbook">{{ $t('add') }}</a-button>
+                        <a-button html-type="submit" :disabled="file?.url?.includes('blob') ? true : submitCookbook">{{ $t('add') }}</a-button>
                       </a-space>
                     </a-row>
                   </a-form>
@@ -112,6 +113,7 @@
           </template>
         </a-split>
       </a-col>
+
       <a-col :span="24" :xs="24" :sm="0">
 
             <a-typography-paragraph>
@@ -148,6 +150,7 @@
                           :show-file-list="false"
                           @change="onChange"
                           @progress="onProgress"
+                          @success="onSuccess"
                           :response-url-key="fileItem => fileItem.response.data"
                       >
                         <template #upload-button>
@@ -195,7 +198,7 @@
                         <a-popconfirm content="确定删除全部内容并返回?" @ok="back">
                             <a-button>{{ $t('cancel') }}</a-button>
                         </a-popconfirm>
-                        <a-button html-type="submit" :disabled="submitCookbook">{{ $t('add') }}</a-button>
+                        <a-button html-type="submit" :disabled="file?.url?.includes('blob') ? true : submitCookbook">{{ $t('add') }}</a-button>
                       </a-space>
                     </a-row>
                   </a-form>
@@ -204,22 +207,19 @@
             </a-typography-paragraph>
       </a-col>
     </a-row>
-
-
   </a-layout-content>
 
 
 </template>
 
 <script>
-import router from "@/router/index.js";
 import {inject, onActivated, onBeforeUnmount, onMounted, reactive, ref} from 'vue';
 import ClassicEditor from "ckeditor5-custom-akiweiqinliang";
 import MyUploadAdapter from "@/utils/MyUploadAdapter";
 import {IconEdit, IconPlus} from '@arco-design/web-vue/es/icon';
 import {Message} from "@arco-design/web-vue";
 import CookbookPreviewPage from "@cp/CookbookPreviewPage.vue";
-import {onBeforeRouteLeave} from 'vue-router';
+import {onBeforeRouteLeave, useRouter} from 'vue-router';
 import axios from "axios";
 
 export default {
@@ -234,6 +234,7 @@ export default {
         next(false); // 取消导航
       }
     });
+    const router = useRouter()
     const api = inject('api');
     let tagList = ref([])
     const form = reactive({
@@ -266,6 +267,10 @@ export default {
     const onProgress = (currentFile) => {
       file.value = currentFile;
     };
+    const onSuccess = (fileItem) => {
+      file.value.url = fileItem.response.data
+      // console.log(fileItem)
+    }
     function resetForm () {
       form.title = '';
       form.category = 0;
@@ -275,8 +280,13 @@ export default {
       if (file.value?.url) {
         file.value.url = null;
       }
-    };
+    }
     const addCookbook = async (cookbook) => {
+      console.log(cookbook)
+      if (file.value.url.includes('blob')){
+        Message.info("图片还在上传，请稍后再试")
+        return
+      }
       submitCookbook.value = true;
       const result = await api.cookbookService.createCookBook(cookbook);
       if (result.code === 0) {
@@ -292,13 +302,12 @@ export default {
       console.log(result)
     };
     const handleSubmit = (data) => {
-      console.log(data)
+      console.log(form)
       form.imgUrl = file?.value?.url;
       form.tagId = data.values.tagObj.tagId;
       form.tag = data.values.tagObj.value;
-      console.log('aaa')
       for (const formKey in form) {
-        if (form[formKey] === undefined || form[formKey] === null) {
+        if (!form[formKey] && form[formKey] !== 0) {
           Message.info(`${formKey}为空`);
           return
         }
@@ -315,6 +324,9 @@ export default {
       event.preventDefault();
       event.returnValue = ''; // 设置一个空字符串会触发浏览器默认的确认消息
     }
+    const back = () => {
+      router.back()
+    }
     onMounted(() => {
       getTagList()
       window.addEventListener('beforeunload', confirmLeave);
@@ -325,15 +337,18 @@ export default {
     onBeforeUnmount(() => {
       window.removeEventListener('beforeunload', confirmLeave);
     })
-    const uploadUrl = ref(axios.defaults.baseURL+'/cookbooks/upload');
+    const uploadUrl = ref(axios.defaults.baseURL+'/upload/cookbook');
+    // const uploadUrl = ref(axios.defaults.baseURL+'/upload/test');
     const uploadHeaders = { Authorization : `Bearer ${localStorage.getItem('token')}`}
     return {
       form,
       file,
       onChange,
       onProgress,
+      onSuccess,
       handleSubmit,
       resetForm,
+      back,
       categoryOptions,
       tagList,
       submitCookbook,
@@ -343,7 +358,6 @@ export default {
   },
   data() {
     return {
-      // uploadUrl: 'http://localhost:3000/cookbooks/upload',
       size: 0.5,
       editor: ClassicEditor,
       editorConfig: {
@@ -359,10 +373,7 @@ export default {
         return new MyUploadAdapter(loader);
       };
     },
-    back() {
-      // router.push({ name: 'home' })
-      router.back()
-    },
+
   }
 }
 </script>

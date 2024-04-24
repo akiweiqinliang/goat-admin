@@ -372,7 +372,7 @@ import { annotate } from 'rough-notation';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import ScrollReveal from "scrollreveal";
 import { IconCaretLeft, IconCaretRight } from "@arco-design/web-vue/es/icon";
-import { FreeMode, EffectFlip, Scrollbar, Mousewheel, Navigation, Pagination } from 'swiper/modules';
+import { EffectFlip, Scrollbar, Mousewheel, Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 
 import 'swiper/css/effect-flip';
@@ -381,7 +381,6 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import {computed, onMounted, ref} from "vue";
 import {useRouter} from "vue-router";
-import router from "@/router/index.js";
 import {adminStore} from "../stores/admin.js";
  export default {
    name: "Landing",
@@ -597,8 +596,8 @@ import {adminStore} from "../stores/admin.js";
     position: absolute;
     width: 88px;
     height: 28px;
-    top: 2px;
-    left: 2px;
+    //top: 2px;
+    //left: 2px;
     border: 2px solid black;
     border-radius: 8px;
   }
@@ -1102,6 +1101,8 @@ import {adminStore} from "../stores/admin.js";
   .footer{
     display: flex;
     align-items: center;
+    position: relative;
+    z-index: 2;
     margin-bottom: 80px;
     span{
       font-size: 16px;

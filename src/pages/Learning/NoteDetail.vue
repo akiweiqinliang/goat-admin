@@ -34,7 +34,7 @@
         </a-typography>
   </a-layout-content>
   <a-drawer
-      :width="320"
+      :width="'50%'"
       :visible="visible"
       @ok="handleOk"
       @cancel="handleCancel"
