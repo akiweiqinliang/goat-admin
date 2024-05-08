@@ -36,11 +36,11 @@
             </span>
           </a-col>
           <a-col class="actions" :span="12">
-            <a-tooltip content="编辑">
+<!--            <a-tooltip content="编辑">-->
               <span class="action" @click="updateCookbook(item.id)">
                 <icon-edit />
               </span>
-            </a-tooltip>
+<!--            </a-tooltip>-->
             <a-popconfirm
                 @ok="deleteCookbook(item.id)"
                 :content="$t('deleteInfoMsg')">
@@ -91,8 +91,8 @@ export default {
     const updateCookbook = (id) => {
       router.push({name: 'updateCookbook', params: {id: id}});
     }
-    async function checkDetail(cookbookId) {
-      await router.push({name: 'cookbookDetail', params: {id: cookbookId}});
+    function checkDetail(cookbookId) {
+      router.push({name: 'cookbookDetail', params: {id: cookbookId}});
     }
     return {
       router,

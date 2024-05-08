@@ -86,9 +86,7 @@
                     <ckeditor :editor="editor" v-model="form.cookingWay" :config="editorConfig" @ready="initExtraPlugins"></ckeditor>
                     <a-row justify="end" class="footer">
                       <a-space>
-                        <a-popconfirm content="确定删除全部内容并返回?" @ok="back">
-                            <a-button>{{ $t('cancel') }}</a-button>
-                        </a-popconfirm>
+                            <a-button @click="back">{{ $t('cancel') }}</a-button>
                         <a-button html-type="submit" :disabled="file?.url?.includes('blob') ? true : submitCookbook">{{ $t('add') }}</a-button>
                       </a-space>
                     </a-row>
@@ -195,9 +193,7 @@
                     <ckeditor :editor="editor" v-model="form.cookingWay" :config="editorConfig" @ready="initExtraPlugins"></ckeditor>
                     <a-row justify="end" class="footer">
                       <a-space>
-                        <a-popconfirm content="确定删除全部内容并返回?" @ok="back">
-                            <a-button>{{ $t('cancel') }}</a-button>
-                        </a-popconfirm>
+                        <a-button @click="back">{{ $t('back') }}</a-button>
                         <a-button html-type="submit" :disabled="file?.url?.includes('blob') ? true : submitCookbook">{{ $t('add') }}</a-button>
                       </a-space>
                     </a-row>
@@ -256,12 +252,13 @@ export default {
       { label: '西餐', value: 1 },
     ]
     // 上传图片
-    const file = ref();
+    const file = ref({
+      url: null
+    });
     let submitCookbook = ref(false);
     const onChange = (_, currentFile) => {
       file.value = {
         ...currentFile,
-        // url: URL.createObjectURL(currentFile.file),
       };
     };
     const onProgress = (currentFile) => {
@@ -269,7 +266,6 @@ export default {
     };
     const onSuccess = (fileItem) => {
       file.value.url = fileItem.response.data
-      // console.log(fileItem)
     }
     function resetForm () {
       form.title = '';
@@ -324,7 +320,8 @@ export default {
       event.preventDefault();
       event.returnValue = ''; // 设置一个空字符串会触发浏览器默认的确认消息
     }
-    const back = () => {
+    const back = (event) => {
+      event.preventDefault();
       router.back()
     }
     onMounted(() => {
@@ -337,8 +334,8 @@ export default {
     onBeforeUnmount(() => {
       window.removeEventListener('beforeunload', confirmLeave);
     })
-    const uploadUrl = ref(axios.defaults.baseURL+'/upload/cookbook');
-    // const uploadUrl = ref(axios.defaults.baseURL+'/upload/test');
+    // const uploadUrl = ref(axios.defaults.baseURL+'/upload/cookbook');
+    const uploadUrl = ref(axios.defaults.baseURL+'/upload/test');
     const uploadHeaders = { Authorization : `Bearer ${localStorage.getItem('token')}`}
     return {
       form,
@@ -362,7 +359,7 @@ export default {
       editor: ClassicEditor,
       editorConfig: {
         toolbar: {
-          items: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList','|', 'fontfamily', 'fontsize', 'fontColor', 'fontBackgroundColor', '|', 'outdent', 'indent', '|', 'imageUpload', 'blockQuote', 'insertTable', 'mediaEmbed', 'undo', 'redo'],
+          items: ['heading', '|','imageUpload', 'bold', 'italic', 'link', 'bulletedList', 'numberedList','|', 'fontfamily', 'fontsize', 'fontColor', 'fontBackgroundColor', '|', 'outdent', 'indent', '|', 'blockQuote', 'insertTable', 'mediaEmbed', 'undo', 'redo'],
         },
       },
     };
