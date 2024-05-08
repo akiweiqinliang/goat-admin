@@ -29,7 +29,7 @@
       <a-row class="mbHeader">
         <a-col :span="24" :xs="24" :sm="0" class="mobile mbHeader">
           <a-layout-header>
-              <a-row align="center" justify="space-between" :wrap="false" style="padding: 0 10px;">
+              <a-row align="center" justify="space-between" :wrap="false" style="padding: 0 16px;">
                   <a-space>
                     <router-link :to="{name: 'landing'}">
                     <a-avatar>
@@ -59,7 +59,7 @@
                   </a-button>
                 </a-space>
 
-                <a-modal :modal-style="{backgroundColor: 'var(--color-bg-2)', right: '-30px', boxShadow: '0 0 20px var(--color-fill-3)'}" width="70%" v-model:visible="mbCollapsed" :top="64" :align-center="false" :footer="false" :hide-title="true">
+                <a-modal :modal-style="{backgroundColor: 'var(--color-bg-2)', right: '-30px'}" width="70%" v-model:visible="mbCollapsed" :top="64" :align-center="false" :footer="false" :hide-title="true">
                   <a-row justify="end" style="margin-bottom: 8px;">
                     <a-button shape="circle" size="small" @click="mbCollapsed = false">
                       <template #icon>
@@ -293,9 +293,6 @@ export default defineComponent({
   },
   methods: {
     adminStore,
-    // handleTriggerClick(e) {
-    //   this.popupVisible = !this.popupVisible;
-    // },
     handleSidePop(item) {
       this.language = item;
       this.handleLanguageChange(item.value)
@@ -483,7 +480,7 @@ export default defineComponent({
 }
 @media screen and (max-width: 576px){
   .layoutContainerPadding{
-    padding: 10px;
+    padding: 16px;
   }
   .footerRow{
     justify-content: center;
@@ -508,7 +505,6 @@ export default defineComponent({
   position: sticky;
   top: 0;
   z-index: 998;
-  box-shadow: 0 10px 20px var(--color-fill-3);
   a{
     text-decoration: none;
   }

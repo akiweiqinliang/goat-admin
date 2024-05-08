@@ -3,6 +3,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from "./router/index.js";
 import {createPinia} from "pinia";
+// import VConsole from 'vconsole';
 
 // import VueShepherdPlugin from 'vue-shepherd';
 import ArcoVue from '@arco-design/web-vue';
@@ -21,6 +22,7 @@ const i18n = createI18n({
     locale: 'zh', // 设置默认语言
     messages, // 引入的本地化消息
 });
+// const vConsole = new VConsole();
 import "@/assets/css/htmlpreview.scss";
 // app.component('editor', CKEditor)
 

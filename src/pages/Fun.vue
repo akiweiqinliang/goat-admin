@@ -6,6 +6,7 @@
     </a-col>
     <a-col :span="9" :xs="24" :sm="24" :md="9">
       <Horoscope class="cardBorderRadius"/>
+      <RiskCalculator class="cardBorderRadius" />
       <Joke class="cardBorderRadius" />
     </a-col>
     <a-col :span="6" :xs="24" :sm="24" :md="6">
@@ -26,10 +27,11 @@ import Horoscope from "@cp/fun/Horoscope.vue";
 import WbHot from "@cp/fun/WbHot.vue";
 import Weather from "@cp/fun/Weather.vue";
 import Joke from "@cp/fun/Joke.vue";
+import RiskCalculator from "@cp/fun/RiskCalculator.vue";
 
 export default {
   name: "Fun",
-  components: { Weather, WbHot, Horoscope, MoyuCalendar, SaladGenerator, Joke}
+  components: {RiskCalculator, Weather, WbHot, Horoscope, MoyuCalendar, SaladGenerator, Joke}
 }
 </script>
 

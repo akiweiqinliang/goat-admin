@@ -9,7 +9,7 @@
                 <a-space>
                   {{ $t('updateCookbook') }} 🥗
                 </a-space>
-                <a-button @click="getDetail">重置</a-button>
+                <a-button @click="resetForm">重置</a-button>
               </a-row>
             </a-layout-header>
             <a-layout-content>
@@ -37,6 +37,7 @@
                       @change="onChange"
                       @progress="onProgress"
                       @success="onSuccess"
+                      :on-before-upload="beforeUpload"
                       :response-url-key="fileItem => fileItem.response.data"
                   >
                     <template #upload-button>
@@ -81,9 +82,7 @@
                 <ckeditor :editor="editor" v-model="form.cookingWay" :config="editorConfig" @ready="initExtraPlugins"></ckeditor>
                 <a-row justify="end" class="footer">
                   <a-space>
-                    <a-popconfirm content="确定放弃当前修改内容并返回?" @ok="back">
-                      <a-button>{{ $t('cancel') }}</a-button>
-                    </a-popconfirm>
+                    <a-button @click="back">{{ $t('back') }}</a-button>
                     <a-button html-type="submit" :disabled="file?.url?.includes('blob') ? true : submitCookbook">{{ $t('edit') }}</a-button>
                   </a-space>
                 </a-row>
@@ -107,7 +106,7 @@ import {Message} from "@arco-design/web-vue";
 import CookbookPreviewPage from "@cp/CookbookPreviewPage.vue";
 import {onBeforeRouteLeave, useRoute, useRouter} from 'vue-router';
 import axios from "axios";
-
+import request from '@/api/axios'
 export default {
   name: "UpdateCookbook",
   components: {CookbookPreviewPage, IconPlus, IconEdit, },
@@ -138,6 +137,7 @@ export default {
       createTime: new Date().toLocaleDateString(),
       description: '',
     });
+    const temp = ref(null)
     const categoryOptions = [
       { label: '中餐', value: 0 },
       { label: '西餐', value: 1 },
@@ -148,6 +148,64 @@ export default {
       url: null
     });
     let submitCookbook = ref(false);
+    const uploadAction = (option) => {
+      const {onProgress, onError, onSuccess, fileItem, name} = option;
+      const xhr = new XMLHttpRequest();
+      if (xhr.upload) {
+        xhr.upload.onprogress = function (event) {
+          let percent;
+          if (event.total > 0) {
+            // 0 ~ 1
+            percent = event.loaded / event.total;
+          }
+          onProgress(percent, event);
+        };
+      }
+      xhr.onerror = function error(e) {
+        onError(e);
+      };
+      xhr.onload = function onload() {
+        if (xhr.status < 200 || xhr.status >= 300) {
+          return onError(xhr.responseText);
+        }
+        onSuccess(xhr.response);
+      };
+      let formData = new FormData();
+      console.log(option)
+      formData.append('file', fileItem.file);
+      formData.append('name', fileItem.name);
+      const genericErrorText = `Couldn't upload file: ${fileItem.file}.`;
+      xhr.open('post', uploadUrl.value, true);
+      xhr.setRequestHeader('Authorization', `Bearer ${localStorage.getItem('token')}`)
+      xhr.addEventListener("load", () => {
+        const response = JSON.parse(xhr.response);
+        console.log(response)
+        file.value.url = response.data
+          if (!response || response.error) {
+            Message.error(response && response.error ? response.error.message : genericErrorText)
+          }
+      });
+      xhr.send(formData);
+
+    }
+    // 格式大小的限制
+    const beforeUpload = (file) => {
+      let isJPG = false,
+          fileType = file.type.split('/')[0];
+      if(file.type === "image/jpeg" || file.type === "image/png") {
+        isJPG = true;
+      } else {
+        isJPG = false;
+      }
+      const isLt5M = file.size / 1024 / 1024 / 1024 / 1024 / 1024;
+
+      if (fileType !== 'image' || isLt5M > 5) {
+        Message.error("请上传5M以内的图片文件!");
+        return false
+      }
+      return true;
+    };
+
     const onChange = (_, currentFile) => {
       file.value = { ...currentFile };
     };
@@ -157,27 +215,25 @@ export default {
     const onSuccess = (fileItem) => {
       file.value.url = fileItem.response.data
     }
+
     const getDetail = async () => {
       const id = route.params.id;
       const res = await api.cookbookService.getCookBookById(id);
-      console.log(res)
       form.value = { ...res.data }
       form.value.tagObj = {
         tagId: res.data.tagId,
         value: res.data.tag,
       }
-      file.value.url = res.data.imgUrl
-      console.log(form.value)
+      file.value.url = res.data.imgUrl;
+      temp.value = {...res.data};
     }
     function resetForm () {
-      form.title = '';
-      form.category = 0;
-      form.cookingWay = '<p>详细做法...</p>';
-      form.imgUrl = null;
-      form.description = '';
-      if (file.value?.url) {
-        file.value.url = null;
+      form.value = { ...temp.value }
+      form.value.tagObj = {
+        tagId: temp.value.tagId,
+        value: temp.value.tag,
       }
+      file.value.url = temp.value.imgUrl;
     }
 
     const handleSubmit = (data) => {
@@ -215,7 +271,6 @@ export default {
           submitCookbook.value = false;
         }, 3000)
       }
-      console.log(result)
     };
     const getTagList = async () => {
       const result = await api.tagService.getCookbookTagList();
@@ -225,7 +280,8 @@ export default {
       event.preventDefault();
       event.returnValue = ''; // 设置一个空字符串会触发浏览器默认的确认消息
     }
-    const back = () => {
+    const back = (event) => {
+      event.preventDefault();
       router.back()
     }
     onMounted(() => {
@@ -234,7 +290,6 @@ export default {
       window.addEventListener('beforeunload', confirmLeave);
     })
     onActivated(() => {
-      // resetForm()
       getDetail()
     })
     onBeforeUnmount(() => {
@@ -258,6 +313,8 @@ export default {
       submitCookbook,
       uploadUrl,
       uploadHeaders,
+      uploadAction,
+      beforeUpload
     };
   },
   data() {
@@ -266,7 +323,7 @@ export default {
       editor: ClassicEditor,
       editorConfig: {
         toolbar: {
-          items: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList','|', 'fontfamily', 'fontsize', 'fontColor', 'fontBackgroundColor', '|', 'outdent', 'indent', '|', 'imageUpload', 'blockQuote', 'insertTable', 'mediaEmbed', 'undo', 'redo'],
+          items: ['heading', '|','imageUpload', 'bold', 'italic', 'link', 'bulletedList', 'numberedList','|', 'fontfamily', 'fontsize', 'fontColor', 'fontBackgroundColor', '|', 'outdent', 'indent', '|', 'blockQuote', 'insertTable', 'mediaEmbed', 'undo', 'redo'],
         },
       },
     };
