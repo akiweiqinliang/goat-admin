@@ -164,6 +164,7 @@ export default {
   transform: translateY(-1px);
   margin-left: calc(100% - 60px);
   width: 60px;
+  z-index: 15;
 }
 .topBreadcrumbItem{}
 @media screen and (max-width: 576px){

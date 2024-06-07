@@ -1,8 +1,9 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
-import postcssConfig from "./postcss.config.js";
 import viteCompression from 'vite-plugin-compression'
+import autoprefixer from "autoprefixer";
+import postcssPxtorem from 'postcss-pxtorem';
 // import { visualizer } from "rollup-plugin-visualizer";
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -30,7 +31,30 @@ export default defineConfig({
     // }),
   ],
   css: {
-    postcss: postcssConfig,
+    postcss: {
+      plugins: [
+          autoprefixer({
+            // 指定目标浏览器
+            overrideBrowserslist: [
+              "Android 4.1",
+              "iOS 7.1",
+              "Chrome > 31",
+              "ff > 31",
+              "ie >= 8",
+            ],
+            grid: true,
+          }),
+        postcssPxtorem({
+          // rootValue: 18,
+          unitPrecision: 5,
+          propList: ['*', '!border*', '!max-width*'],
+          selectorBlackList: ['.ignore', /^\.no-rem/],
+          replace: true,
+          mediaQuery: true,
+          minPixelValue: 0
+        })
+      ]
+    },
     preprocessorOptions: {
       less: {
         modifyVars: {
