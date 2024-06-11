@@ -47,7 +47,7 @@
                     <template #content>
                       <a-space>
                         <router-link :to="{name: 'login'}">
-                          <a-button type="primary" style="margin-top: 10px;" >{{ $t('signOut') }}</a-button>
+                          <a-button type="primary" style="margin-top: 10px;">{{ $t('signOut') }}</a-button>
                         </router-link>
                       </a-space>
                     </template>
@@ -261,7 +261,6 @@ export default defineComponent({
       collapsedAll.value = !collapsedAll.value
       collapsed.value = true
     }
-
     const localeType = ref('zh');
     const locale = computed(() => {
       return locales[localeType.value] || zhCN;
@@ -404,9 +403,11 @@ export default defineComponent({
 .layout-demo {
   height: 100vh;
   max-width: 1440px;
+  //max-width: 1600px;
   margin: auto;
   background: var(--color-fill-2);
   border: 1px solid var(--color-border);
+  box-sizing: border-box;
 }
 .layout-demo :deep(.arco-layout-sider){
   box-shadow: none;

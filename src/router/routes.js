@@ -2,7 +2,7 @@ const CommonLayout = () => import('@/layouts/CommonLayout.vue')
 
 const Login = () => import('@pages/Login.vue')
 const Landing = () => import('@pages/Landing.vue')
-const Register = () => import('@pages/Register.vue')
+const VanGogh = () => import('@pages/VanGogh.vue')
 const Error = () => import('@pages/404.vue')
 const Home = () => import('@pages/Home.vue')
 const Dashboard = () => import('@pages/Dashboard.vue')
@@ -156,6 +156,22 @@ export const routes = [
             requiresAuth: false,
             icon: 'icon-dashboard',
             title: 'hello',
+            isDisableBreadcrumbLink: true,
+            isShowBreadcrumb: false,
+            addToSidebar: false,
+            sidebarIcon: 'icon-dashboard',
+            sidebarIconAlt: '',
+            isNoLogin: true,
+        },
+    },
+    {
+        path: '/version1',
+        component: VanGogh,
+        name: 'vanGogh',
+        meta: {
+            requiresAuth: false,
+            icon: 'icon-dashboard',
+            title: 'landing version 1',
             isDisableBreadcrumbLink: true,
             isShowBreadcrumb: false,
             addToSidebar: false,

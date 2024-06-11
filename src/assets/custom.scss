@@ -13,10 +13,7 @@
   display: none;
 }
 
-body{
-  //background: #000;
-  //overscroll-behavior-y: none;
-}
+
 ::-webkit-scrollbar {
   //background-color: var(--color-background);
   width: 0;
@@ -60,3 +57,28 @@ body{
 .arco-form-item-label-col.arco-form-item-label-col-flex{
   box-sizing: border-box;
 }
+html {
+  font-size: 16px;
+}
+@media (max-width: 1200px) {
+  html {
+    font-size: 15px;
+  }
+}
+  @media (max-width: 992px) {
+    html {
+      font-size: 14px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    html {
+      font-size: 14px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    html {
+      font-size: 14px;
+    }
+  }

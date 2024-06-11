@@ -89,7 +89,7 @@ export default {
     height: 600px;
     max-width: 1000px;
     //background: rgba(var(--primary-6), 0.14);
-    background: white;
+    background: var(--color-bg-1);
     border-radius: 0px;
     backdrop-filter: blur(6px);
     display: flex;
